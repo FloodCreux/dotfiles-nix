@@ -141,7 +141,7 @@ in
 
             toggleterm-nvim
 
-            conform-nvim
+            # conform-nvim
 
             symbols-outline-nvim
 
