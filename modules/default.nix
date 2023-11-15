@@ -1,6 +1,5 @@
 { inputs }:
 let
-    darwin = import ./darwin { inherit inputs; };
     home-manager = import ./home-manager { inherit inputs; };
 in
 {
@@ -13,7 +12,7 @@ in
             };
 
             modules = [ 
-                darwin
+                (import ./darwin/configurations.nix { inherit username; })
 
                 inputs.home-manager.darwinModules.home-manager {
                     home-manager = {
