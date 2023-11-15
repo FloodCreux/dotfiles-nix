@@ -128,6 +128,7 @@ in
             vimPlugins.nvim-metals
 
             vimPlugins.nvim-treesitter.withAllGrammars
+            vimPlugins.nvim-treesitter-context
 
             vimPlugins.plenary-nvim
 
