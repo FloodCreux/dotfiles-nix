@@ -4,7 +4,7 @@ local lualine = require 'lualine'
 
 local function init()
     catppuccin.setup({
-        flavour = 'macchioto',
+        flavour = 'macchiato',
         integrations = {
             gitsigns = true,
             native_lsp = {
@@ -56,13 +56,13 @@ local function init()
     lualine.setup {
         options = {
             icons_enabled = false,
-            theme = 'onedark',
+            theme = 'catppuccin',
             component_separators = '|',
             section_separators = '',
         },
     }
 
-    vim.cmd.colorscheme 'catppuccin'
+    vim.cmd.colorscheme "catppuccin"
 end
 
 return {
