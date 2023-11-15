@@ -7,7 +7,10 @@ in
     mkDarwin = { git ? { }, system, username }:
         inputs.darwin.lib.darwinSystem {
             system = system;
-            pkgs = import inputs.nixpkgs { system = system; };
+            pkgs = import inputs.nixpkgs { 
+                inherit system;
+                config.allowUnfree = true;
+            };
 
             modules = [ 
                 darwin
