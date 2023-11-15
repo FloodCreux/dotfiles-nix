@@ -133,7 +133,7 @@ in
             nvim-dap
 
             harpoon
-            refactoring
+            refactoring-nvim
 
             noice-nvim
             persistence-nvim
