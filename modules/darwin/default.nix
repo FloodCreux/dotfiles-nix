@@ -37,7 +37,7 @@ in
 
         NSGlobalDomain = {
             AppleShowAllExtensions = true;
-            InitalKeyRepeat = 14;
+            InitialKeyRepeat = 14;
             KeyRepeat = 1;
         };
     };
