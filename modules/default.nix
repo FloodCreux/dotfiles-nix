@@ -6,10 +6,10 @@ in
     mkDarwin = { git ? { }, system, username }:
         inputs.darwin.lib.darwinSystem {
             system = system;
-            pkgs = import inputs.nixpkgs { 
-                inherit system;
-                config.allowUnfree = true;
-            };
+            # pkgs = import inputs.nixpkgs { 
+            #     inherit system;
+            #     config.allowUnfree = true;
+            # };
 
             modules = [ 
                 (import ./darwin/configurations.nix { inherit username; })
@@ -18,9 +18,9 @@ in
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
-                        users.${username}.imports = [
-                            home-manager
-                        ];
+                        users.${username} = { pkgs, ... }: {
+                            imports = [ (home-manager { inherit git; }) ];
+                        };
                     };
                 }
             ];

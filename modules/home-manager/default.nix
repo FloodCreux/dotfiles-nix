@@ -1,4 +1,4 @@
-{ inputs }: {pkgs, ...}:
+{ inputs }: { git }: {pkgs, ...}:
 
 let
     catppuccin-bat = pkgs.fetchFromGitHub {
