@@ -47,7 +47,6 @@ in
         enable = true;
         caskArgs.no_quarantine = true;
         global.brewfile = true;
-        macApps = {};
         casks = [ "devtoys" "wezterm" "dotnet-sdk" ];
         taps = [];
         brews = [];
