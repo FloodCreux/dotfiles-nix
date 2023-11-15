@@ -78,8 +78,6 @@ in
 
     programs.wezterm = {
         enable = true;
-        settings.font.normal.family = "JetBrains Nerd Font Mono";
-        settings.font.size = 16;
     };
 
     programs.tmux = {
