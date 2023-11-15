@@ -1,5 +1,6 @@
 { inputs }:
 let
+    darwin = import ./darwin { inherit inputs; };
     home-manager = import ./home-manager { inherit inputs; };
 in
 {
@@ -8,7 +9,7 @@ in
             system = system;
 
             modules = [ 
-                ./darwin
+                darwin
 
                 inputs.home-manager.darwinModules.home-manager {
                     home-manager = {
