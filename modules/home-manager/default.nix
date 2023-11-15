@@ -182,7 +182,7 @@ in
             nil
             rust-analyzer
             terraform-ls
-            pkgsUnstable.csharp-ls
+            pkgsUnstable.roslyn
 
             # formatters
             nixpkgs-fmt

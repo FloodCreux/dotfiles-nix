@@ -74,7 +74,7 @@ local function init()
     }
 
     local language_servers = {
-        csharp_ls = {},
+        roslyn = {},
         diagnosticls = {
             filetypes = { 'python' },
             init_options = {
