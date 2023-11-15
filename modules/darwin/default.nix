@@ -1,6 +1,6 @@
 { inputs }:
 let
-  pkgs = inputs.pkgs;
+  pkgs = inputs.nixpkgs;
 in 
 {
     # here go the darwin preferences and config items
