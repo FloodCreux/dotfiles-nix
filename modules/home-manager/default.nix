@@ -140,6 +140,7 @@ in
             vimPlugins.harpoon
             vimPlugins.refactoring-nvim
 
+            vimPlugins.nvim-notify
             vimPlugins.noice-nvim
             vimPlugins.persistence-nvim
             vimPlugins.todo-comments-nvim
@@ -154,6 +155,7 @@ in
             vimPlugins.vim-be-good
             vimPlugins.vim-dadbod
             vimPlugins.ChatGPT-nvim
+            vimPlugins.copilot-lua
             vimPlugins.neorg
             vimPlugins.dashboard-nvim
 
