@@ -90,6 +90,11 @@ in
         terminal = "screen-256color";
     };
 
+    programs.direnv = {
+        enable = true;
+        enableZshIntegration = true;
+        nix-direnv.enable = true;
+    };
 
     programs.neovim = {
         enable = true;
@@ -155,10 +160,8 @@ in
             inputs.self.packages.${pkgs.system}.mike-nvim
         ];
 
-        extraConfig = ''
-            lua << EOF
-                require 'mike'.init()
-            EOF
+        extraLuaConfig = ''
+            require 'mike'.init()
         '';
 
         extraPackages = with pkgs; [
