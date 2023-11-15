@@ -1,4 +1,4 @@
-{ inputs }: {pkgs, ...}:
+{ inputs }: { git }: {pkgs, ...}:
 
 let
     catppuccin-bat = pkgs.fetchFromGitHub {
@@ -98,65 +98,67 @@ in
         vimAlias = true;
         vimdiffAlias = true;
     
-        plugins = with pkgs.vimPlugins; [
+        plugins = with pkgs; [
             # Git related plugins
-            vim-fugitive
-            vim-rhubarb
-            gitsigns-nvim
-            git-worktree-nvim
+            vimPlugins.vim-fugitive
+            vimPlugins.vim-rhubarb
+            vimPlugins.gitsigns-nvim
+            vimPlugins.git-worktree-nvim
             
             # Detect tabstop and shiftwidth automatically
-            vim-sleuth
+            vimPlugins.vim-sleuth
             #vim-editorconfig # Need to find the right one
             
             # Lsp configuration
-            nvim-lspconfig
+            vimPlugins.nvim-lspconfig
 
-            comment-nvim
-            nvim-cmp
-            which-key-nvim
+            vimPlugins.comment-nvim
+            vimPlugins.nvim-cmp
+            vimPlugins.which-key-nvim
 
-            catppuccin-nvim
+            vimPlugins.catppuccin-nvim
 
-            lualine-nvim
+            vimPlugins.lualine-nvim
 
-            nvim-metals
+            vimPlugins.nvim-metals
 
-            nvim-treesitter.withAllGrammars
+            vimPlugins.nvim-treesitter.withAllGrammars
 
-            plenary-nvim
+            vimPlugins.plenary-nvim
 
-            telescope-nvim
-            telescope-fzf-native-nvim
-            telescope-file-browser-nvim
+            vimPlugins.telescope-nvim
+            vimPlugins.telescope-fzf-native-nvim
+            vimPlugins.telescope-file-browser-nvim
 
-            nvim-dap
+            vimPlugins.nvim-dap
 
-            harpoon
-            refactoring-nvim
+            vimPlugins.harpoon
+            vimPlugins.refactoring-nvim
 
-            noice-nvim
-            persistence-nvim
-            todo-comments-nvim
+            vimPlugins.noice-nvim
+            vimPlugins.persistence-nvim
+            vimPlugins.todo-comments-nvim
 
-            toggleterm-nvim
+            vimPlugins.toggleterm-nvim
 
             # conform-nvim
 
-            symbols-outline-nvim
+            vimPlugins.symbols-outline-nvim
 
             # extras
-            vim-be-good
-            vim-dadbod
-            ChatGPT-nvim
-            neorg
-            dashboard-nvim
+            vimPlugins.vim-be-good
+            vimPlugins.vim-dadbod
+            vimPlugins.ChatGPT-nvim
+            vimPlugins.neorg
+            vimPlugins.dashboard-nvim
 
             inputs.self.packages.${pkgs.system}.mike-nvim
         ];
 
-        extraLuaConfig = ''
-            require 'mike'.init()
+        extraConfig = ''
+            lua << EOF
+                require 'mike'.init()
+            EOF
         '';
 
         extraPackages = with pkgs; [
