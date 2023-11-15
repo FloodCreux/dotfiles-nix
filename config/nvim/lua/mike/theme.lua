@@ -1,4 +1,4 @@
-local catppuccin = require 'catpuccin'
+local catppuccin = require 'catppuccin'
 local gitsigns = require 'gitsigns'
 local lualine = require 'lualine'
 
