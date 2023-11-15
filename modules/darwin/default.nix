@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{ inputs }:
+let
+  pkgs = inputs.pkgs;
+in 
+{
     # here go the darwin preferences and config items
     programs.zsh.enable = true;
 
