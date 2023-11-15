@@ -103,7 +103,7 @@ in
             vim-fugitive
             vim-rhubarb
             gitsigns-nvim
-            git-worktree
+            git-worktree-nvim
             
             # Detect tabstop and shiftwidth automatically
             vim-sleuth
