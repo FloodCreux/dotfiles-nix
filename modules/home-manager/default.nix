@@ -142,6 +142,7 @@ in
             vimPlugins.refactoring-nvim
 
             vimPlugins.nvim-notify
+            vimPlugins.nui-nvim
             vimPlugins.noice-nvim
             vimPlugins.persistence-nvim
             vimPlugins.todo-comments-nvim
@@ -155,6 +156,8 @@ in
             # extras
             vimPlugins.vim-be-good
             vimPlugins.vim-dadbod
+            vimPlugins.vim-dadbod-ui
+            vimPlugins.vim-dadbod-completion
             vimPlugins.ChatGPT-nvim
             vimPlugins.copilot-lua
             vimPlugins.neorg
@@ -162,10 +165,6 @@ in
 
             inputs.self.packages.${pkgs.system}.mike-nvim
         ];
-
-        # extraLuaConfig = ''
-        #     require 'mike'.init()
-        # '';
 
         extraPackages = with pkgs; [
             # languages
