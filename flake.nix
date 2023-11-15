@@ -21,7 +21,7 @@
           userEmail = "flood.mike@gmail.com";
           userName = "FloodCreux";
       };
-      username = "Mike";
+      username = "mike";
     in 
         flake-parts.lib.mkFlake { inherit inputs; } {
             systems = [ "aarch64-darwin" ];
