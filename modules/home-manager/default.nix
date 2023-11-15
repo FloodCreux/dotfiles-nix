@@ -114,7 +114,7 @@ in
 
             comment-nvim
             nvim-cmp
-            which-key
+            which-key-nvim
 
             catppuccin-nvim
 
