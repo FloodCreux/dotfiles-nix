@@ -40,6 +40,10 @@
                         inherit git username;
                         system = "aarch64-darwin";
                     };
+                    Mikes-MacBook-Pro = self.lib.mkDarwin { 
+                        inherit git username;
+                        system = "aarch64-darwin";
+                    };
                 };
 
                 lib = import ./modules { inherit inputs; };
