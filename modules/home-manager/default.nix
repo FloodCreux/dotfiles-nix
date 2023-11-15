@@ -32,6 +32,11 @@ in
         EDITOR = "nvim";
     };
 
+    home.file.".inputrc".source = ./dotfiles/inputrc;
+    home.file.".config/nvim/after/ftplugin/markdown.vim".text = ''
+        setlocal wrap
+    '';
+
     #--------------------------------------------------------
     # programs
     #--------------------------------------------------------
@@ -87,7 +92,6 @@ in
         terminal = "screen-256color";
     };
 
-    home.file.".inputrc".source = ./dotfiles/inputrc;
 
     programs.neovim = {
         enable = true;
@@ -150,10 +154,11 @@ in
             neorg
             dashboard-nvim
 
+            inputs.self.packages.${pkgs.system}.mike-nvim
         ];
 
         extraLuaConfig = ''
-            ${builtins.readFile ./nvim/options.lua}
+            require 'mike'.init()
         '';
 
         extraPackages = with pkgs; [
