@@ -2,8 +2,8 @@
     description = "Development packages for Mike Flood";
     inputs = {
         # Where we get most of our sofware
-        nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-23.05";
-        nixpkgs-unstable.url = "github:nixos/nixpkgs-unstable";
+        nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+        nixpkgs-unstable.url = "github:nixos/nixos-unstable";
 
         # Manages configs links things into home directory
         home-manager.url = "github:nix-community/home-manager/release-23.05";
