@@ -181,7 +181,7 @@ in
             nil
             rust-analyzer
             terraform-ls
-            # csharp-ls
+            roslyn
 
             # formatters
             nixpkgs-fmt
