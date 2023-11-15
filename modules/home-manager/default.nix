@@ -170,7 +170,7 @@ in
             # language servers
             lua-language-server
             nil
-            rust-analzer
+            rust-analyzer
             terraform-ls
             csharp-ls
 
