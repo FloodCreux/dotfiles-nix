@@ -7,6 +7,7 @@ in
     mkDarwin = { git ? { }, system, username }:
         inputs.darwin.lib.darwinSystem {
             system = system;
+            pkgs = import inputs.nixpkgs { system = system; };
 
             modules = [ 
                 darwin
