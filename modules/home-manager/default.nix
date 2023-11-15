@@ -172,13 +172,13 @@ in
             nil
             rust-analyzer
             terraform-ls
-            csharp-ls
+            # csharp-ls
 
             # formatters
             nixpkgs-fmt
             rustfmt
             scalafmt
-            csharpier
+            # csharpier
         ];
     };
 }
