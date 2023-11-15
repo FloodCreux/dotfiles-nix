@@ -149,6 +149,8 @@ in
 
             vimPlugins.toggleterm-nvim
 
+            vimPlugins.nvim-web-devicons
+
             # conform-nvim
 
             vimPlugins.symbols-outline-nvim
