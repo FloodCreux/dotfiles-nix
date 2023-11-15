@@ -18,7 +18,7 @@ in
         experiments-features = nix-command flakes
     '';
     systemPackages = [ pkgs.coreutils ];
-    system.keyboard.enableKeyMappings = true;
+    system.keyboard.enableKeyMapping = true;
 
     fonts = {
         fontDir.enable = false; # DANGER: if set to true it will only install fonts listed below
