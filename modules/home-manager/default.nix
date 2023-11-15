@@ -160,9 +160,9 @@ in
             inputs.self.packages.${pkgs.system}.mike-nvim
         ];
 
-        extraLuaConfig = ''
-            require 'mike'.init()
-        '';
+        # extraLuaConfig = ''
+        #     require 'mike'.init()
+        # '';
 
         extraPackages = with pkgs; [
             # languages
