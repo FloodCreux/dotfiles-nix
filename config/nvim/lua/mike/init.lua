@@ -1,5 +1,6 @@
 local function init()
     require 'mike.vim'.init()
+    require 'mike.dashboard'.init()
     require 'mike.theme'.init()
     require 'mike.languages'.init()
     require 'mike.chatgpt'.init()
