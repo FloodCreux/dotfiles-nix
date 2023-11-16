@@ -182,7 +182,6 @@ in
     extraPackages = with pkgs; [
       # languages
       rustc
-      scala
       scala_2_12
       ocaml
       go
