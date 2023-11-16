@@ -170,7 +170,7 @@ in
             vimPlugins.copilot-lua
             vimPlugins.neorg
             vimPlugins.dashboard-nvim
-            vimPlugins.lazy-nvim
+            #vimPlugins.lazy-nvim
 
 
             inputs.self.packages.${pkgs.system}.mike-nvim
