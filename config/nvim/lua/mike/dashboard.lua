@@ -16,6 +16,7 @@ function init()
         [[⠀⠀⠀⠀⠀⠿⣿⣿⣿⠿⠿⠀⠀⠀⠀⠀⠸⣿⣿⣿⣿⠿⠇⠀  ⠀⠀⠀⠀]],
         [[                              ]],
         [[  There is no place like ~/   ]],
+        [[                              ]],
     }
 
     dashboard.setup({
