@@ -9,7 +9,7 @@ local function init()
 
     autopairs.setup {
         fast_wrap = {},
-        disable_filetype = { 'TelescopePrompt' },
+        disable_filetype = { 'TelescopePrompt', 'vim' },
     }
 
     cmp.setup {
