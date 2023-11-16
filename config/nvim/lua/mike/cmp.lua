@@ -1,9 +1,16 @@
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
+local autopairs = require 'nvim-autopairs'
+local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
 
 local function init()
     require('luasnip.loaders.from_vscode').lazy_load()
     luasnip.config.setup {}
+
+    autopairs.setup {
+        fast_wrap = {},
+        disable_filetype = { 'TelescopePrompt' },
+    }
 
     cmp.setup {
         snippet = {
@@ -45,6 +52,8 @@ local function init()
             { name = 'luasnip' },
         },
     }
+
+    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 end
 
 return {
