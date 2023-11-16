@@ -83,10 +83,11 @@ in
 
     programs.tmux = {
         enable = true;
-        extraConfig = ''
-            set-option -a terminal-overrides ",*256col*;RGB";
-        '';
-        plugins = with pkgs; [ tmuxPlugins.catppuccin ];
+        extraConfig = builtins.readFile ./dotfiles/tmux.conf;
+        plugins = with pkgs; [ 
+            tmuxPlugins.catppuccin
+            tmuxPlugins.vim-tmux-navigator
+        ];
         shell = "${pkgs.zsh}/bin/zsh";
         terminal = "screen-256color";
     };
@@ -157,7 +158,7 @@ in
 
             vimPlugins.nvim-web-devicons
 
-            # conform-nvim
+            pkgsUnstable.vimPlugins.conform-nvim
 
             vimPlugins.symbols-outline-nvim
 
@@ -175,6 +176,10 @@ in
 
             inputs.self.packages.${pkgs.system}.mike-nvim
         ];
+
+        extraLuaConfig = ''
+            require('mike').init()
+        '';
 
         extraPackages = with pkgs; [
             # languages

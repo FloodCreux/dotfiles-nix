@@ -1,6 +1,13 @@
 local noice = require 'noice'
+local notify = require 'notify'
 
 local function init()
+    notify.setup({
+        stages = 'fade_in_slide_out',
+        timeout = 500,
+        background_colour = '#000000',
+    })
+
     noice.setup({
         lsp = {
             override = {
