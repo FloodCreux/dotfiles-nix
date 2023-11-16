@@ -194,6 +194,8 @@ in
       terraform-ls
       pkgsUnstable.roslyn
       omnisharp-roslyn
+      coursier
+      metals
 
       # formatters
       nixpkgs-fmt

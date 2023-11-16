@@ -1,6 +1,7 @@
 { inputs }:
 let
   home-manager = import ./home-manager { inherit inputs; };
+  metals = import ./metals { inherit inputs; };
 in
 {
   mkDarwin = { git ? { }, system, username }:
@@ -14,7 +15,9 @@ in
             useGlobalPkgs = true;
             useUserPackages = true;
             users.${username} = { pkgs, ... }: {
-              imports = [ (home-manager { inherit git; }) ];
+              imports = [
+                (home-manager { inherit git; })
+              ];
             };
           };
         }
@@ -22,4 +25,6 @@ in
 
       system = system;
     };
+
+  metalsOverlay = metals;
 }
