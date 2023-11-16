@@ -75,7 +75,70 @@ in
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    settings = builtins.readFile ./dotfiles/starship.toml;
+    settings = {
+      add_newline = false;
+      command_timeout = 1000;
+      format = ''$env_var $all'';
+      character = {
+        success_symbol = "";
+        error_symbol = "";
+      };
+      env_var = {
+        STARSHIP_DISTRO = {
+          format = "[$env_value](bold white}";
+          variable = "STARSHIP_DISTRO";
+          disable = false;
+        };
+        USER = {
+          format = "[$env_value](bold white)";
+          variable = "USER";
+          disabled = false;
+        };
+        STARSHIP_DEVICE = {
+          format = "on [$env_value](bold yellow)";
+          variable = "STARSHIP_DEVICE";
+          disabled = false;
+        };
+      };
+      hostname = {
+        ssh_only = false;
+        format = "[$hostname](bold yellow)";
+        disabled = false;
+      };
+      directory = {
+        truncation_length = 1;
+        truncation_symbol = "…/";
+        home_symbol = "󰋜 ~";
+        read_only_style = "197";
+        read_only = "  ";
+        format = "at [$path]($style)[$read_only]($read_only_style) ";
+      };
+      git_branch = {
+        symbol = "󰘬 ";
+        format = "via [$symbol$branch]($style) ";
+        # truncation_length = 4
+        truncation_symbol = "…/";
+        style = "bold green";
+      };
+      git_status = {
+        format = "[ ($all_status$ahead_behind) ] ($style) ";
+        style = "bold green";
+        conflicted = "🏳";
+        up_to_date = " ";
+        untracked = " ";
+        ahead = ''⇡$count'';
+        diverged = "⇕⇡$ahead_count⇣$behind_count";
+        behind = "⇣$count";
+        stashed = "󰏗 ";
+        modified = " ";
+        staged = "[++($count)](green)";
+        renamed = "襁 ";
+        deleted = " ";
+      };
+      scala = {
+        symbol = " ";
+      };
+    };
   };
 
   programs.wezterm = {
