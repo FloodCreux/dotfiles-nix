@@ -3,7 +3,7 @@ local dashboard = require 'dashboard'
 function init()
     vim.g.dashboard_default_executive = 'telescope'
 
-    vim.g.dashboard_custom_header = {
+    local logo = {
         [[⠀⠀⠀⠀⣀⣀⣤⣤⣶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⡄⠀⠀⠀⠀⠀⠀⠀]],
         [[⠀⠀⠀⠀⣿⣿⣿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠛⠛⢿⣿⡇⠀⠀⠀⠀⠀⠀⠀]],
         [[⠀⠀⠀⠀⣿⡟⠡⠂⠀⢹⣿⣿⣿⣿⣿⣿⡇⠘⠁⠀⠀⣿⡇⠀⢠⣄⠀⠀⠀⠀]],
@@ -25,6 +25,7 @@ function init()
             tabline,
         },
         config = {
+            header = logo,
             center = {
                 { action = "Telescope find_files", desc = " Find file", icon = " ", key = "f" },
                 { action = "ene | startinsert", desc = " New file", icon = " ", key = "n" },
@@ -39,6 +40,7 @@ function init()
                 },
                 { action = "qa", desc = " Quit", icon = " ", key = "q" },
             },
+            footer = ''
         },
     })
 end
