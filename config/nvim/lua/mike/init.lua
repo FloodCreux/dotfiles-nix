@@ -10,6 +10,7 @@ local function init()
     require 'mike.metals'.init()
     require 'mike.git'.init()
     require 'mike.noice'.init()
+    require 'mike.cmp'.init()
 end
 
 return {
