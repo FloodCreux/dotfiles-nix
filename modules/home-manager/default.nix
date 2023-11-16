@@ -119,7 +119,11 @@ in
             vimPlugins.nvim-lspconfig
 
             vimPlugins.comment-nvim
+
+            vimPlugins.nvim-autopairs
+            vimPlugins.cmp-nvim-lsp
             vimPlugins.nvim-cmp
+            
             vimPlugins.which-key-nvim
 
             vimPlugins.catppuccin-nvim
@@ -165,6 +169,7 @@ in
             vimPlugins.copilot-lua
             vimPlugins.neorg
             vimPlugins.dashboard-nvim
+
 
             inputs.self.packages.${pkgs.system}.mike-nvim
         ];

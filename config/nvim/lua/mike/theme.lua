@@ -1,6 +1,7 @@
 local catppuccin = require 'catppuccin'
 local gitsigns = require 'gitsigns'
 local lualine = require 'lualine'
+local notify = require 'notify'
 
 local function init()
     catppuccin.setup({
@@ -61,6 +62,10 @@ local function init()
             section_separators = '',
         },
     }
+
+    notify.setup({
+        background_color = "#000000"
+    })
 
     vim.cmd.colorscheme "catppuccin"
 end
