@@ -48,7 +48,7 @@
                         inherit git username;
                         system = "aarch64-darwin";
                     };
-                    CHMC-H0297XJsMBP-MacBook-Pro = self.lib.mkDarwin {
+                    CHMC-H022FL97XJs-MacBook-Pro = self.lib.mkDarwin {
                         inherit git username;
                         system = "aarch64-darwin";
                     };
