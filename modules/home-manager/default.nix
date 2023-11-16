@@ -75,6 +75,7 @@ in
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
+    settings = builtins.readFile ./dotfiles/starship.toml;
   };
 
   programs.wezterm = {
