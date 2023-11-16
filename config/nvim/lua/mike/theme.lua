@@ -67,7 +67,7 @@ local function init()
         background_color = "#000000"
     })
 
-    vim.cmd.colorscheme "catppuccin"
+    vim.cmd.colorscheme "catppuccin-macchiato"
 end
 
 return {
