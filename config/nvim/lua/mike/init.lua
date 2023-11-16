@@ -12,6 +12,7 @@ local function init()
     require 'mike.noice'.init()
     require 'mike.cmp'.init()
     require 'mike.conform'.init()
+    require 'mike.harpoon'.init()
 end
 
 return {
