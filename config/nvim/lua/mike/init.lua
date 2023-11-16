@@ -14,6 +14,7 @@ local function init()
     require 'mike.conform'.init()
     require 'mike.harpoon'.init()
     require 'mike.database'.init()
+    require 'mike.notes'.init()
 end
 
 return {
