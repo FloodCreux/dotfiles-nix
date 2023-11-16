@@ -25,6 +25,8 @@ in
     less
     gh
     jq
+    coursier
+    maven
   ];
 
   home.sessionVariables = {
@@ -96,6 +98,11 @@ in
     enable = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
+  };
+
+  programs.java = {
+    enable = true;
+    package = pkgs.openjdk8;
   };
 
   programs.neovim = {
@@ -194,7 +201,6 @@ in
       terraform-ls
       pkgsUnstable.roslyn
       omnisharp-roslyn
-      coursier
       metals
 
       # formatters

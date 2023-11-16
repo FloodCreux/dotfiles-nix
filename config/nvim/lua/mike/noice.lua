@@ -3,7 +3,7 @@ local notify = require 'notify'
 
 local function init()
     notify.setup({
-        stages = 'fade_in_slide_out',
+        stages = 'fade',
         timeout = 500,
         background_colour = '#000000',
     })

@@ -84,7 +84,8 @@ local function init()
         pattern = { 'scala', 'sbt', 'java' },
         callback = function()
             metals.initialize_or_attach(metals_config)
-        end
+        end,
+        group = nvim_metals_group,
     })
 end
 
