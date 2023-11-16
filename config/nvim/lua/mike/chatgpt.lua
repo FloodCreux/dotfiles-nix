@@ -17,4 +17,3 @@ end
 return {
     init = init
 }
-
