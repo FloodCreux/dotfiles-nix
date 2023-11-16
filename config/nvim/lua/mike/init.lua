@@ -13,6 +13,7 @@ local function init()
     require 'mike.cmp'.init()
     require 'mike.conform'.init()
     require 'mike.harpoon'.init()
+    require 'mike.database'.init()
 end
 
 return {
