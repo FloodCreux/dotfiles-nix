@@ -121,7 +121,7 @@ in
         style = "bold green";
       };
       git_status = {
-        format = "[ ($all_status$ahead_behind) ] ($style) ";
+        format = ''[ \($all_status$ahead_behind\) ] ($style) '';
         style = "bold green";
         conflicted = "🏳";
         up_to_date = " ";
@@ -131,7 +131,7 @@ in
         behind = "⇣$count";
         stashed = "󰏗 ";
         modified = " ";
-        staged = "[++($count)](green)";
+        staged = "[++\($count\)](green)";
         renamed = "襁 ";
         deleted = " ";
       };
