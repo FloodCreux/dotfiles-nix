@@ -40,7 +40,7 @@ function init()
                 },
                 { action = "qa", desc = " Quit", icon = " ", key = "q" },
             },
-            footer = ''
+            footer = {}
         },
     })
 end
