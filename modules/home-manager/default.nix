@@ -183,6 +183,7 @@ in
       # languages
       rustc
       scala
+      scala_2_12
       ocaml
       go
       zig
