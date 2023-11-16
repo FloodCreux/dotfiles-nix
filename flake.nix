@@ -21,7 +21,7 @@
           userEmail = "flood.mike@gmail.com";
           userName = "FloodCreux";
       };
-      username = "mike";
+      username = "chmc-h022fl97xj";
     in 
         flake-parts.lib.mkFlake { inherit inputs; } {
             systems = [ "aarch64-darwin" ];
@@ -36,11 +36,19 @@
 
             flake = {
                 darwinConfigurations = {
+		    default = self.lib.mkDarwin {
+			inherit git username;
+			system = "aarch64-darwin";
+		    };
                     mike = self.lib.mkDarwin { 
                         inherit git username;
                         system = "aarch64-darwin";
                     };
                     Mikes-MacBook-Pro = self.lib.mkDarwin { 
+                        inherit git username;
+                        system = "aarch64-darwin";
+                    };
+                    CHMC-H0297XJsMBP-MacBook-Pro = self.lib.mkDarwin {
                         inherit git username;
                         system = "aarch64-darwin";
                     };
