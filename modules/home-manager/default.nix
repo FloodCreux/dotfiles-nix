@@ -123,6 +123,7 @@ in
             vimPlugins.nvim-autopairs
             vimPlugins.cmp-nvim-lsp
             vimPlugins.nvim-cmp
+            vimPlugins.luasnip
             
             vimPlugins.which-key-nvim
 
