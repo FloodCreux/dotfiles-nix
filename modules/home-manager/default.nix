@@ -209,6 +209,12 @@ in
       rustfmt
       scalafmt
       # csharpier
+
+      # tools
+      cargo
+      fd
+      gcc
+      ghc
     ];
   };
 }
