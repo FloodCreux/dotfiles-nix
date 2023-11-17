@@ -9,7 +9,7 @@
     home-manager.url = "github:nix-community/home-manager/release-23.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Controls system level softwayre and settings including fonts
+    # Controls system level software and settings including fonts
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -21,7 +21,7 @@
         userEmail = "flood.mike@gmail.com";
         userName = "FloodCreux";
       };
-      username = "mike";
+      username = "chmc-h022fl97xj";
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "aarch64-darwin" ];
@@ -37,18 +37,6 @@
       flake = {
         darwinConfigurations = {
           default = self.lib.mkDarwin {
-            inherit git username;
-            system = "aarch64-darwin";
-          };
-          mike = self.lib.mkDarwin {
-            inherit git username;
-            system = "aarch64-darwin";
-          };
-          Mikes-MacBook-Pro = self.lib.mkDarwin {
-            inherit git username;
-            system = "aarch64-darwin";
-          };
-          CHMC-H022FL97XJs-MacBook-Pro = self.lib.mkDarwin {
             inherit git username;
             system = "aarch64-darwin";
           };

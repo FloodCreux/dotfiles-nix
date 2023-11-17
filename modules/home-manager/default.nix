@@ -69,7 +69,7 @@ in
 
     shellAliases = {
       ls = "ls --color=auto -F";
-      nixswitch = "darwin-rebuild switch --flake ~/.config/nix/.#";
+      nixswitch = "darwin-rebuild switch --flake ~/.config/nix/.#default";
       nixup = "pushd ~/.config/nix flake update; nixswitch; popd";
     };
   };
