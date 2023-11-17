@@ -83,6 +83,8 @@ in
     enable = true;
   };
 
+  xdg.configFile."wezterm/wezterm.lua".text = builtins.readFile ./dotfiles/wezterm.lua;
+
   programs.tmux = {
     enable = true;
     extraConfig = builtins.readFile ./dotfiles/tmux.conf;
