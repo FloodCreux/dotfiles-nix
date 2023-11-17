@@ -1,4 +1,5 @@
 local neorg = require 'neorg'
+local map = vim.keymap.set
 
 local function init()
     neorg.setup {
@@ -21,6 +22,9 @@ local function init()
             },
         },
     }
+
+    map('n', '<leader>nww', ':Neorg workspace work<CR>', { desc = 'Open work notes workspace' })
+    map('n', '<leader>nwp', ':Neorg workspace personal<CR>', { desc = 'Open work notes workspace' })
 end
 
 return {
