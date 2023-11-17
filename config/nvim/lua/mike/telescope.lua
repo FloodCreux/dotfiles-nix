@@ -6,6 +6,7 @@ local function init()
             file_ignore_patterns = {
                 'node_modules/.*',
                 '%.pem',
+                '.git/.*',
             },
             mappings = {
                 i = {
