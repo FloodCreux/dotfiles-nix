@@ -1,6 +1,7 @@
 local function set_vim_g()
     vim.g.mapleader = ' '
     vim.g.maplocalleader = ' '
+    vim.g.indent_blankline_buftype_exclude = { 'dashboard', '', 'lspinfo', 'checkhealth', 'help' }
 end
 
 local function set_vim_o()

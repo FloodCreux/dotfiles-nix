@@ -27,6 +27,7 @@ in
     jq
     coursier
     maven
+    zsh
   ];
 
   home.sessionVariables = {
@@ -70,7 +71,7 @@ in
     shellAliases = {
       ls = "ls --color=auto -F";
       nixswitch = "darwin-rebuild switch --flake ~/.config/nix/.#default";
-      nixup = "pushd ~/.config/nix flake update; nixswitch; popd";
+      nixup = "pushd ~/.config/nix; nix flake update; nixswitch; popd";
     };
   };
 
@@ -139,6 +140,7 @@ in
       vimPlugins.catppuccin-nvim
 
       vimPlugins.lualine-nvim
+      vimPlugins.neodev-nvim
 
       vimPlugins.nvim-metals
 
@@ -161,6 +163,7 @@ in
       vimPlugins.noice-nvim
       vimPlugins.persistence-nvim
       vimPlugins.todo-comments-nvim
+      vimPlugins.indent-blankline-nvim
 
       vimPlugins.toggleterm-nvim
 
