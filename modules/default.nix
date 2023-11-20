@@ -7,7 +7,10 @@ in
   mkDarwin = { git ? { }, system, username }:
     inputs.darwin.lib.darwinSystem {
       modules = [
-        (import ./darwin/configurations.nix { inherit username; })
+        (import ./darwin/configurations.nix {
+          pkgs = inputs.nixpkgs;
+          inherit username;
+        })
 
         inputs.home-manager.darwinModules.home-manager
         {
