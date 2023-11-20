@@ -20,19 +20,19 @@ local function init()
         end
 
         metals.setup_dap()
-        map("n", "<leader>mc", telescope.extensions.metals.commands, { desc = "[M]etals [C]ommands" })
+        map("n", "<leader>mc", telescope.extensions.metals.commands, { desc = "Metals commands" })
 
         mapB("v", "R", metals.type_of_range, "metals: type of range")
 
-        mapB("n", "<leader>mt", require('metals.tvp').toggle_tree_view, '[M]etals toggle [T]ree view')
-        mapB("n", "<leader>mf", "<cmd>MetalsNewScalaFile<cr>", "[M]etals create new scala [F]ile")
-        mapB("n", "<leader>mr", require('metals.tvp').reveal_in_tree, '[M]etals [R]eveal in tree')
+        mapB("n", "<leader>mt", require('metals.tvp').toggle_tree_view, 'Metals toggle tree view')
+        mapB("n", "<leader>mf", "<cmd>MetalsNewScalaFile<cr>", "Metals create new scala file")
+        mapB("n", "<leader>mr", require('metals.tvp').reveal_in_tree, 'Metals reveal in tree')
         mapB('n', '<leader>msi', function()
             require('metals').toggle_setting("showImplicitArguments")
-        end, "[M]etals [S]how [I]mplicit arguments")
+        end, "Metals show implicit arguments")
         mapB('n', '<leader>mss', function()
             require('metals').toggle_setting('enableSemanticHighlighting')
-        end, '[M]etals [S]how [S]emantic highlights')
+        end, 'Metals show semantic highlights')
     end
 
     metals_config.settings = {
@@ -42,7 +42,7 @@ local function init()
             'com.github.swagger.akka.javadsl',
         },
         enableSemanticHighlighting = false,
-        mavenScript = "/opt/homebrew/bin/mvn"
+        mavenScript = "mvn"
     }
 
     metals_config.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(

@@ -28,6 +28,7 @@ in
     coursier
     maven
     zsh
+    jdk8
   ];
 
   home.sessionVariables = {
@@ -102,11 +103,6 @@ in
     nix-direnv.enable = true;
   };
 
-  programs.java = {
-    enable = true;
-    package = pkgs.openjdk8;
-  };
-
   programs.neovim = {
     enable = true;
 
@@ -153,7 +149,10 @@ in
       vimPlugins.telescope-fzf-native-nvim
       vimPlugins.telescope-file-browser-nvim
 
+      # debugging
       vimPlugins.nvim-dap
+      vimPlugins.nvim-dap-ui
+      vimPlugins.nvim-dap-virtual-text
 
       vimPlugins.harpoon
       vimPlugins.refactoring-nvim
