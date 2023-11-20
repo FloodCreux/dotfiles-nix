@@ -8,7 +8,6 @@ in
     inputs.darwin.lib.darwinSystem {
       modules = [
         (import ./darwin/configurations.nix {
-          pkgs = inputs.nixpkgs;
           inherit username;
         })
 

@@ -1,4 +1,4 @@
-{ pkgs, username }:
+{ username }:
 
 let
   nix = import ../shared/nix.nix;
@@ -11,20 +11,7 @@ in
   system.stateVersion = 4;
   users.users.${username}.home = "/Users/${username}";
 
-  environment = {
-    shells = with pkgs; [ bash zsh ];
-    loginShell = pkgs.zsh;
-    systemPackages = [ pkgs.coreutils ];
-    systemPath = [ "/opt/homebrew/bin" ];
-    pathsToLink = [ "/Applications" ];
-  };
-
   system.keyboard.enableKeyMapping = true;
-
-  fonts = {
-    fontDir.enable = false;
-    fonts = [ (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
-  };
 
   system.defaults = {
     finder = {
