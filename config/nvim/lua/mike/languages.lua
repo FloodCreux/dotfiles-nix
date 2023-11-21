@@ -122,7 +122,15 @@ local function init()
                 },
             },
         },
-        rust_analyzer = {},
+        rust_analyzer = {
+            settings = {
+                ['rust-analyzer'] = {
+                    cargo = {
+                        allFeatures = true,
+                    },
+                },
+            },
+        },
         sqlls = {},
         terraformls = {},
         tsserver = {},
