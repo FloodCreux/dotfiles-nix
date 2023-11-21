@@ -71,8 +71,8 @@ in
 
     shellAliases = {
       ls = "ls --color=auto -F";
-      nixswitch = "darwin-rebuild switch --flake ~/.config/nix/.#default";
-      nixup = "pushd ~/.config/nix; nix flake update; nixswitch; popd";
+      nixswitch = "darwin-rebuild switch --flake ~/personal/nix/.#default";
+      nixup = "pushd ~/personal/nix; nix flake update; nixswitch; popd";
     };
   };
 
@@ -205,6 +205,7 @@ in
       pkgsUnstable.roslyn
       omnisharp-roslyn
       metals
+      yaml-language-server
 
       # formatters
       nixpkgs-fmt
