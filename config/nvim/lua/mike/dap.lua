@@ -1,7 +1,7 @@
-local dap = require 'dap'
-local dapui = require 'dapui'
-
 local function init()
+    local dap = require 'dap'
+    local dapui = require 'dapui'
+
     vim.keymap.set('n', '<leader>bs', dap.continue, { desc = 'Debug: Start/Continue' })
     vim.keymap.set('n', '<leader>bi', dap.step_into, { desc = 'Debug: Step Into' })
     vim.keymap.set('n', '<leader>bo', dap.step_over, { desc = 'Debug: Step Over' })

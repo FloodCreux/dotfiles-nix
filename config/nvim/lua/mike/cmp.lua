@@ -1,11 +1,41 @@
-local cmp = require 'cmp'
-local luasnip = require 'luasnip'
-local autopairs = require 'nvim-autopairs'
-local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+local M = {}
+
+M.dependencies = {
+    -- Snippet Engine & its associated nvim-cmp source
+    'L3MON4D3/LuaSnip',
+    'saadparwaiz1/cmp_luasnip',
+
+    -- Adds LSP completion capabilities
+    'hrsh7th/cmp-nvim-lsp',
+
+    -- Adds a number of user-friendly snippets
+    'rafamadriz/friendly-snippets',
+
+    -- Adds autopairs
+    {
+        'windwp/nvim-autopairs',
+        opts = {
+            fast_wrap = {},
+            disable_filetype = { 'TelescopePrompt', 'vim' },
+        },
+        config = function(_, opts)
+            require('nvim-autopairs').setup(opts)
+
+            local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+            require('cmp').event:on('confirm_done', cmp_autopairs.on_confirm_done())
+        end,
+    },
+}
+
 
 local function init()
-    require('luasnip.loaders.from_vscode').lazy_load()
+    local cmp = require 'cmp'
+    local luasnip = require 'luasnip'
+    local autopairs = require 'nvim-autopairs'
+    local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+
     luasnip.config.setup {}
+    require('luasnip.loaders.from_vscode').lazy_load()
 
     autopairs.setup {
         fast_wrap = {},
@@ -58,4 +88,5 @@ end
 
 return {
     init = init,
+    dependencies = M.dependencies,
 }

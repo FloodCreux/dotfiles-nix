@@ -1,6 +1,5 @@
-local wk = require 'which-key'
-
 local function init()
+    local wk = require 'which-key'
     wk.register({
         ['<leader>b'] = { name = 'Debug', _ = 'which_key_ignore' },
         ['<leader>c'] = { name = 'Code', _ = 'which_key_ignore' },

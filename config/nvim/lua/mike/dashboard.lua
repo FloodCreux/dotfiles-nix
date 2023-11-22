@@ -1,6 +1,5 @@
-local dashboard = require 'dashboard'
-
 local function init()
+    local dashboard = require 'dashboard'
     vim.g.dashboard_default_executive = 'telescope'
 
     local logo = {

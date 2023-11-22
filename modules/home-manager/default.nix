@@ -114,78 +114,7 @@ in
     vimdiffAlias = true;
 
     plugins = with pkgs; [
-      # Git related plugins
-      vimPlugins.vim-fugitive
-      vimPlugins.vim-rhubarb
-      vimPlugins.gitsigns-nvim
-      vimPlugins.git-worktree-nvim
-
-      # Detect tabstop and shiftwidth automatically
-      vimPlugins.vim-sleuth
-      #vim-editorconfig # Need to find the right one
-
-      # Lsp configuration
-      vimPlugins.nvim-lspconfig
-
-      vimPlugins.comment-nvim
-
-      vimPlugins.nvim-autopairs
-      vimPlugins.cmp-nvim-lsp
-      vimPlugins.nvim-cmp
-      vimPlugins.luasnip
-
-      vimPlugins.which-key-nvim
-
-      vimPlugins.catppuccin-nvim
-
-      vimPlugins.lualine-nvim
-      vimPlugins.neodev-nvim
-
-      vimPlugins.nvim-metals
-
-      vimPlugins.nvim-treesitter.withAllGrammars
-      vimPlugins.nvim-treesitter-context
-
-      vimPlugins.plenary-nvim
-
-      vimPlugins.telescope-nvim
-      vimPlugins.telescope-fzf-native-nvim
-      vimPlugins.telescope-file-browser-nvim
-
-      # debugging
-      vimPlugins.nvim-dap
-      vimPlugins.nvim-dap-ui
-      vimPlugins.nvim-dap-virtual-text
-
-      vimPlugins.harpoon
-      vimPlugins.refactoring-nvim
-
-      vimPlugins.nvim-notify
-      vimPlugins.nui-nvim
-      vimPlugins.noice-nvim
-      vimPlugins.persistence-nvim
-      vimPlugins.todo-comments-nvim
-      vimPlugins.indent-blankline-nvim
-
-      vimPlugins.toggleterm-nvim
-
-      vimPlugins.nvim-web-devicons
-
-      pkgsUnstable.vimPlugins.conform-nvim
-
-      vimPlugins.symbols-outline-nvim
-
-      # extras
-      vimPlugins.vim-be-good
-      vimPlugins.vim-dadbod
-      vimPlugins.vim-dadbod-ui
-      vimPlugins.vim-dadbod-completion
-      vimPlugins.ChatGPT-nvim
-      vimPlugins.copilot-lua
-      vimPlugins.neorg
-      vimPlugins.dashboard-nvim
-      vimPlugins.fidget-nvim
-
+      vimPlugins.lazy-nvim
       inputs.self.packages.${pkgs.system}.mike-nvim
     ];
 

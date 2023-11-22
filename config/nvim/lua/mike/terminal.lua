@@ -1,6 +1,5 @@
-local term = require 'toggleterm'
-
 local function init()
+	local term = require 'toggleterm'
 	term.setup {}
 
 	local map = vim.keymap.set

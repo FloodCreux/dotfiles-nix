@@ -1,10 +1,10 @@
-local metals = require 'metals'
-local metals_config = metals.bare_config()
-local telescope = require 'telescope'
-
-local map = vim.keymap.set
-
 local function init()
+    local metals = require 'metals'
+    local metals_config = metals.bare_config()
+    local telescope = require 'telescope'
+
+    local map = vim.keymap.set
+
     metals_config.tvp = {
         icons = {
             enabled = true,
