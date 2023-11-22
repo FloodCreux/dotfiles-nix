@@ -15,6 +15,7 @@ local function init()
 		},
 		format_on_save = {
 			lsp_fallback = true,
+			timeout_ms = 500,
 		},
 	})
 end

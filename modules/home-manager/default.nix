@@ -18,17 +18,20 @@ in
   home.stateVersion = "23.05";
 
   # specify home manager configs
-  home.packages = with pkgs; [
-    ripgrep
-    fd
-    curl
-    less
-    gh
-    jq
-    coursier
-    maven
-    zsh
-    jdk8
+  home.packages = [
+    pkgs.ripgrep
+    pkgs.fd
+    pkgs.curl
+    pkgs.less
+    pkgs.gh
+    pkgs.jq
+    pkgs.coursier
+    pkgs.maven
+    pkgs.zsh
+    pkgs.jdk8
+
+    pkgsUnstable.rustc
+    pkgsUnstable.cargo
   ];
 
   home.sessionVariables = {
@@ -181,6 +184,7 @@ in
       vimPlugins.copilot-lua
       vimPlugins.neorg
       vimPlugins.dashboard-nvim
+      vimPlugins.fidget-nvim
 
       inputs.self.packages.${pkgs.system}.mike-nvim
     ];
@@ -189,35 +193,35 @@ in
       require('mike').init()
     '';
 
-    extraPackages = with pkgs; [
+    extraPackages = [
       # languages
-      rustc
-      scala_2_12
-      ocaml
-      go
-      zig
+      pkgsUnstable.rustc
+      pkgs.scala_2_12
+      pkgs.ocaml
+      pkgs.go
+      pkgs.zig
 
       # language servers
-      lua-language-server
-      nil
-      rust-analyzer
-      terraform-ls
+      pkgs.lua-language-server
+      pkgs.nil
+      pkgs.rust-analyzer
+      pkgs.terraform-ls
       pkgsUnstable.roslyn
-      omnisharp-roslyn
-      metals
-      yaml-language-server
+      pkgs.omnisharp-roslyn
+      pkgs.metals
+      pkgs.yaml-language-server
 
       # formatters
-      nixpkgs-fmt
-      rustfmt
-      scalafmt
+      pkgs.nixpkgs-fmt
+      pkgs.rustfmt
+      pkgs.scalafmt
       # csharpier
 
       # tools
-      cargo
-      fd
-      gcc
-      ghc
+      pkgsUnstable.cargo
+      pkgs.fd
+      pkgs.gcc
+      pkgs.ghc
     ];
   };
 }
