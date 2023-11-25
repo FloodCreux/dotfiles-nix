@@ -15,9 +15,7 @@ local function init()
 end
 
 local function install()
-    -- require 'mike.languages'.init()
     -- require 'mike.chatgpt'.init()
-    -- require 'mike.git'.init()
     -- require 'mike.database'.init()
     -- require 'mike.notes'.init()
     require('lazy').setup({
@@ -30,8 +28,10 @@ local function install()
             'nvim-treesitter/nvim-treesitter',
             dependencies = {
                 'nvim-treesitter/nvim-treesitter-textobjects',
+                'nvim-treesitter/nvim-treesitter-context',
             },
             build = ':TSUpdate',
+            config = require 'mike.treesitter'.init
         },
         {
             -- Add indentation guides even on blank lines
@@ -212,6 +212,7 @@ local function install()
         },
         {
             "zbirenbaum/copilot.lua",
+            config = require 'mike.copilot'.init,
         },
     })
 end
