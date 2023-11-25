@@ -5,7 +5,7 @@ local function init()
         suggestion = {
             auto_trigger = true,
             keymap = {
-                accept = '<TAB>',
+                accept = '<C-TAB>',
                 dismiss = '<C-c>',
             },
         },
