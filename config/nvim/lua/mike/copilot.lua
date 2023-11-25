@@ -4,6 +4,10 @@ local function init()
     copilot.setup {
         suggestion = {
             auto_trigger = true,
+            keymap = {
+                accept = '<TAB>',
+                dismiss = '<C-c>',
+            },
         },
     }
 end

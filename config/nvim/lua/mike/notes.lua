@@ -1,7 +1,7 @@
-local neorg = require 'neorg'
-local map = vim.keymap.set
-
 local function init()
+    local neorg = require 'neorg'
+    local map = vim.keymap.set
+
     neorg.setup {
         load = {
             ['core.defaults'] = {},

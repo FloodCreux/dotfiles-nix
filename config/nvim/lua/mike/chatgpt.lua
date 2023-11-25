@@ -1,6 +1,5 @@
-local chatgpt = require 'chatgpt'
-
 local function init()
+    local chatgpt = require 'chatgpt'
     local api_key_cmd = 'pass show api/tokens/openai'
 
     chatgpt.setup({

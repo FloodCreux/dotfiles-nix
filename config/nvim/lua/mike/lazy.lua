@@ -15,8 +15,6 @@ local function init()
 end
 
 local function install()
-    -- require 'mike.chatgpt'.init()
-    -- require 'mike.notes'.init()
     require('lazy').setup({
         'tpope/vim-fugitive',
         'tpope/vim-rhubarb',
@@ -221,6 +219,23 @@ local function install()
                 'kristijanhusak/vim-dadbod-completion',
             },
             config = require 'mike.database'.init,
+        },
+        {
+            'jackMort/ChatGPT.nvim',
+            config = require 'mike.chatgpt'.init,
+            dependencies = {
+                'MunifTanjim/nui.nvim',
+                'nvim-lua/plenary.nvim',
+                'nvim-telescope/telescope.nvim',
+            },
+        },
+        {
+            'nvim-neorg/neorg',
+            build = ':Neorg sync-parsers',
+            dependencies = {
+                'nvim-lua/plenary.nvim',
+            },
+            config = require 'mike.notes'.init,
         },
     })
 end
