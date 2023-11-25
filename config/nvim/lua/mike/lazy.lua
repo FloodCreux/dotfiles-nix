@@ -20,7 +20,6 @@ local function install()
     -- require 'mike.git'.init()
     -- require 'mike.database'.init()
     -- require 'mike.notes'.init()
-    -- require 'mike.comment'.init()
     require('lazy').setup({
         'tpope/vim-fugitive',
         'tpope/vim-rhubarb',
