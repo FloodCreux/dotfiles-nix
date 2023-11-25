@@ -16,7 +16,6 @@ end
 
 local function install()
     -- require 'mike.chatgpt'.init()
-    -- require 'mike.database'.init()
     -- require 'mike.notes'.init()
     require('lazy').setup({
         'tpope/vim-fugitive',
@@ -214,6 +213,14 @@ local function install()
         {
             "zbirenbaum/copilot.lua",
             config = require 'mike.copilot'.init,
+        },
+        {
+            'tpope/vim-dadbod',
+            dependencies = {
+                'kristijanhusak/vim-dadbod-ui',
+                'kristijanhusak/vim-dadbod-completion',
+            },
+            config = require 'mike.database'.init,
         },
     })
 end
