@@ -43,9 +43,9 @@ local function install()
             config = require 'mike.indent'.config,
         },
 
-        { 
-            'numToStr/Comment.nvim', 
-            opts = {}, 
+        {
+            'numToStr/Comment.nvim',
+            opts = {},
             config = require 'mike.comment'.init
         },
         {
@@ -69,7 +69,7 @@ local function install()
             config = require 'mike.telescope'.init
         },
 
-        { 'folke/which-key.nvim',  opts = {} },
+        { 'folke/which-key.nvim', opts = {} },
         {
             'catppuccin/nvim',
             name = "catppuccin",
@@ -94,6 +94,7 @@ local function install()
                 -- Additional lua configuration, makes nvim stuff amazing!
                 'folke/neodev.nvim',
             },
+            config = require 'mike.lspconfig'.init,
         },
         {
             -- Autocompletion
@@ -112,7 +113,7 @@ local function install()
             config = require 'mike.git'.gitworktree,
         },
         {
-            'ThePrimeagen/harpoon',
+            'theprimeagen/harpoon',
             config = require 'mike.harpoon'.init
         },
         {

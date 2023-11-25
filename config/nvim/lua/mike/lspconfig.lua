@@ -1,4 +1,5 @@
 local function init()
+    print("LSP Config")
     local function on_attach(client, buffer)
         local augroup_highlight = vim.api.nvim_create_autogroup("custom-lsp-references", { clear = true })
         local autocmd_clear = vim.api.nvim_clear_autocmds
@@ -130,8 +131,6 @@ local function init()
 
         lspconfig[server].setup(config)
     end
-
-
 end
 
 return {
