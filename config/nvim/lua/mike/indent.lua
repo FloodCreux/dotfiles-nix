@@ -1,9 +1,8 @@
 local function config()
-    local indent = require('ibl')
-    indent.setup({
+    require('indent_blankline').setup({
         exclude = {
             buftypes = { 'dashboard', '', 'lspinfo', 'mason', 'checkhealth', 'help' }
-        }
+        },
     })
 end
 

@@ -1,8 +1,9 @@
-local harpoon_mark = require 'harpoon.mark'
-local harpoon_ui = require 'harpoon.ui'
-local harpoon_cmd_ui = require 'harpoon.cmd-ui'
 
 local function init()
+    local harpoon_mark = require 'harpoon.mark'
+    local harpoon_ui = require 'harpoon.ui'
+    local harpoon_cmd_ui = require 'harpoon.cmd-ui'
+
     vim.keymap.set('n', '<leader>ha', harpoon_mark.add_file, { desc = '[H]arpoon [A]dd File' })
     vim.keymap.set('n', '<leader>hm', harpoon_ui.toggle_quick_menu, { desc = '[H]arpoon Toggle [M]enu' })
     vim.keymap.set('n', '<leader>hh', function()

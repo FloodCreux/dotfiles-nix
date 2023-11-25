@@ -1,6 +1,7 @@
-local telescope = require 'telescope'
 
 local function init()
+    local telescope = require 'telescope'
+
     telescope.setup {
         defaults = {
             file_ignore_patterns = {

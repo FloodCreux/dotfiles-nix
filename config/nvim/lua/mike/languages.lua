@@ -1,8 +1,3 @@
-local copilot = require 'copilot'
-local lspconfig = require 'lspconfig'
-local treesitter = require 'nvim-treesitter.configs'
-local treesitter_context = require 'treesitter-context'
-
 local function autocmd(args)
     local event = args[1]
     local group = args[2]
@@ -67,6 +62,11 @@ local function on_attach(client, buffer)
 end
 
 local function init()
+    local copilot = require 'copilot'
+    local lspconfig = require 'lspconfig'
+    local treesitter = require 'nvim-treesitter.configs'
+    local treesitter_context = require 'treesitter-context'
+
     copilot.setup {
         suggestion = {
             auto_trigger = true,

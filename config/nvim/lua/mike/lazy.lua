@@ -17,10 +17,7 @@ end
 local function install()
     -- require 'mike.languages'.init()
     -- require 'mike.chatgpt'.init()
-    -- require 'mike.telescope'.init()
     -- require 'mike.git'.init()
-    -- require 'mike.conform'.init()
-    -- require 'mike.harpoon'.init()
     -- require 'mike.database'.init()
     -- require 'mike.notes'.init()
     -- require 'mike.comment'.init()
@@ -30,16 +27,28 @@ local function install()
         'tpope/vim-sleuth',
         'sgur/vim-editorconfig',
         {
+            -- Highlight, edit, and navigate code
+            'nvim-treesitter/nvim-treesitter',
+            dependencies = {
+                'nvim-treesitter/nvim-treesitter-textobjects',
+            },
+            build = ':TSUpdate',
+        },
+        {
             -- Add indentation guides even on blank lines
             'lukas-reineke/indent-blankline.nvim',
             -- Enable `lukas-reineke/indent-blankline.nvim`
             -- See `:help indent_blankline.txt`
             main = "ibl",
             opts = {},
-            config = require('mike.indent').config,
+            config = require 'mike.indent'.config,
         },
 
-        { 'numToStr/Comment.nvim', opts = {} },
+        { 
+            'numToStr/Comment.nvim', 
+            opts = {}, 
+            config = require 'mike.comment'.init
+        },
         {
             'nvim-telescope/telescope.nvim',
             branch = '0.1.x',
@@ -58,16 +67,9 @@ local function install()
                     end,
                 },
             },
+            config = require 'mike.telescope'.init
         },
 
-        {
-            -- Highlight, edit, and navigate code
-            'nvim-treesitter/nvim-treesitter',
-            dependencies = {
-                'nvim-treesitter/nvim-treesitter-textobjects',
-            },
-            build = ':TSUpdate',
-        },
         { 'folke/which-key.nvim',  opts = {} },
         {
             'catppuccin/nvim',
@@ -103,47 +105,16 @@ local function install()
         {
             -- Adds git related signs to the gutter, as well as utilities for managing changes
             'lewis6991/gitsigns.nvim',
-            opts = {
-                signs = {
-                    add = { text = '+' },
-                    change = { text = '~' },
-                    delete = { text = '_' },
-                    topdelete = { text = '‾' },
-                    changedelete = { text = '~' },
-                },
-                on_attach = function(bufnr)
-                    vim.keymap.set('n', '<leader>gh', require('gitsigns').preview_hunk,
-                        { buffer = bufnr, desc = 'Preview git hunk' })
-
-                    -- don't override the built in and fugitive keymaps
-                    local gs = package.loaded.gitsigns
-
-                    vim.keymap.set({ 'n', 'v' }, ']c', function()
-                        if vim.wo.diff then return ']c' end
-                        vim.schedule(function() gs.next_hunk() end)
-                        return '<Ignore>'
-                    end, { expr = true, buffer = bufnr, desc = "Jump to next hunk" })
-                    vim.keymap.set({ 'n', 'v' }, '[c', function()
-                        if vim.wo.diff then return '[c' end
-                        vim.schedule(function() gs.prev_hunk() end)
-                        return '<Ignore>'
-                    end, { expr = true, buffer = bufnr, desc = "Jump to previous hunk" })
-
-                    vim.keymap.set('n', '<leader>gsh', gs.stage_hunk, { desc = 'Git stage hunk' })
-                    vim.keymap.set('n', '<leader>gsb', gs.stage_buffer, { desc = 'Git stage buffer' })
-                    vim.keymap.set('n', '<leader>gsu', gs.undo_stage_hunk, { desc = 'Git undo stage hunk' })
-                    vim.keymap.set('n', '<leader>gsr', gs.reset_buffer, { desc = 'Git reset buffer' })
-                    vim.keymap.set('n', '<leader>gsp', gs.preview_hunk, { desc = 'Git preview hunk' })
-
-                    vim.keymap.set('n', '<leader>gpp', ':Git push ', { desc = 'Git push' })
-                    vim.keymap.set('n', '<leader>gpr', ':Git rebase origin ', { desc = 'Git rebase origin' })
-                end
-            },
+            config = require 'mike.git'.gitsigns,
         },
 
         {
             'ThePrimeagen/git-worktree.nvim',
-            -- config = function() require 'mike.git-worktree'.config() end,
+            config = require 'mike.git'.gitworktree,
+        },
+        {
+            'ThePrimeagen/harpoon',
+            config = require 'mike.harpoon'.init
         },
         {
             'folke/noice.nvim',
@@ -239,7 +210,10 @@ local function install()
                 'leoluz/nvim-dap-go',
             },
             config = require 'mike.dap'.init,
-        }
+        },
+        {
+            "zbirenbaum/copilot.lua",
+        },
     })
 end
 

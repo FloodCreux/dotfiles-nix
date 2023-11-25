@@ -1,6 +1,5 @@
-local comment = require 'Comment'
-
 local function init()
+    local comment = require 'Comment'
     comment.setup()
 end
 
