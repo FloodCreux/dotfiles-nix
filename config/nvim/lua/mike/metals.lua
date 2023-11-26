@@ -42,7 +42,7 @@ local function init()
             'com.github.swagger.akka.javadsl',
         },
         enableSemanticHighlighting = false,
-        mavenScript = "mvn"
+        mavenScript = "mvn ch.epfl.scala:bloop-maven-plugin:2.0.0:bloopInstall"
     }
 
     metals_config.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(

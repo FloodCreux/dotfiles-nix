@@ -1,18 +1,3 @@
-local function autocmd(args)
-    local event = args[1]
-    local group = args[2]
-    local callback = args[3]
-
-    vim.api.nvim_create_autocmd(event, {
-        group = group,
-        buffer = args[4],
-        callback = function()
-            callback()
-        end,
-        once = args.once,
-    })
-end
-
 local function init()
     local treesitter = require 'nvim-treesitter.configs'
     local treesitter_context = require 'treesitter-context'

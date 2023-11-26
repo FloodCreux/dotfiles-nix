@@ -1,5 +1,19 @@
 local function init()
-    print("LSP Config")
+    local function autocmd(args)
+        local event = args[1]
+        local group = args[2]
+        local callback = args[3]
+
+        vim.api.nvim_create_autocmd(event, {
+            group = group,
+            buffer = args[4],
+            callback = function()
+                callback()
+            end,
+            once = args.once,
+        })
+    end
+
     local function on_attach(client, buffer)
         local augroup_highlight = vim.api.nvim_create_autogroup("custom-lsp-references", { clear = true })
         local autocmd_clear = vim.api.nvim_clear_autocmds
@@ -51,7 +65,16 @@ local function init()
     local lspconfig = require 'lspconfig'
 
     local language_servers = {
-        omnisharp = {},
+        omnisharp = {
+            cmd = { "dotnet" },
+            enable_editorconfig_support = true,
+            enable_ms_build_load_projects_on_demand = false,
+            enable_roslyn_analyzers = false,
+            organize_imports_on_format = true,
+            enable_import_completion = true,
+            sdk_include_prereleases = true,
+            analyze_open_documents_only = false,
+        },
         diagnosticls = {
             filetypes = { 'python' },
             init_options = {
