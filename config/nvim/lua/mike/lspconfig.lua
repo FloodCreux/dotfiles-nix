@@ -14,11 +14,9 @@ local function init()
         })
     end
 
-    local function on_attach(client, buffer)
+    local on_attach = function(client, buffer)
         local augroup_highlight = vim.api.nvim_create_autogroup("custom-lsp-references", { clear = true })
         local autocmd_clear = vim.api.nvim_clear_autocmds
-
-        local opts = { buffer = buffer, remap = false }
 
         -- Enable completion triggered by <c-x><c-o>
         vim.bo[buffer].omnifunc = 'v:lua.vim.lsp.omnifunc'
@@ -61,6 +59,9 @@ local function init()
             autocmd { 'CursorMove', augroup_highlight, vim.lsp.buf.clear_references, buffer }
         end
     end
+
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
     local lspconfig = require 'lspconfig'
 
@@ -144,7 +145,7 @@ local function init()
     }
 
     for server, server_config in pairs(language_servers) do
-        local config = { on_attach = on_attach }
+        local config = { on_attach = on_attach, capabilities = capabilities }
 
         if server_config then
             for k, v in pairs(server_config) do
@@ -154,6 +155,9 @@ local function init()
 
         lspconfig[server].setup(config)
     end
+
+    require 'mason'.setup()
+    require 'mason-lspconfig'.setup()
 end
 
 return {

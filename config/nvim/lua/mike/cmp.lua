@@ -34,8 +34,8 @@ local function init()
     local autopairs = require 'nvim-autopairs'
     local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
 
-    luasnip.config.setup {}
     require('luasnip.loaders.from_vscode').lazy_load()
+    luasnip.config.setup {}
 
     autopairs.setup {
         fast_wrap = {},
@@ -47,6 +47,9 @@ local function init()
             expand = function(args)
                 luasnip.lsp_expand(args.body)
             end,
+        },
+        completion = {
+            completeopt = 'menu,menuone,noinsert',
         },
         mapping = cmp.mapping.preset.insert {
             ['<C-n>'] = cmp.mapping.select_next_item(),

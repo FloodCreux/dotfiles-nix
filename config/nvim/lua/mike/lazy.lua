@@ -93,6 +93,8 @@ local function install()
 
                 -- Additional lua configuration, makes nvim stuff amazing!
                 'folke/neodev.nvim',
+                'williamboman/mason.nvim',
+                'williamboman/mason-lspconfig.nvim',
             },
             config = require 'mike.lspconfig'.init,
         },
