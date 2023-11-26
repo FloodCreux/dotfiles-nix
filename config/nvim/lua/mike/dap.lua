@@ -33,6 +33,29 @@ local function init()
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
+
+    dap.adapters.coreclr = {
+        type = 'executable',
+        command = 'netcoredbg',
+        args = { '--interpreter=vscode' },
+    }
+
+    dap.adapters.netcoredbg = {
+        type = 'executable',
+        command = 'netcoredbg',
+        args = { '--interpreter=vscode' },
+    }
+
+    dap.configurations.cs = {
+        {
+            type = 'coreclr',
+            name = 'launch - netcoredbg',
+            request = 'launch',
+            program = function()
+                return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/src', 'file')
+            end
+        },
+    }
 end
 
 return {
