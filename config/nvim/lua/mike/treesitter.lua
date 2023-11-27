@@ -22,6 +22,7 @@ local function init()
             'zig',
             'javascript',
             'typescript',
+            'nix',
         },
         highlight = { enable = true },
         indent = { enable = true },

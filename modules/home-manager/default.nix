@@ -45,6 +45,12 @@ in
     setlocal wrap
   '';
 
+  home.file.".config/alacritty/alacritty.yml".source = ./dotfiles/alacritty/alacritty.yml;
+  home.file.".config/alacritty/catppuccin-macchiato.yml".source = ./dotfiles/alacritty/catppuccin-macchiato.yml;
+
+  home.file.".zsh/starship.zsh".source = ./dotfiles/zsh/starship.zsh;
+  home.file.".zsh/aliases.zsh".source = ./dotfiles/zsh/aliases.zsh;
+
   #--------------------------------------------------------
   # programs
   #--------------------------------------------------------
@@ -77,6 +83,11 @@ in
       nixswitch = "darwin-rebuild switch --flake ~/personal/nix/.#default";
       nixup = "pushd ~/personal/nix; nix flake update; nixswitch; popd";
     };
+
+    initExtra = ''
+      [[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
+      [[ -f ~/.zsh/starship.zsh ]] && source ~/.zsh/starship.zsh
+    '';
   };
 
   programs.starship = {
@@ -152,6 +163,10 @@ in
       pkgs.gcc
       pkgs.ghc
     ];
+  };
+
+  programs.alacritty = {
+    enable = true;
   };
 }
 
