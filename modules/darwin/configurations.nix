@@ -33,7 +33,7 @@ in
     caskArgs.no_quarantine = true;
     global.brewfile = true;
     masApps = { };
-    casks = [ "devtoys" "dotnet-sdk" "raycast" ];
+    casks = [ "devtoys" "dotnet-sdk" "raycast" "fontforge" ];
     taps = [ "azure/azd" ];
     brews = [ "azd" ];
   };
