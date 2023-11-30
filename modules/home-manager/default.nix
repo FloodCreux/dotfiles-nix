@@ -53,8 +53,8 @@ in
 
   home.file.".local/scripts/tmux-sessionizer".source = ./scripts/tmux/tmux-sessionizer.sh;
   home.file.".local/scripts/tmux-cht.sh".source = ./scripts/tmux/tmux-cht.sh;
-  home.file.".tmux-cht-languages".source = ./scripts/tmux/tmux-cht-languages;
-  home.file.".tmux-cht-command".source = ./scripts/tmux/tmux-cht-command;
+  home.file.".tmux-cht-languages".source = ./scripts/tmux/.tmux-cht-languages;
+  home.file.".tmux-cht-command".source = ./scripts/tmux/.tmux-cht-command;
 
   #--------------------------------------------------------
   # programs
