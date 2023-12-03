@@ -15,7 +15,7 @@ in
   #--------------------------------------------------------
 
   # Don't change this
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
 
   # specify home manager configs
   home.packages = [
@@ -53,8 +53,8 @@ in
 
   home.file.".local/scripts/tmux-sessionizer".source = ./scripts/tmux/tmux-sessionizer.sh;
   home.file.".local/scripts/tmux-cht.sh".source = ./scripts/tmux/tmux-cht.sh;
-  home.file.".tmux-cht-languages".source = ./scripts/tmux/.tmux-cht-languages;
-  home.file.".tmux-cht-command".source = ./scripts/tmux/.tmux-cht-command;
+  home.file.".tmux-cht-languages".source = ./dotfiles/tmux/.tmux-cht-languages;
+  home.file.".tmux-cht-command".source = ./dotfiles/tmux/.tmux-cht-command;
 
   #--------------------------------------------------------
   # programs
@@ -74,14 +74,16 @@ in
     enableZshIntegration = true;
   };
 
-  programs.exa.enable = true;
+  programs.eza.enable = true;
   programs.git.enable = true;
 
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting = {
+      enable = true;
+    };
 
     shellAliases = {
       ls = "ls --color=auto -F";
@@ -155,11 +157,14 @@ in
       pkgs.omnisharp-roslyn
       pkgs.metals
       pkgs.yaml-language-server
+      pkgs.ocamlPackages.ocaml-lsp
+      pkgs.ocamlPackages.merlin
 
       # formatters
       pkgs.nixpkgs-fmt
       pkgs.rustfmt
       pkgs.scalafmt
+      pkgs.ocamlformat
       # csharpier
 
       # tools
