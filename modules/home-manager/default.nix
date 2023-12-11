@@ -56,6 +56,8 @@ in
   home.file.".tmux-cht-languages".source = ./dotfiles/tmux/.tmux-cht-languages;
   home.file.".tmux-cht-command".source = ./dotfiles/tmux/.tmux-cht-command;
 
+  home.file.".config/starship.toml".source = ./dotfiles/starship/starship.toml;
+
   #--------------------------------------------------------
   # programs
   #--------------------------------------------------------
