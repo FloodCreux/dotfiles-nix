@@ -86,7 +86,6 @@ in
     };
 
     shellAliases = {
-      ls = "ls --color=auto -F";
       nixswitch = "darwin-rebuild switch --flake ~/personal/nix/.#default";
       nixup = "pushd ~/personal/nix; nix flake update; nixswitch; popd";
     };
@@ -104,7 +103,7 @@ in
 
   programs.wezterm = {
     enable = true;
-    extraConfig = builtins.readFile ./dotfiles/wezterm.lua;
+    extraConfig = builtins.readFile ./dotfiles/wezterm/wezterm.lua;
   };
 
   programs.tmux = {
@@ -153,12 +152,13 @@ in
       pkgs.nil
       pkgs.rust-analyzer
       pkgs.terraform-ls
-      pkgsUnstable.roslyn
+      pkgs.roslyn
       pkgs.omnisharp-roslyn
       pkgs.metals
       pkgs.yaml-language-server
       pkgs.ocamlPackages.ocaml-lsp
       pkgs.ocamlPackages.merlin
+      pkgs.clang
 
       # formatters
       pkgs.nixpkgs-fmt
@@ -168,7 +168,7 @@ in
       # csharpier
 
       # tools
-      pkgsUnstable.cargo
+      pkgs.cargo
       pkgs.fd
       pkgs.gcc
       pkgs.ghc

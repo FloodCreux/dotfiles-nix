@@ -143,6 +143,7 @@ local function init()
             },
         },
         ocamllsp = {},
+        clangd = {},
     }
 
     for server, server_config in pairs(language_servers) do
