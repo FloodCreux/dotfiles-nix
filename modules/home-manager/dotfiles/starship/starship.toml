@@ -21,13 +21,13 @@ disabled = false
 
 # Shows the current username
 [env_var.USER]
-format = '[$env_value](bold lavender) '
+format = '[$env_value](bold flamingo) '
 variable = "USER"
 disabled = false
 
 # Shows an icon depending on what device it is running on
 [env_var.STARSHIP_DEVICE]
-format = 'on [$env_value](bold lavender)'
+format = 'on [$env_value](bold peach)'
 variable = "STARSHIP_DEVICE"
 disabled = false
 
@@ -36,7 +36,7 @@ disabled = false
 # Shows the hostname
 [hostname]
 ssh_only = false
-format = "[$hostname](bold lavender) "
+format = "[$hostname](bold peach) "
 disabled = false
 
 # Shows current directory
