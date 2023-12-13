@@ -1,4 +1,6 @@
-{ inputs }: { git }: { pkgs, ... }:
+{ inputs }:
+{ git }:
+{ pkgs, ... }:
 
 let
   catppuccin-bat = pkgs.fetchFromGitHub {
@@ -8,8 +10,7 @@ let
     sha256 = "sha256-6WVKQErGdaqb++oaXnY3i6/GuH2FhTgK0v4TN4Y0Wbw=";
   };
   pkgsUnstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
-in
-{
+in {
   #--------------------------------------------------------
   # home
   #--------------------------------------------------------
@@ -45,13 +46,16 @@ in
     setlocal wrap
   '';
 
-  home.file.".config/alacritty/alacritty.yml".source = ./dotfiles/alacritty/alacritty.yml;
-  home.file.".config/alacritty/catppuccin-macchiato.yml".source = ./dotfiles/alacritty/catppuccin-macchiato.yml;
+  home.file.".config/alacritty/alacritty.yml".source =
+    ./dotfiles/alacritty/alacritty.yml;
+  home.file.".config/alacritty/catppuccin-macchiato.yml".source =
+    ./dotfiles/alacritty/catppuccin-macchiato.yml;
 
   home.file.".zsh/starship.zsh".source = ./dotfiles/zsh/starship.zsh;
   home.file.".zsh/aliases.zsh".source = ./dotfiles/zsh/aliases.zsh;
 
-  home.file.".local/scripts/tmux-sessionizer".source = ./scripts/tmux/tmux-sessionizer.sh;
+  home.file.".local/scripts/tmux-sessionizer".source =
+    ./scripts/tmux/tmux-sessionizer.sh;
   home.file.".local/scripts/tmux-cht.sh".source = ./scripts/tmux/tmux-cht.sh;
   home.file.".tmux-cht-languages".source = ./dotfiles/tmux/.tmux-cht-languages;
   home.file.".tmux-cht-command".source = ./dotfiles/tmux/.tmux-cht-command;
@@ -66,8 +70,8 @@ in
     enable = true;
     config = { theme = "catppuccin"; };
     themes = {
-      catppuccin = builtins.readFile
-        (catppuccin-bat + "/Catppuccin-macchiato.tmTheme");
+      catppuccin =
+        builtins.readFile (catppuccin-bat + "/Catppuccin-macchiato.tmTheme");
     };
   };
 
@@ -83,9 +87,7 @@ in
     enable = true;
     enableCompletion = true;
     enableAutosuggestions = true;
-    syntaxHighlighting = {
-      enable = true;
-    };
+    syntaxHighlighting = { enable = true; };
 
     shellAliases = {
       nixswitch = "darwin-rebuild switch --flake ~/personal/nix/.#default";
@@ -164,10 +166,17 @@ in
 
       # formatters
       pkgs.nixpkgs-fmt
+      pkgs.nixfmt
       pkgs.rustfmt
       pkgs.scalafmt
       pkgs.ocamlformat
       # csharpier
+      pkgs.prettierd
+      pkgs.nodePackages.prettier
+      pkgs.nodePackages.sql-formatter
+      pkgs.isort
+      pkgs.stylua
+      pkgs.uncrustify
 
       # tools
       pkgs.cargo
@@ -177,8 +186,6 @@ in
     ];
   };
 
-  programs.alacritty = {
-    enable = true;
-  };
+  programs.alacritty = { enable = true; };
 }
 
