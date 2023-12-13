@@ -133,7 +133,9 @@ local function init()
             },
         },
         sqlls = {},
-        terraformls = {},
+        terraformls = {
+            filetypes = { 'terraform', 'terraform-vars', 'tf', 'tfvars', }
+        },
         tsserver = {},
         yamlls = {
             settings = {

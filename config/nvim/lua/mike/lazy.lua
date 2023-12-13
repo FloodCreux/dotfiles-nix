@@ -65,7 +65,10 @@ local function install()
             },
             config = require 'mike.telescope'.init
         },
-
+        {
+            'lewis6991/hover.nvim',
+            config = require 'mike.hover'.init,
+        },
         { 'folke/which-key.nvim', opts = {} },
         {
             'catppuccin/nvim',
