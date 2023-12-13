@@ -31,8 +31,18 @@ in {
     pkgs.zsh
     pkgs.jdk8
 
-    pkgsUnstable.rustc
-    pkgsUnstable.cargo
+    pkgs.rustc
+    pkgs.cargo
+    pkgs.gcc
+    pkgs.ghc
+
+    pkgs.scala_2_12
+    pkgs.ocaml
+    pkgs.go
+    pkgs.zig
+    pkgs.elixir
+
+    pkgs.dotnet-sdk_8
   ];
 
   home.sessionVariables = {
@@ -145,7 +155,7 @@ in {
 
     extraPackages = [
       # languages
-      pkgsUnstable.rustc
+      pkgs.rustc
       pkgs.scala_2_12
       pkgs.ocaml
       pkgs.go
@@ -163,6 +173,7 @@ in {
       pkgs.ocamlPackages.ocaml-lsp
       pkgs.ocamlPackages.merlin
       pkgs.clang
+      pkgs.zls
 
       # formatters
       pkgs.nixpkgs-fmt
