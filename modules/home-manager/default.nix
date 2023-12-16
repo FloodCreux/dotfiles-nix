@@ -29,10 +29,12 @@ in {
     pkgs.coursier
     pkgs.maven
     pkgs.zsh
-    pkgs.jdk8
+    pkgs.skhd
 
     pkgs.rustc
+    pkgs.rustfmt
     pkgs.cargo
+
     pkgs.gcc
     pkgs.ghc
 
@@ -43,6 +45,9 @@ in {
     pkgs.elixir
 
     pkgs.dotnet-sdk_8
+
+    pkgs.sqlite
+    pkgs.docker
   ];
 
   home.sessionVariables = {
@@ -72,6 +77,16 @@ in {
 
   home.file.".config/starship.toml".source = ./dotfiles/starship/starship.toml;
 
+  home.file.".config/skhd/skhdrc" = {
+    source = ./dotfiles/skhd/skhdrc;
+    executable = true;
+  };
+
+  home.file.".config/yabai/yabairc" = {
+    source = ./dotfiles/yabai/yabairc;
+    executable = true;
+  };
+
   #--------------------------------------------------------
   # programs
   #--------------------------------------------------------
@@ -92,6 +107,11 @@ in {
 
   programs.eza.enable = true;
   programs.git.enable = true;
+
+  programs.java = {
+    enable = true;
+    package = pkgs.jdk8;
+  };
 
   programs.zsh = {
     enable = true;
@@ -160,6 +180,7 @@ in {
       pkgs.ocaml
       pkgs.go
       pkgs.zig
+      pkgs.jdk8
 
       # language servers
       pkgs.lua-language-server

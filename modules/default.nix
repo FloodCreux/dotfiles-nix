@@ -2,14 +2,11 @@
 let
   home-manager = import ./home-manager { inherit inputs; };
   metals = import ./metals { inherit inputs; };
-in
-{
+in {
   mkDarwin = { git ? { }, system, username }:
     inputs.darwin.lib.darwinSystem {
       modules = [
-        (import ./darwin/configurations.nix {
-          inherit username;
-        })
+        (import ./darwin/configurations.nix { inherit username; })
 
         inputs.home-manager.darwinModules.home-manager
         {
@@ -17,9 +14,7 @@ in
             useGlobalPkgs = true;
             useUserPackages = true;
             users.${username} = { pkgs, ... }: {
-              imports = [
-                (home-manager { inherit git; })
-              ];
+              imports = [ (home-manager { inherit git; }) ];
             };
           };
         }

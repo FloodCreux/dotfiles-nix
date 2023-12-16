@@ -69,7 +69,11 @@ local function install()
 			"lewis6991/hover.nvim",
 			config = require("mike.hover").init,
 		},
-		{ "folke/which-key.nvim", opts = {} },
+		{
+			"folke/which-key.nvim",
+			config = require("mike.which-key").init,
+			opts = {},
+		},
 		{
 			"catppuccin/nvim",
 			name = "catppuccin",

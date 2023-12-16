@@ -1,5 +1,5 @@
 local function init()
-	local conform = require 'conform'
+	local conform = require("conform")
 
 	conform.setup({
 		formatters_by_ft = {
@@ -10,7 +10,7 @@ local function init()
 			terraform = { "terraform_fmt" },
 			rust = { "rustfmt" },
 			csharp = { { "uncrustify", "csharpier" } },
-			sql = { "sql-formatter" },
+			sql = { "sqlfmt", "sql-formatter" },
 			nix = { "nixfmt" },
 		},
 		format_on_save = {

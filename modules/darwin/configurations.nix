@@ -1,9 +1,7 @@
 { username }:
 
-let
-  nix = import ../shared/nix.nix;
-in
-{
+let nix = import ../shared/nix.nix;
+in {
   nix = nix;
   nixpkgs.config.allowUnfree = true;
   programs.zsh.enable = true;
@@ -35,6 +33,6 @@ in
     masApps = { };
     casks = [ "devtoys" "dotnet-sdk" "raycast" "fontforge" ];
     taps = [ "azure/azd" ];
-    brews = [ "azd" "opam" "tree" ];
+    brews = [ "azd" "opam" "tree" "yabai" ];
   };
 }

@@ -29,7 +29,12 @@ local function init()
 	vim.keymap.set("n", "<leader>rbf", function()
 		refactoring.refactor("Extract Block To File")
 	end)
-	-- Extract block supports only normal modeend
+
+	require("telescope").load_extension("refactoring")
+
+	vim.keymap.set({ "n", "x" }, "<leader>rr", function()
+		require("telescope").extensions.refactoring.refactors()
+	end)
 end
 
 return {

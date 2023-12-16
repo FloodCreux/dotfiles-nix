@@ -1,8 +1,6 @@
 { inputs }:
-let
-  pkgs = inputs.nixpkgs;
-in
-{
+let pkgs = inputs.nixpkgs;
+in {
   # here go the darwin preferences and config items
   programs.zsh.enable = true;
 
@@ -21,7 +19,8 @@ in
   system.keyboard.enableKeyMapping = true;
 
   fonts = {
-    fontDir.enable = false; # DANGER: if set to true it will only install fonts listed below
+    fontDir.enable =
+      false; # DANGER: if set to true it will only install fonts listed below
     fonts = [ (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
   };
 
