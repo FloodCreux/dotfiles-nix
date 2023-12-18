@@ -15,7 +15,7 @@ local function init()
 end
 
 local function install()
-	require("lazy").setup({
+	local plugins = {
 		"tpope/vim-fugitive",
 		"tpope/vim-rhubarb",
 		"tpope/vim-sleuth",
@@ -265,7 +265,11 @@ local function install()
 			},
 			config = require("mike.notes").init,
 		},
-	})
+	}
+
+	local opts = {}
+
+	require("lazy").setup(plugins, opts)
 end
 
 return {

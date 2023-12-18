@@ -1,1 +1,1 @@
-require 'mike'.init()
+require("mike").init()
