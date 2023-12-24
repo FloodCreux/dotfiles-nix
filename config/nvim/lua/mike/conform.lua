@@ -10,8 +10,8 @@ local function init()
 			terraform = { "terraform_fmt" },
 			rust = { "rustfmt" },
 			csharp = { { "uncrustify", "csharpier" } },
-			sql = { "sqlfmt", "sql-formatter" },
 			nix = { "nixfmt" },
+			yaml = { "yamlfix" },
 		},
 		format_on_save = {
 			lsp_fallback = true,

@@ -30,6 +30,7 @@ in {
     pkgs.maven
     pkgs.zsh
     pkgs.skhd
+    pkgs.gimp
 
     pkgs.rustc
     pkgs.rustfmt
@@ -37,6 +38,7 @@ in {
 
     pkgs.gcc
     pkgs.ghc
+    pkgs.cmake
 
     pkgs.scala_2_12
     pkgs.ocaml
@@ -48,6 +50,8 @@ in {
 
     pkgs.sqlite
     pkgs.docker
+
+    pkgs.nodePackages.vscode-json-languageserver
   ];
 
   home.sessionVariables = {
@@ -127,6 +131,7 @@ in {
     initExtra = ''
       [[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
       [[ -f ~/.zsh/starship.zsh ]] && source ~/.zsh/starship.zsh
+      export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib
     '';
   };
 
@@ -206,6 +211,7 @@ in {
       pkgs.prettierd
       pkgs.nodePackages.prettier
       pkgs.nodePackages.sql-formatter
+      pkgs.nodePackages.vscode-json-languageserver
       pkgs.isort
       pkgs.stylua
       pkgs.uncrustify

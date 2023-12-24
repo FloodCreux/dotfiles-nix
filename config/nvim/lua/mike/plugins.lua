@@ -194,6 +194,7 @@ return {
 	},
 	{
 		"stevearc/conform.nvim",
+		event = { "BufWritePre" },
 		config = require("mike.conform").init,
 	},
 	{
@@ -247,5 +248,11 @@ return {
 			"nvim-lua/plenary.nvim",
 		},
 		config = require("mike.notes").init,
+	},
+	{
+		"johmsalas/text-case.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim" },
+		config = require("mike.textcase").init,
+		keys = require("mike.textcase").keys,
 	},
 }
