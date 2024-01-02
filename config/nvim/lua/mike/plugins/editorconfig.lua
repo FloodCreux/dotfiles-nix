@@ -1,0 +1,3 @@
+return {
+	"sgur/vim-editorconfig",
+}
