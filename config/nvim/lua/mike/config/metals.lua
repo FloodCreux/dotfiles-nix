@@ -22,7 +22,6 @@ local function init()
 		},
 		enableSemanticHighlighting = false,
 		mavenScript = "mvn ch.epfl.scala:bloop-maven-plugin:2.0.0:bloopInstall",
-		javaHome = "$JAVA_HOME",
 	}
 
 	-- local capabilities = vim.lsp.protocol.make_client_capabilities()
