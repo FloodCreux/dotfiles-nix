@@ -1,5 +1,5 @@
 return {
 	"stevearc/conform.nvim",
-	event = { "BufWritePre" },
+	-- event = { "BufWritePre" },
 	config = require("mike.config.conform").init,
 }

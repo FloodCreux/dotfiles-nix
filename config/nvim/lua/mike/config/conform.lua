@@ -9,7 +9,7 @@ local function init()
 			scala = { "scalafmt" },
 			terraform = { "terraform_fmt" },
 			rust = { "rustfmt" },
-			csharp = { { "uncrustify", "csharpier" } },
+			cs = { "csharpier" },
 			nix = { "nixfmt" },
 			yaml = { "yamlfix" },
 		},

@@ -26,32 +26,51 @@ in {
     pkgs.less
     pkgs.gh
     pkgs.jq
-    pkgs.coursier
-    pkgs.maven
     pkgs.zsh
     pkgs.skhd
     pkgs.gimp
 
+    # Rust
     pkgs.rustc
     pkgs.rustfmt
     pkgs.cargo
 
+    # C
     pkgs.gcc
     pkgs.ghc
     pkgs.cmake
 
+    # Scala
+    pkgs.coursier
+    pkgs.maven
     pkgs.scala_2_12
+
+    # OCaml
     pkgs.ocaml
+
+    # Go
     pkgs.go
+
+    # Zig
     pkgs.zig
+
+    # Haskell
     pkgs.elixir
 
+    # .NET
     pkgs.dotnet-sdk_8
+    pkgs.omnisharp-roslyn
+    pkgs.roslyn
 
+    # Sql
     pkgs.sqlite
+
+    # Containers
     pkgs.docker
 
     pkgs.nodePackages.vscode-json-languageserver
+
+    pkgs.snyk
   ];
 
   home.sessionVariables = {
@@ -194,6 +213,7 @@ in {
       pkgs.terraform-ls
       pkgs.roslyn
       pkgs.omnisharp-roslyn
+      # pkgsUnstable.csharp-ls
       pkgs.metals
       pkgs.yaml-language-server
       pkgs.ocamlPackages.ocaml-lsp
@@ -223,7 +243,5 @@ in {
       pkgs.ghc
     ];
   };
-
-  programs.alacritty = { enable = true; };
 }
 

@@ -49,7 +49,7 @@ local function init()
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 		end, "Workspace List Folders")
 
-		vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
+		vim.api.nvim_buf_create_user_command(buffer, "Format", function(_)
 			vim.lsp.buf.format()
 		end, { desc = "Format current buffer with LSP" })
 
@@ -66,15 +66,21 @@ local function init()
 	local lspconfig = require("lspconfig")
 
 	local language_servers = {
-		omnisharp = {
-			cmd = { "dotnet" },
-			enable_editorconfig_support = true,
-			enable_ms_build_load_projects_on_demand = false,
-			enable_roslyn_analyzers = false,
-			organize_imports_on_format = true,
-			enable_import_completion = true,
-			sdk_include_prereleases = true,
-			analyze_open_documents_only = false,
+		-- omnisharp = {
+		-- 	enable_editorconfig_support = true,
+		-- 	enable_ms_build_load_projects_on_demand = false,
+		-- 	enable_roslyn_analyzers = false,
+		-- 	organize_imports_on_format = true,
+		-- 	enable_import_completion = true,
+		-- 	sdk_include_prereleases = true,
+		-- 	analyze_open_documents_only = false,
+		-- },
+		csharp_ls = {
+			cmd = { "csharp-ls" },
+			filetypes = { "cs" },
+			init_options = {
+				AutomaticWorkspaceInit = true,
+			},
 		},
 		diagnosticls = {
 			filetypes = { "python" },
@@ -102,6 +108,10 @@ local function init()
 				Lua = {
 					workspace = { checkThirdParty = false },
 					telemetry = { enable = false },
+					runtime = { version = "LuaJIT" },
+					diagnostics = {
+						globals = { "vim" },
+					},
 				},
 			},
 		},
@@ -163,7 +173,24 @@ local function init()
 	require("mason").setup({
 		PATH = "prepend",
 	})
-	require("mason-lspconfig").setup()
+
+	require("mason-lspconfig").setup({
+		ensure_installed = {
+			"csharp_ls",
+		},
+	})
+
+	vim.diagnostic.config({
+		update_in_insert = true,
+		float = {
+			focusable = false,
+			style = "minimal",
+			border = "rounded",
+			source = "always",
+			header = "",
+			prefix = "",
+		},
+	})
 end
 
 return {
