@@ -45,6 +45,7 @@ in {
     pkgs.coursier
     pkgs.maven
     pkgs.scala_2_12
+    pkgs.scalafmt
 
     # OCaml
     pkgs.ocaml

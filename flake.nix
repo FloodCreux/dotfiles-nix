@@ -31,12 +31,6 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "aarch64-darwin" ];
       perSystem = { self', inputs', pkgs, system, ... }: {
-        packages = {
-          mike-nvim = pkgs.vimUtils.buildVimPlugin {
-            name = "mike";
-            src = ./config/nvim;
-          };
-        };
       };
 
       flake = {
