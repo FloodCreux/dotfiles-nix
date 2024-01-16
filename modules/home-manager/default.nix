@@ -1,7 +1,6 @@
 { inputs }:
-{ git }:
+{ git, system }:
 { pkgs, ... }:
-
 let
   catppuccin-bat = pkgs.fetchFromGitHub {
     owner = "catppuccin";
@@ -9,7 +8,6 @@ let
     rev = "ba4d16880d63e656acced2b7d4e034e4a93f74b1";
     sha256 = "sha256-6WVKQErGdaqb++oaXnY3i6/GuH2FhTgK0v4TN4Y0Wbw=";
   };
-  pkgsUnstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
 in {
   #--------------------------------------------------------
   # home
@@ -20,6 +18,8 @@ in {
 
   # specify home manager configs
   home.packages = [
+    inputs.nixvim.packages.${system}.default
+
     pkgs.ripgrep
     pkgs.fd
     pkgs.curl
@@ -41,6 +41,7 @@ in {
     pkgs.cmake
 
     # Scala
+    pkgs.metals
     pkgs.coursier
     pkgs.maven
     pkgs.scala_2_12
@@ -71,6 +72,7 @@ in {
     pkgs.nodePackages.vscode-json-languageserver
 
     pkgs.snyk
+
   ];
 
   home.sessionVariables = {
@@ -179,69 +181,6 @@ in {
     enable = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
-  };
-
-  programs.neovim = {
-    enable = true;
-
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
-
-    plugins = with pkgs; [
-      vimPlugins.lazy-nvim
-      inputs.self.packages.${pkgs.system}.mike-nvim
-    ];
-
-    extraLuaConfig = ''
-      require('mike').init()
-    '';
-
-    extraPackages = [
-      # languages
-      pkgs.rustc
-      pkgs.scala_2_12
-      pkgs.ocaml
-      pkgs.go
-      pkgs.zig
-      pkgs.jdk8
-
-      # language servers
-      pkgs.lua-language-server
-      pkgs.nil
-      pkgs.rust-analyzer
-      pkgs.terraform-ls
-      pkgs.roslyn
-      pkgs.omnisharp-roslyn
-      # pkgsUnstable.csharp-ls
-      pkgs.metals
-      pkgs.yaml-language-server
-      pkgs.ocamlPackages.ocaml-lsp
-      pkgs.ocamlPackages.merlin
-      pkgs.clang
-      pkgs.zls
-
-      # formatters
-      pkgs.nixpkgs-fmt
-      pkgs.nixfmt
-      pkgs.rustfmt
-      pkgs.scalafmt
-      pkgs.ocamlformat
-      # csharpier
-      pkgs.prettierd
-      pkgs.nodePackages.prettier
-      pkgs.nodePackages.sql-formatter
-      pkgs.nodePackages.vscode-json-languageserver
-      pkgs.isort
-      pkgs.stylua
-      pkgs.uncrustify
-
-      # tools
-      pkgs.cargo
-      pkgs.fd
-      pkgs.gcc
-      pkgs.ghc
-    ];
   };
 }
 

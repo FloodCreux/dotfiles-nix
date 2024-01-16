@@ -32,7 +32,12 @@ local function init()
 
 	dap.listeners.after.event_initialized["dapui_config"] = dapui.open
 	dap.listeners.before.event_terminated["dapui_config"] = dapui.close
-	dap.listeners.before.event_exited["dapui_config"] = dapui.close
+	dap.listeners.before.event_exited["dapui_config"] = function(_, event)
+		if event.exitCode == 0 then
+			vim.notify("Tests passed")
+		end
+		dapui.close()
+	end
 
 	dap.adapters.coreclr = {
 		type = "executable",

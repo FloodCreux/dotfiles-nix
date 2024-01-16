@@ -4,6 +4,7 @@
 alias tf="terraform"
 alias code="open -a 'Visual Studio Code'"
 alias ls="eza"
+alias vim="nvim"
 
 # ALIAS COMMANDS
 alias grep='grep --color'

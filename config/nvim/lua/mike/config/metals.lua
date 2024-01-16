@@ -111,6 +111,14 @@ local function init()
 				runType = "testTarget",
 			},
 		},
+		{
+			type = "scala",
+			request = "launch",
+			name = "Test Case",
+			metals = {
+				runType = "testCase",
+			},
+		},
 	}
 end
 
