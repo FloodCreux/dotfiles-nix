@@ -466,11 +466,11 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1705373146,
-        "narHash": "sha256-ygNlDb4LagoxNzoPysPyT7TeOOVQrz+XL4nMB0srT1s=",
+        "lastModified": 1705374343,
+        "narHash": "sha256-P0i04OGBFCZb4YRuEmfdrZjAf+EjD3naipM0r2MdL1Q=",
         "owner": "FloodCreux",
         "repo": "nixvim",
-        "rev": "5648820e0eaf86eedefb2fcdfec4ad68dbaf4d28",
+        "rev": "dca3ffeb4a0e2db2f77071e7e8b5b6af6d27be62",
         "type": "github"
       },
       "original": {

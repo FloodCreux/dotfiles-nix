@@ -52,6 +52,9 @@ in {
     # Go
     pkgs.go
 
+    # Nix
+    pkgs.nixfmt
+
     # Zig
     pkgs.zig
 
