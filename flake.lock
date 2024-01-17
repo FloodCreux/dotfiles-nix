@@ -415,7 +415,7 @@
         "narHash": "sha256-60LQ2ttMtR02pEZbYNYOACSyJ9Lftq1/J8NZ7niQwYI=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "73e1942abe7a96d63ce3749af4187f2cdff87e69",
+        "rev": "da541c0af1ef6589548140ebce133ad3fecf6d42",
         "type": "github"
       },
       "original": {
@@ -485,7 +485,7 @@
         "narHash": "sha256-+dI40XOyR2Eh2VpVOXyRCuhzw0IKZITsHlnuyCoQ9BQ=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "9fda35eaebeb3a6502279337aad1830eac39a5c4",
+        "rev": "22e04ae785a5e70cdc7055b91a41f453c7a89f8a",
         "type": "github"
       },
       "original": {
