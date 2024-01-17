@@ -1,3 +1,0 @@
-return {
-	"sgur/vim-editorconfig",
-}
