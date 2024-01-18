@@ -631,11 +631,11 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1705507103,
-        "narHash": "sha256-RnbtPfYpNiVtGw8MpjWZBBiwPpps4iUVBk8otgv4Ank=",
+        "lastModified": 1705517479,
+        "narHash": "sha256-G6JQqbIinR45jl/fFI9Pv6XKu70pheVTX/dveZlXBLY=",
         "owner": "FloodCreux",
         "repo": "nixvim",
-        "rev": "7b9b8053da8edc3746c7beb3c84e4f86399f7601",
+        "rev": "1dc7ee6bf8dbad2e734b889a6fcfbf3a814f706e",
         "type": "github"
       },
       "original": {
