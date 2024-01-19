@@ -116,6 +116,11 @@ in {
     executable = true;
   };
 
+  home.file.".config/zellij/config.kdl" = {
+    source = ./dotfiles/zellij/config.kdl;
+    executable = true;
+  };
+
   #--------------------------------------------------------
   # programs
   #--------------------------------------------------------
@@ -180,6 +185,8 @@ in {
     shell = "${pkgs.zsh}/bin/zsh";
     terminal = "screen-256color";
   };
+
+  programs.zellij = { enable = true; };
 
   programs.direnv = {
     enable = true;
