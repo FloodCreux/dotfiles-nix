@@ -29,6 +29,7 @@ in {
     pkgs.zsh
     pkgs.skhd
     pkgs.gimp
+    pkgs.lazygit
 
     # Rust
     pkgs.rustc
