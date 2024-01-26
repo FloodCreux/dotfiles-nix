@@ -1,5 +1,5 @@
 { inputs }:
-{ git, system }:
+{ system }:
 { pkgs, ... }:
 let
   catppuccin-bat = pkgs.fetchFromGitHub {
@@ -13,7 +13,7 @@ in {
   # home
   #--------------------------------------------------------
 
-  # Don't change this
+  # Don't change this unless you know what you're doing
   home.stateVersion = "23.11";
 
   # specify home manager configs
@@ -29,7 +29,10 @@ in {
     pkgs.zsh
     pkgs.skhd
     pkgs.gimp
+
+    # Git
     pkgs.lazygit
+    pkgs.gitkraken
 
     # Rust
     pkgs.rustc
@@ -42,6 +45,7 @@ in {
     pkgs.cmake
 
     # Scala
+    # pkgs.jetbrains.idea-community
     pkgs.metals
     pkgs.coursier
     pkgs.maven
@@ -64,6 +68,7 @@ in {
     pkgs.elixir
 
     # .NET
+    # pkgs.jetbrains.rider
     pkgs.dotnet-sdk_8
     pkgs.omnisharp-roslyn
     pkgs.roslyn
@@ -87,9 +92,6 @@ in {
   };
 
   home.file.".inputrc".source = ./dotfiles/inputrc;
-  home.file.".config/nvim/after/ftplugin/markdown.vim".text = ''
-    setlocal wrap
-  '';
 
   home.file.".config/alacritty/alacritty.yml".source =
     ./dotfiles/alacritty/alacritty.yml;
@@ -119,6 +121,16 @@ in {
 
   home.file.".config/zellij/config.kdl" = {
     source = ./dotfiles/zellij/config.kdl;
+    executable = true;
+  };
+
+  home.file.".gitkraken/themes/catppuccin-macchiato-theme.jsonc" = {
+    source = ./dotfiles/gitkraken/themes/catppuccin-macchiato-theme.jsonc;
+    executable = true;
+  };
+
+  home.file.".gitkraken/themes/catppuccin-mocha-theme.jsonc" = {
+    source = ./dotfiles/gitkraken/themes/catppuccin-mocha-theme.jsonc;
     executable = true;
   };
 
@@ -182,6 +194,7 @@ in {
     plugins = with pkgs; [
       tmuxPlugins.catppuccin
       tmuxPlugins.vim-tmux-navigator
+      tmuxPlugins.resurrect
     ];
     shell = "${pkgs.zsh}/bin/zsh";
     terminal = "screen-256color";
@@ -193,6 +206,11 @@ in {
     enable = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
+  };
+
+  programs.password-store = {
+    enable = true;
+    settings = { PASSWORD_STORE_DIR = "~/.password-store"; };
   };
 }
 
