@@ -83,6 +83,8 @@ in {
 
     pkgs.snyk
 
+    # Notes
+    pkgs.obsidian
   ];
 
   home.sessionVariables = {
@@ -101,11 +103,25 @@ in {
   home.file.".zsh/starship.zsh".source = ./dotfiles/zsh/starship.zsh;
   home.file.".zsh/aliases.zsh".source = ./dotfiles/zsh/aliases.zsh;
 
-  home.file.".local/scripts/tmux-sessionizer".source =
-    ./scripts/tmux/tmux-sessionizer.sh;
-  home.file.".local/scripts/tmux-cht.sh".source = ./scripts/tmux/tmux-cht.sh;
-  home.file.".tmux-cht-languages".source = ./dotfiles/tmux/.tmux-cht-languages;
-  home.file.".tmux-cht-command".source = ./dotfiles/tmux/.tmux-cht-command;
+  home.file.".local/scripts/tmux-sessionizer" = {
+    source = ./scripts/tmux/tmux-sessionizer.sh;
+    executable = true;
+  };
+
+  home.file.".local/scripts/tmux-cht.sh" = {
+    source = ./scripts/tmux/tmux-cht.sh;
+    executable = true;
+  };
+
+  home.file.".tmux-cht-languages" = {
+    source = ./dotfiles/tmux/.tmux-cht-languages;
+    executable = true;
+  };
+
+  home.file.".tmux-cht-command" = {
+    source = ./dotfiles/tmux/.tmux-cht-command;
+    executable = true;
+  };
 
   home.file.".config/starship.toml".source = ./dotfiles/starship/starship.toml;
 
