@@ -35,14 +35,13 @@ in {
     pkgs.gitkraken
 
     # Rust
-    pkgs.rustc
-    pkgs.rustfmt
-    pkgs.cargo
+    pkgs.rustup
 
     # C
     pkgs.gcc
     pkgs.ghc
     pkgs.cmake
+    pkgs.raylib
 
     # Scala
     # pkgs.jetbrains.idea-community
@@ -78,6 +77,7 @@ in {
 
     # Containers
     pkgs.docker
+    pkgs.podman
 
     pkgs.nodePackages.vscode-json-languageserver
 
@@ -150,6 +150,11 @@ in {
     executable = true;
   };
 
+  home.file.".local/bin/zet" = {
+    source = ./scripts/second-brain/zet;
+    executable = true;
+  };
+
   #--------------------------------------------------------
   # programs
   #--------------------------------------------------------
@@ -191,6 +196,7 @@ in {
       [[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
       [[ -f ~/.zsh/starship.zsh ]] && source ~/.zsh/starship.zsh
       export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib
+      export SECOND_BRAIN="$HOME/personal/zettelkasten"
     '';
   };
 
