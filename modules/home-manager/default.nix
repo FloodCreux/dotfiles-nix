@@ -29,6 +29,7 @@ in {
     pkgs.zsh
     pkgs.skhd
     pkgs.gimp
+    pkgs.zoxide
 
     # Git
     pkgs.lazygit
@@ -197,6 +198,7 @@ in {
       [[ -f ~/.zsh/starship.zsh ]] && source ~/.zsh/starship.zsh
       export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib
       export SECOND_BRAIN="$HOME/personal/zettelkasten"
+      eval "$(zoxide init --cmd cd zsh)"
     '';
   };
 
