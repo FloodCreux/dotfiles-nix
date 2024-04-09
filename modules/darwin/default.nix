@@ -33,6 +33,6 @@ in {
     masApps = { };
     casks = [ "devtoys" "dotnet-sdk" "raycast" "fontforge" ];
     taps = [ "azure/azd" ];
-    brews = [ "azd" "opam" "tree" "yabai" ];
+    brews = [ "azd" "opam" "tree" "yabai" "azure-cli" ];
   };
 }

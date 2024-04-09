@@ -18,7 +18,7 @@ in {
 
   # specify home manager configs
   home.packages = [
-    inputs.nixvim.packages.${system}.default
+    # inputs.nixvim.packages.${system}.default
 
     pkgs.ripgrep
     pkgs.fd
@@ -197,7 +197,7 @@ in {
       [[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
       [[ -f ~/.zsh/starship.zsh ]] && source ~/.zsh/starship.zsh
       export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib
-      export SECOND_BRAIN="$HOME/personal/zettelkasten"
+      export SECOND_BRAIN="$HOME/personal/second-brain"
       eval "$(zoxide init --cmd cd zsh)"
     '';
   };
