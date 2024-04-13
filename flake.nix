@@ -21,9 +21,13 @@
 
   outputs = inputs@{ flake-parts, self, ... }:
     let
-      username = "mike";
-    in
-    flake-parts.lib.mkFlake { inherit inputs; } {
+      git = {
+        extraConfig.github.user = username;
+        userEmail = "flood.mike@gmail.com";
+        userName = "FloodCreux";
+      };
+      username = "chmc-h022fl97xj";
+    in flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "aarch64-darwin" ];
       perSystem = { self', inputs', pkgs, system, ... }: { };
 
