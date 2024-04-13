@@ -1,4 +1,4 @@
-{ username }:
+{ pkgs, username }:
 
 let nix = import ../shared/nix.nix;
 in {
@@ -8,6 +8,8 @@ in {
   services.nix-daemon.enable = true;
   system.stateVersion = 4;
   users.users.${username}.home = "/Users/${username}";
+
+  environment.systemPackages = with pkgs; [ neovim ];
 
   system.keyboard.enableKeyMapping = true;
 
@@ -33,6 +35,6 @@ in {
     masApps = { };
     casks = [ "devtoys" "dotnet-sdk" "raycast" "fontforge" ];
     taps = [ "azure/azd" ];
-    brews = [ "azd" "opam" "tree" "yabai" "azure-cli" ];
+    brews = [ "azd" "opam" "tree" "yabai" "azure-cli" "openjdk@17" ];
   };
 }

@@ -8,6 +8,19 @@ let
     rev = "ba4d16880d63e656acced2b7d4e034e4a93f74b1";
     sha256 = "sha256-6WVKQErGdaqb++oaXnY3i6/GuH2FhTgK0v4TN4Y0Wbw=";
   };
+
+  catppuccin-lazygit = pkgs.fetchFromGitHub {
+    owner = "catppuccin";
+    repo = "lazygit";
+    rev = "30bff2e6d14ca12a09d71e5ce4e6a086b3e48aa6";
+    sha256 = "sha256-mmNA7MpORvdCb37myo2QqagPK46rxRxD0dvUMsHegEM=";
+  };
+
+  jdk8NoDemo = pkgs.jdk8.overrideAttrs (oldAttrs: {
+    postInstall = ''
+      rm -rf $out/demo
+    '';
+  });
 in {
   #--------------------------------------------------------
   # home
@@ -19,6 +32,7 @@ in {
   # specify home manager configs
   home.packages = [
     # inputs.nixvim.packages.${system}.default
+    # pkgs.nvim-pkg
 
     pkgs.ripgrep
     pkgs.fd
@@ -51,6 +65,9 @@ in {
     pkgs.maven
     pkgs.scala_2_12
     pkgs.scalafmt
+
+    # jdk8NoDemo
+    pkgs.jdk17
 
     # OCaml
     pkgs.ocaml
@@ -156,6 +173,11 @@ in {
     executable = true;
   };
 
+  home.file."personal/themes/lazygit" = {
+    source = catppuccin-lazygit;
+    executable = true;
+  };
+
   #--------------------------------------------------------
   # programs
   #--------------------------------------------------------
@@ -179,7 +201,7 @@ in {
 
   programs.java = {
     enable = true;
-    package = pkgs.jdk8;
+    package = pkgs.jdk17;
   };
 
   programs.zsh = {
@@ -198,6 +220,7 @@ in {
       [[ -f ~/.zsh/starship.zsh ]] && source ~/.zsh/starship.zsh
       export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib
       export SECOND_BRAIN="$HOME/personal/second-brain"
+      export CC=gcc
       eval "$(zoxide init --cmd cd zsh)"
     '';
   };

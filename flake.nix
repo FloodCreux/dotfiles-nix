@@ -19,17 +19,29 @@
     nixvim = { url = "github:FloodCreux/nixvim"; };
   };
 
-  outputs = inputs@{ flake-parts, self, ... }:
-    let username = "chmc-h022fl97xj";
+  outputs =
+    inputs@{ flake-parts, self, nixpkgs-unstable, neovim-nightly-overlay, ... }:
+    let
+      username = "chmc-h022fl97xj";
+      nixpkgs = nixpkgs-unstable;
+      nvim = neovim-nightly-overlay;
     in flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "aarch64-darwin" ];
-      perSystem = { self', inputs', pkgs, system, ... }: { };
+      perSystem = { self, system, ... }: { };
 
       flake = {
         darwinConfigurations = {
           default = self.lib.mkDarwin {
             inherit username;
             system = "aarch64-darwin";
+            pkgs = import nixpkgs {
+              system = "aarch64-darwin";
+              config = {
+                allowUnfree = true;
+                allowUnsupportedSystem = true;
+              };
+              overlays = [ nvim.overlays.default ];
+            };
           };
         };
 

@@ -3,10 +3,13 @@ let
   home-manager = import ./home-manager { inherit inputs; };
   metals = import ./metals { inherit inputs; };
 in {
-  mkDarwin = { system, username }:
+  mkDarwin = { system, pkgs, username }:
     inputs.darwin.lib.darwinSystem {
       modules = [
-        (import ./darwin { inherit username; })
+        (import ./darwin {
+          inherit username;
+          inherit pkgs;
+        })
 
         inputs.home-manager.darwinModules.home-manager
         {
