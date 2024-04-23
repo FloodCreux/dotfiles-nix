@@ -17,10 +17,12 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     nixvim = { url = "github:FloodCreux/nixvim"; };
+
+    zig.url = "github:mitchellh/zig-overlay";
   };
 
   outputs =
-    inputs@{ flake-parts, self, nixpkgs-unstable, neovim-nightly-overlay, ... }:
+    inputs@{ flake-parts, self, nixpkgs-unstable, neovim-nightly-overlay, zig, ... }:
     let
       username = "mike";
       nixpkgs = nixpkgs-unstable;
@@ -40,7 +42,12 @@
                 allowUnfree = true;
                 allowUnsupportedSystem = true;
               };
-              overlays = [ nvim.overlays.default ];
+              overlays = [ 
+                nvim.overlays.default 
+                (final: prev: {
+                  zigpkgs = inputs.zig.packages.${prev.system};
+                })
+              ];
             };
           };
         };

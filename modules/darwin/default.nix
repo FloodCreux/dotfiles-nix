@@ -9,7 +9,12 @@ in {
   system.stateVersion = 4;
   users.users.${username}.home = "/Users/${username}";
 
-  environment.systemPackages = with pkgs; [ neovim ];
+  environment.systemPackages = with pkgs; [ 
+    neovim 
+    zigpkgs.master 
+    templ 
+    air
+  ];
 
   system.keyboard.enableKeyMapping = true;
 
@@ -35,6 +40,6 @@ in {
     masApps = { };
     casks = [ "devtoys" "dotnet-sdk" "raycast" "fontforge" ];
     taps = [ "azure/azd" ];
-    brews = [ "azd" "opam" "tree" "yabai" "azure-cli" "openjdk@17" ];
+    brews = [ "azd" "opam" "tree" "yabai" "azure-cli" "openjdk@17" "rustup" "go" ];
   };
 }

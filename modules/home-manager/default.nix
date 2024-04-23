@@ -15,12 +15,6 @@ let
     rev = "30bff2e6d14ca12a09d71e5ce4e6a086b3e48aa6";
     sha256 = "sha256-mmNA7MpORvdCb37myo2QqagPK46rxRxD0dvUMsHegEM=";
   };
-
-  jdk8NoDemo = pkgs.jdk8.overrideAttrs (oldAttrs: {
-    postInstall = ''
-      rm -rf $out/demo
-    '';
-  });
 in {
   #--------------------------------------------------------
   # home
@@ -49,9 +43,6 @@ in {
     pkgs.lazygit
     pkgs.gitkraken
 
-    # Rust
-    pkgs.rustup
-
     # C
     pkgs.gcc
     pkgs.ghc
@@ -72,14 +63,8 @@ in {
     # OCaml
     pkgs.ocaml
 
-    # Go
-    pkgs.go
-
     # Nix
     pkgs.nixfmt
-
-    # Zig
-    pkgs.zig
 
     # Haskell
     pkgs.elixir
@@ -218,9 +203,10 @@ in {
     initExtra = ''
       [[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
       [[ -f ~/.zsh/starship.zsh ]] && source ~/.zsh/starship.zsh
-      export LIBRARY_PATH=$LIBRARY_PATH:$(brew --prefix)/lib:$(brew --prefix)/opt/libiconv/lib
+      path+=('/Users/mike/.cargo/bin')
+      export PATH
       export SECOND_BRAIN="$HOME/personal/second-brain"
-      export CC=gcc
+      export CC=clang
       eval "$(zoxide init --cmd cd zsh)"
     '';
   };
