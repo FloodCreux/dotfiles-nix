@@ -57,8 +57,8 @@ in {
     pkgs.scala_2_12
     pkgs.scalafmt
 
-    # jdk8NoDemo
-    pkgs.jdk17
+    pkgs.jdk8
+    # pkgs.jdk17
 
     # OCaml
     pkgs.ocaml
@@ -200,15 +200,7 @@ in {
       nixup = "pushd ~/personal/nix; nix flake update; nixswitch; popd";
     };
 
-    initExtra = ''
-      [[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
-      [[ -f ~/.zsh/starship.zsh ]] && source ~/.zsh/starship.zsh
-      path+=('/Users/mike/.cargo/bin')
-      export PATH
-      export SECOND_BRAIN="$HOME/personal/second-brain"
-      export CC=clang
-      eval "$(zoxide init --cmd cd zsh)"
-    '';
+    initExtra = builtins.readFile ./dotfiles/zsh/.zshrc;
   };
 
   programs.starship = {
