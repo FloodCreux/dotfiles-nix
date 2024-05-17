@@ -40,6 +40,6 @@ in {
     masApps = { };
     casks = [ "devtoys" "dotnet-sdk" "raycast" "fontforge" ];
     taps = [ "azure/azd" ];
-    brews = [ "azd" "opam" "tree" "yabai" "azure-cli" "openjdk@17" "rustup" "go" ];
+    brews = [ "azd" "opam" "tree" "yabai" "azure-cli" "openjdk@17" "rustup" "go" "scalacenter/bloop/bloop"];
   };
 }

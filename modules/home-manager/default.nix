@@ -57,8 +57,8 @@ in {
     pkgs.scala_2_12
     pkgs.scalafmt
 
-    pkgs.jdk8
-    # pkgs.jdk17
+    # pkgs.jdk8
+    pkgs.jdk17
 
     # OCaml
     pkgs.ocaml
@@ -105,6 +105,7 @@ in {
 
   home.file.".zsh/starship.zsh".source = ./dotfiles/zsh/starship.zsh;
   home.file.".zsh/aliases.zsh".source = ./dotfiles/zsh/aliases.zsh;
+  home.file.".zsh/integrations.zsh".source = ./dotfiles/zsh/integrations.zsh;
 
   home.file.".local/scripts/tmux-sessionizer" = {
     source = ./scripts/tmux/tmux-sessionizer.sh;
