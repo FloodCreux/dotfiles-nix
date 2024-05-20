@@ -24,7 +24,7 @@
   outputs =
     inputs@{ flake-parts, self, nixpkgs-unstable, neovim-nightly-overlay, zig, ... }:
     let
-      username = "mike";
+      username = "chmc-h022fl97xj";
       nixpkgs = nixpkgs-unstable;
       nvim = neovim-nightly-overlay;
     in flake-parts.lib.mkFlake { inherit inputs; } {
