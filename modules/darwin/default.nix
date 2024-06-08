@@ -39,7 +39,7 @@ in {
     global.brewfile = true;
     masApps = { };
     casks = [ "devtoys" "dotnet-sdk" "raycast" "fontforge" ];
-    taps = [ "azure/azd" ];
+    taps = [ "azure/azd" "scalacenter/bloop" ];
     brews = [ "azd" "opam" "tree" "yabai" "azure-cli" "openjdk@17" "rustup" "go" "scalacenter/bloop/bloop"];
   };
 }

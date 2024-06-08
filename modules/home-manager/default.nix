@@ -21,12 +21,13 @@ in {
   #--------------------------------------------------------
 
   # Don't change this unless you know what you're doing
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 
   # specify home manager configs
   home.packages = [
     # inputs.nixvim.packages.${system}.default
     # pkgs.nvim-pkg
+    pkgs.oh-my-posh
 
     pkgs.ripgrep
     pkgs.fd
@@ -106,6 +107,8 @@ in {
   home.file.".zsh/starship.zsh".source = ./dotfiles/zsh/starship.zsh;
   home.file.".zsh/aliases.zsh".source = ./dotfiles/zsh/aliases.zsh;
   home.file.".zsh/integrations.zsh".source = ./dotfiles/zsh/integrations.zsh;
+
+  home.file.".config/ohmyposh/zen.toml".source = ./dotfiles/ohmyposh/zen.toml;
 
   home.file.".local/scripts/tmux-sessionizer" = {
     source = ./scripts/tmux/tmux-sessionizer.sh;
@@ -193,7 +196,9 @@ in {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableAutosuggestions = true;
+    autosuggestion = {
+      enable = true;
+    };
     syntaxHighlighting = { enable = true; };
 
     shellAliases = {
@@ -205,7 +210,7 @@ in {
   };
 
   programs.starship = {
-    enable = true;
+    enable = false;
     enableZshIntegration = true;
   };
 
