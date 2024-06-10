@@ -58,8 +58,8 @@ in {
     pkgs.scala_2_12
     pkgs.scalafmt
 
-    # pkgs.jdk8
-    pkgs.jdk17
+    pkgs.jdk8
+    # pkgs.jdk17
 
     # OCaml
     pkgs.ocaml
@@ -84,6 +84,7 @@ in {
     pkgs.podman
 
     pkgs.nodePackages.vscode-json-languageserver
+    pkgs.nodePackages.prettier
 
     pkgs.snyk
 
