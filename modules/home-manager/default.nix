@@ -65,7 +65,7 @@ in {
     pkgs.ocaml
 
     # Nix
-    pkgs.nixfmt
+    pkgs.nixfmt-rfc-style
 
     # Haskell
     pkgs.elixir
@@ -205,6 +205,8 @@ in {
     shellAliases = {
       nixswitch = "darwin-rebuild switch --flake ~/personal/nix/.#default";
       nixup = "pushd ~/personal/nix; nix flake update; nixswitch; popd";
+      wixswitch = "darwin-rebuild switch --flake ~/personal/nix/.#work";
+      wixup = "pushd ~/personal/nix; nix flake update; wixswitch; popd";
     };
 
     initExtra = builtins.readFile ./dotfiles/zsh/.zshrc;

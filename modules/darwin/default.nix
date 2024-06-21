@@ -14,6 +14,7 @@ in {
     zigpkgs.master 
     templ 
     air
+    yazi
   ];
 
   system.keyboard.enableKeyMapping = true;
