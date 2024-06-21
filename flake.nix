@@ -22,11 +22,12 @@
   };
 
   outputs =
-    inputs@{ flake-parts, self, nixpkgs-unstable, neovim-nightly-overlay, zig, ... }:
+    inputs@{ flake-parts, self, ... }:
     let
       username = "mike";
-      nixpkgs = nixpkgs-unstable;
-      nvim = neovim-nightly-overlay;
+      nixpkgs = inputs.nixpkgs-unstable;
+      nvim-overlay = inputs.neovim-nightly-overlay.overlays.default;
+      zigpkgs = inputs.zig.packages;
     in flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "aarch64-darwin" ];
       perSystem = { self, system, ... }: { };
@@ -43,9 +44,27 @@
                 allowUnsupportedSystem = true;
               };
               overlays = [ 
-                nvim.overlays.default 
+                nvim-overlay
                 (final: prev: {
-                  zigpkgs = inputs.zig.packages.${prev.system};
+                  zigpkgs = zigpkgs.${prev.system};
+                })
+              ];
+            };
+          };
+
+          work = self.lib.mkDarwin {
+            username = "chmc-h022fl97xj";
+            system = "aarch64-darwin";
+            pkgs = import nixpkgs {
+              system = "aarch64-darwin";
+              config = {
+                allowUnfree = true;
+                allowUnsupportedSystem = true;
+              };
+              overlays = [ 
+                nvim-overlay
+                (final: prev: {
+                  zigpkgs = zigpkgs.${prev.system};
                 })
               ];
             };

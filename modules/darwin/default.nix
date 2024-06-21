@@ -14,6 +14,7 @@ in {
     zigpkgs.master 
     templ 
     air
+    yazi
   ];
 
   system.keyboard.enableKeyMapping = true;
@@ -40,6 +41,6 @@ in {
     masApps = { };
     casks = [ "devtoys" "dotnet-sdk" "raycast" "fontforge" ];
     taps = [ "azure/azd" "scalacenter/bloop" ];
-    brews = [ "azd" "opam" "tree" "yabai" "azure-cli" "openjdk@17" "rustup" "go" "scalacenter/bloop/bloop"];
+    brews = [ "azd" "opam" "tree" "yabai" "azure-cli" "rustup" "go" "scalacenter/bloop/bloop" "openjdk@17" ];
   };
 }

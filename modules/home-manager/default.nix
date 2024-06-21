@@ -58,14 +58,14 @@ in {
     pkgs.scala_2_12
     pkgs.scalafmt
 
-    # pkgs.jdk8
-    pkgs.jdk17
+    pkgs.jdk8
+    # pkgs.jdk17
 
     # OCaml
     pkgs.ocaml
 
     # Nix
-    pkgs.nixfmt
+    pkgs.nixfmt-rfc-style
 
     # Haskell
     pkgs.elixir
@@ -84,6 +84,7 @@ in {
     pkgs.podman
 
     pkgs.nodePackages.vscode-json-languageserver
+    pkgs.nodePackages.prettier
 
     pkgs.snyk
 
@@ -190,7 +191,7 @@ in {
 
   programs.java = {
     enable = true;
-    package = pkgs.jdk17;
+    package = pkgs.jdk8;
   };
 
   programs.zsh = {
@@ -204,6 +205,8 @@ in {
     shellAliases = {
       nixswitch = "darwin-rebuild switch --flake ~/personal/nix/.#default";
       nixup = "pushd ~/personal/nix; nix flake update; nixswitch; popd";
+      wixswitch = "darwin-rebuild switch --flake ~/personal/nix/.#work";
+      wixup = "pushd ~/personal/nix; nix flake update; wixswitch; popd";
     };
 
     initExtra = builtins.readFile ./dotfiles/zsh/.zshrc;
