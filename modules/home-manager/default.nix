@@ -61,6 +61,8 @@ in {
     pkgs.jdk8
     # pkgs.jdk17
 
+    pkgs.hadoop
+
     # OCaml
     pkgs.ocaml
 
