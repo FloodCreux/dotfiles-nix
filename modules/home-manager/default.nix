@@ -232,11 +232,6 @@ in {
   programs.tmux = {
     enable = true;
     extraConfig = builtins.readFile ./dotfiles/tmux/tmux.conf;
-    plugins = with pkgs; [
-      tmuxPlugins.catppuccin
-      tmuxPlugins.vim-tmux-navigator
-      tmuxPlugins.resurrect
-    ];
     shell = "${pkgs.zsh}/bin/zsh";
     terminal = "screen-256color";
   };
