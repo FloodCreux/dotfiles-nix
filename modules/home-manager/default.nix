@@ -133,6 +133,11 @@ in {
     executable = true;
   };
 
+  home.file.".config/tmux/tmux.reset.conf" = {
+    source = ./dotfiles/tmux/tmux.reset.conf;
+    executable = true;
+  };
+
   home.file.".config/starship.toml".source = ./dotfiles/starship/starship.toml;
 
   home.file.".config/skhd/skhdrc" = {
@@ -227,11 +232,6 @@ in {
   programs.tmux = {
     enable = true;
     extraConfig = builtins.readFile ./dotfiles/tmux/tmux.conf;
-    plugins = with pkgs; [
-      tmuxPlugins.catppuccin
-      tmuxPlugins.vim-tmux-navigator
-      tmuxPlugins.resurrect
-    ];
     shell = "${pkgs.zsh}/bin/zsh";
     terminal = "screen-256color";
   };
