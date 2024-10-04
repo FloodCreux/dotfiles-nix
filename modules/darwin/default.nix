@@ -53,6 +53,7 @@ in {
       "openjdk@17" 
       "libuv" 
       "pipx" 
+      "sbt"
     ];
   };
 }
