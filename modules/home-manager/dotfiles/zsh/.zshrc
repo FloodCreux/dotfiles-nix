@@ -29,7 +29,6 @@ zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
 
-# Load completions
 autoload -Uz compinit && compinit
 
 zinit cdreplay -q
@@ -38,6 +37,9 @@ zinit cdreplay -q
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+
+# VI Mode!!!
+bindkey jj vi-cmd-mode
 
 # History
 HISTSIZE=5000

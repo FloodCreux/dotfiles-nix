@@ -15,7 +15,8 @@ let
     rev = "30bff2e6d14ca12a09d71e5ce4e6a086b3e48aa6";
     sha256 = "sha256-mmNA7MpORvdCb37myo2QqagPK46rxRxD0dvUMsHegEM=";
   };
-in {
+in
+{
   #--------------------------------------------------------
   # home
   #--------------------------------------------------------
@@ -102,10 +103,8 @@ in {
 
   home.file.".inputrc".source = ./dotfiles/inputrc;
 
-  home.file.".config/alacritty/alacritty.yml".source =
-    ./dotfiles/alacritty/alacritty.yml;
-  home.file.".config/alacritty/catppuccin-macchiato.yml".source =
-    ./dotfiles/alacritty/catppuccin-macchiato.yml;
+  home.file.".config/alacritty/alacritty.yml".source = ./dotfiles/alacritty/alacritty.yml;
+  home.file.".config/alacritty/catppuccin-macchiato.yml".source = ./dotfiles/alacritty/catppuccin-macchiato.yml;
 
   home.file.".zsh/starship.zsh".source = ./dotfiles/zsh/starship.zsh;
   home.file.".zsh/aliases.zsh".source = ./dotfiles/zsh/aliases.zsh;
@@ -181,10 +180,11 @@ in {
 
   programs.bat = {
     enable = true;
-    config = { theme = "catppuccin"; };
+    config = {
+      theme = "catppuccin";
+    };
     themes = {
-      catppuccin =
-        builtins.readFile (catppuccin-bat + "/Catppuccin-macchiato.tmTheme");
+      catppuccin = builtins.readFile (catppuccin-bat + "/Catppuccin-macchiato.tmTheme");
     };
   };
 
@@ -207,7 +207,9 @@ in {
     autosuggestion = {
       enable = true;
     };
-    syntaxHighlighting = { enable = true; };
+    syntaxHighlighting = {
+      enable = true;
+    };
 
     shellAliases = {
       nixswitch = "darwin-rebuild switch --flake ~/personal/nix/.#default";
@@ -236,7 +238,9 @@ in {
     terminal = "screen-256color";
   };
 
-  programs.zellij = { enable = true; };
+  programs.zellij = {
+    enable = true;
+  };
 
   programs.direnv = {
     enable = true;
@@ -246,7 +250,8 @@ in {
 
   programs.password-store = {
     enable = true;
-    settings = { PASSWORD_STORE_DIR = "~/.password-store"; };
+    settings = {
+      PASSWORD_STORE_DIR = "~/.password-store";
+    };
   };
 }
-

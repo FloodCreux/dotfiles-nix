@@ -3,9 +3,7 @@
 f: p:
 
 let
-  builder = p.callPackage ./builder.nix {
-    pkgs = p;
-  };
+  builder = p.callPackage ./builder.nix { pkgs = p; };
 in
 {
   metals = builder {

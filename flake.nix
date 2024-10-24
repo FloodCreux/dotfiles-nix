@@ -16,7 +16,9 @@
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
-    nixvim = { url = "github:FloodCreux/nixvim"; };
+    nixvim = {
+      url = "github:FloodCreux/nixvim";
+    };
 
     zig.url = "github:mitchellh/zig-overlay";
   };
@@ -28,7 +30,8 @@
       nixpkgs = inputs.nixpkgs-unstable;
       nvim-overlay = inputs.neovim-nightly-overlay.overlays.default;
       zigpkgs = inputs.zig.packages;
-    in flake-parts.lib.mkFlake { inherit inputs; } {
+    in
+    flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "aarch64-darwin" ];
       perSystem = { self, system, ... }: { };
 
@@ -43,11 +46,9 @@
                 allowUnfree = true;
                 allowUnsupportedSystem = true;
               };
-              overlays = [ 
+              overlays = [
                 nvim-overlay
-                (final: prev: {
-                  zigpkgs = zigpkgs.${prev.system};
-                })
+                (final: prev: { zigpkgs = zigpkgs.${prev.system}; })
               ];
             };
           };
@@ -61,11 +62,9 @@
                 allowUnfree = true;
                 allowUnsupportedSystem = true;
               };
-              overlays = [ 
+              overlays = [
                 nvim-overlay
-                (final: prev: {
-                  zigpkgs = zigpkgs.${prev.system};
-                })
+                (final: prev: { zigpkgs = zigpkgs.${prev.system}; })
               ];
             };
           };
