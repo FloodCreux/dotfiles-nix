@@ -24,22 +24,11 @@ in
   # Don't change this unless you know what you're doing
   home.stateVersion = "24.05";
 
+  home.enableNixpkgsReleaseCheck = false;
+
   # specify home manager configs
   home.packages = [
-    # inputs.nixvim.packages.${system}.default
-    # pkgs.nvim-pkg
-    pkgs.oh-my-posh
-
-    pkgs.ripgrep
-    pkgs.fd
-    pkgs.curl
-    pkgs.less
-    pkgs.gh
-    pkgs.jq
-    pkgs.zsh
-    pkgs.skhd
     pkgs.gimp
-    pkgs.zoxide
 
     # Git
     pkgs.lazygit
@@ -52,7 +41,6 @@ in
     pkgs.raylib
 
     # Scala
-    # pkgs.jetbrains.idea-community
     pkgs.metals
     pkgs.coursier
     pkgs.maven
@@ -79,6 +67,9 @@ in
     pkgs.omnisharp-roslyn
     pkgs.roslyn
 
+    # Zig
+    pkgs.zls
+
     # Sql
     pkgs.sqlite
 
@@ -88,8 +79,6 @@ in
 
     pkgs.nodePackages.vscode-json-languageserver
     pkgs.nodePackages.prettier
-
-    pkgs.snyk
 
     # Notes
     pkgs.obsidian
@@ -129,6 +118,16 @@ in
 
   home.file.".tmux-cht-command" = {
     source = ./dotfiles/tmux/.tmux-cht-command;
+    executable = true;
+  };
+
+  home.file.".config/nushell/config.nu" = {
+    source = ./dotfiles/nushell/config.nu;
+    executable = true;
+  };
+
+  home.file.".config/nushell/env.nu" = {
+    source = ./dotfiles/nushell/env.nu;
     executable = true;
   };
 
@@ -211,14 +210,21 @@ in
       enable = true;
     };
 
-    shellAliases = {
-      nixswitch = "darwin-rebuild switch --flake ~/personal/nix/.#default";
-      nixup = "pushd ~/personal/nix; nix flake update; nixswitch; popd";
-      wixswitch = "darwin-rebuild switch --flake ~/personal/nix/.#work";
-      wixup = "pushd ~/personal/nix; nix flake update; wixswitch; popd";
-    };
-
     initExtra = builtins.readFile ./dotfiles/zsh/.zshrc;
+  };
+
+  programs.oh-my-posh = {
+    enable = true;
+    enableNushellIntegration = true;
+  };
+
+  programs.nushell = {
+    enable = true;
+  };
+
+  programs.carapace = {
+    enable = true;
+    enableNushellIntegration = true;
   };
 
   programs.starship = {
@@ -234,7 +240,8 @@ in
   programs.tmux = {
     enable = true;
     extraConfig = builtins.readFile ./dotfiles/tmux/tmux.conf;
-    shell = "${pkgs.zsh}/bin/zsh";
+    # shell = "${pkgs.zsh}/bin/zsh";
+    shell = "${pkgs.nushell}/bin/nu";
     terminal = "screen-256color";
   };
 

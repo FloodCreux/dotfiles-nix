@@ -10,15 +10,58 @@ in
   programs.zsh.enable = true;
   services.nix-daemon.enable = true;
   system.stateVersion = 4;
-  users.users.${username}.home = "/Users/${username}";
+
+  users.users.${username} = {
+    home = "/Users/${username}";
+    shell = pkgs.nushell;
+  };
 
   environment.systemPackages = with pkgs; [
     neovim
     zigpkgs.master
+
     templ
     yazi
+
+    jq
+    curl
+    gh
+    less
+    fd
+    ripgrep
+
     nixd
+
+    nushell
+    carapace
+    oh-my-posh
+
+    skhd
+
+    zoxide
   ];
+
+  environment.shellAliases = {
+    tf = "terraform";
+    code = "open -a 'Visual Studio Code'";
+    ls = "ls --color";
+    vim = "nvim";
+    vimdiff = "nvim -d";
+    c = "clear";
+    grep = "grep --color";
+    nixswitch = "darwin-rebuild switch --flake ~/personal/nix/.#default";
+    nixup = "pushd ~/personal/nix; nix flake update; nixswitch; popd";
+    wixswitch = "darwin-rebuild switch --flake ~/personal/nix/.#work";
+    wixup = "pushd ~/personal/nix; nix flake update; wixswitch; popd";
+    flushdns = "sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder";
+    tmux-sessionizer = "sh ~/.local/scripts/tmux-sessionizer";
+  };
+
+  environment.shells = [ pkgs.nushell ];
+
+  environment.variables = {
+    XDG_CONFIG_HOME = "$HOME/.config";
+  };
 
   system.keyboard.enableKeyMapping = true;
 

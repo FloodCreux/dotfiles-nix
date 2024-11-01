@@ -2,8 +2,8 @@
   description = "Development packages for Mike Flood";
   inputs = {
     # Where we get most of our sofware
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Manages configs links things into home directory
     home-manager.url = "github:nix-community/home-manager/release-24.05";
@@ -27,7 +27,7 @@
     inputs@{ flake-parts, self, ... }:
     let
       username = "mike";
-      nixpkgs = inputs.nixpkgs-unstable;
+      nixpkgs = inputs.nixpkgs;
       nvim-overlay = inputs.neovim-nightly-overlay.overlays.default;
       zigpkgs = inputs.zig.packages;
     in
