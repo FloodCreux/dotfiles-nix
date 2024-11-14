@@ -101,11 +101,10 @@ path add /opt/homebrew/bin
 # To load from a custom file you can use:
 # source ($nu.default-config-dir | path join 'custom.nu')
 
-# Add starship support
-# mkdir ~/.cache/starship
-# starship init nu | save -f ~/.cache/starship/init.nu
+mkdir ~/.cache/starship
+starship init nu | save -f ~/.cache/starship/init.nu
 
-oh-my-posh init nu --config ~/.config/ohmyposh/zen.toml --print | save -f ~/.oh-my-posh.nu
+oh-my-posh init nu --config ~/.config/ohmyposh/zen.toml --print | save -f ~/.cache/oh-my-posh/init.nu
 zoxide init nushell | save -f ~/.zoxide.nu
 
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional

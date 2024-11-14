@@ -121,6 +121,11 @@ in
     executable = true;
   };
 
+  home.file.".config/aerospace/aerospace.toml" = {
+    source = ./dotfiles/aerospace/aerospace.toml;
+    executable = true;
+  };
+
   home.file.".config/nushell/config.nu" = {
     source = ./dotfiles/nushell/config.nu;
     executable = true;
@@ -240,9 +245,8 @@ in
   programs.tmux = {
     enable = true;
     extraConfig = builtins.readFile ./dotfiles/tmux/tmux.conf;
-    # shell = "${pkgs.zsh}/bin/zsh";
-    shell = "${pkgs.nushell}/bin/nu";
-    terminal = "screen-256color";
+    shell = "${pkgs.zsh}/bin/zsh";
+    terminal = "xterm-256color";
   };
 
   programs.zellij = {

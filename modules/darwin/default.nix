@@ -13,31 +13,25 @@ in
 
   users.users.${username} = {
     home = "/Users/${username}";
-    shell = pkgs.nushell;
   };
 
   environment.systemPackages = with pkgs; [
+    carapace
+    curl
+    fd
+    gh
+    jq
+    lazygit
+    less
     neovim
-    zigpkgs.master
-
+    nixd
+    nushell
+    oh-my-posh
+    ripgrep
+    skhd
     templ
     yazi
-
-    jq
-    curl
-    gh
-    less
-    fd
-    ripgrep
-
-    nixd
-
-    nushell
-    carapace
-    oh-my-posh
-
-    skhd
-
+    zigpkgs.master
     zoxide
   ];
 
@@ -90,6 +84,7 @@ in
       "dotnet-sdk"
       "raycast"
       "fontforge"
+      "nikitabobko/tap/aerospace"
     ];
     taps = [
       "azure/azd"
@@ -99,7 +94,7 @@ in
       "azd"
       "opam"
       "tree"
-      "yabai"
+      # "yabai"
       "azure-cli"
       "rustup"
       "go"

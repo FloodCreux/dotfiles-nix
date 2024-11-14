@@ -910,8 +910,11 @@ def nixup [name = "default"] {
     pushd ~/personal/nix; nix flake update; nixswitch $name; popd
 }
 
-source ~/.oh-my-posh.nu
 source ~/.config/nushell/env.nu
 source ~/.zoxide.nu
 source ~/.cache/carapace/init.nu
+source ~/.oh-my-posh.nu
+
+use ~/.oh-my-posh.nu
+# use ~/.cache/starship/init.nu
 
