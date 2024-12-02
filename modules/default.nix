@@ -23,9 +23,14 @@ in
             useGlobalPkgs = true;
             useUserPackages = true;
             users.${username} =
-              { pkgs, ... }:
+              { ... }:
               {
-                imports = [ (home-manager { inherit system; }) ];
+                imports = [
+                  (home-manager {
+                    inherit system;
+                    inherit username;
+                  })
+                ];
               };
           };
         }

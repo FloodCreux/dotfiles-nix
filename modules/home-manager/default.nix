@@ -1,5 +1,5 @@
 { inputs }:
-{ system }:
+{ system, username }:
 { pkgs, ... }:
 let
   catppuccin-bat = pkgs.fetchFromGitHub {
@@ -63,7 +63,7 @@ in
 
     # .NET
     # pkgs.jetbrains.rider
-    pkgs.dotnet-sdk_8
+    pkgs.dotnet-sdk
     pkgs.omnisharp-roslyn
     pkgs.roslyn
 
@@ -141,7 +141,7 @@ in
     executable = true;
   };
 
-  home.file.".config/starship.toml".source = ./dotfiles/starship/starship.toml;
+  home.file.".config/starship/starship.toml".source = ./dotfiles/starship/starship.toml;
 
   home.file.".config/skhd/skhdrc" = {
     source = ./dotfiles/skhd/skhdrc;
@@ -233,8 +233,9 @@ in
   };
 
   programs.starship = {
-    enable = false;
+    enable = true;
     enableZshIntegration = true;
+    enableNushellIntegration = true;
   };
 
   programs.wezterm = {
@@ -245,7 +246,8 @@ in
   programs.tmux = {
     enable = true;
     extraConfig = builtins.readFile ./dotfiles/tmux/tmux.conf;
-    shell = "${pkgs.zsh}/bin/zsh";
+    shell = "${pkgs.nushell}/bin/nu";
+    # shell = "${pkgs.zsh}/bin/zsh";
     terminal = "xterm-256color";
   };
 
@@ -256,6 +258,7 @@ in
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
+    enableNushellIntegration = true;
     nix-direnv.enable = true;
   };
 

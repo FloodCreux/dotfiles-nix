@@ -1,4 +1,9 @@
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
+ui {
+    pane_frames {
+        hide_session_name false
+    }
+}
 keybinds {
     normal {
         // uncomment this and adjust key if using copy_on_select=false
@@ -184,11 +189,10 @@ keybinds {
 }
 
 plugins {
-    tab-bar { path "tab-bar"; }
-    status-bar { path "status-bar"; }
-    strider { path "strider"; }
-    compact-bar { path "compact-bar"; }
-    session-manager { path "session-manager"; }
+  tab-bar { path "tab-bar"; }
+  status-bar { path "status-bar"; }
+  strider { path "strider"; }
+  compact-bar { path "compact-bar"; }
 }
 
 // Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
@@ -197,19 +201,19 @@ plugins {
 //   - detach (Default)
 //   - quit
 //
-// on_force_close "quit"
+on_force_close "detach"
 
 //  Send a request for a simplified ui (without arrow fonts) to plugins
 //  Options:
 //    - true
 //    - false (Default)
 //
-// simplified_ui true
+simplified_ui true
 
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
 //
-// default_shell "fish"
+default_shell "nu"
 
 // Choose the path to override cwd that zellij will use for opening new panes
 //
@@ -220,7 +224,7 @@ plugins {
 //   - true (default)
 //   - false
 //
-// pane_frames true
+pane_frames false
 
 // Toggle between having Zellij lay out panes according to a predefined set of layouts whenever possible
 // Options:
@@ -251,27 +255,12 @@ plugins {
 // Define color themes for Zellij
 // For more examples, see: https://github.com/zellij-org/zellij/tree/main/example/themes
 // Once these themes are defined, one of them should to be selected in the "theme" section of this file
-//
-themes {
-  catppuccin-macchiato {
-    bg "#5b6078" // Surface2
-    fg "#cad3f5"
-    red "#ed8796"
-    green "#a6da95"
-    blue "#8aadf4"
-    yellow "#eed49f"
-    magenta "#f5bde6" // Pink
-    orange "#f5a97f" // Peach
-    cyan "#91d7e3" // Sky
-    black "#1e2030" // Mantle
-    white "#cad3f5"
-  }
-}
 
+//
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "catppuccin-macchiato"
+theme "tokyo-night"
 
 // The name of the default layout to load on startup
 // Default: "default"
