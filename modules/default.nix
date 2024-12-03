@@ -26,9 +26,7 @@ in
               { ... }:
               {
                 imports = [
-                  (home-manager {
-                    inherit username;
-                  })
+                  (home-manager { inherit username; })
                 ];
               };
           };
