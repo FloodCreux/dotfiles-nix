@@ -1,4 +1,10 @@
 { pkgs, username, ... }:
+let
+  # Helper to import modules with pkgs or username
+  importWith = path: args: import path args;
+  importPkgs = path: importWith path { inherit pkgs; };
+  importUsername = path: importWith path { inherit username; };
+in
 {
   imports = [
     ./home
@@ -8,13 +14,13 @@
     ./eza
     ./fzf
     ./git
-    (import ./java { inherit pkgs; })
+    (importPkgs ./java)
     ./nushell
     ./ohmyposh
     ./password-store
     ./starship
     ./tmux
-    (import ./wezterm { inherit username; })
+    (importUsername ./wezterm)
     ./zellij
     ./zsh
   ];

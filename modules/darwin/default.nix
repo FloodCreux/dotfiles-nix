@@ -2,33 +2,36 @@
 
 let
   nix = import ../shared/nix.nix;
+
+  # Helper to import modules with pkgs or username
+  importWith = path: args: import path args;
+  importPkgs = path: importWith path { inherit pkgs; };
+  importUsername = path: importWith path { inherit username; };
+
 in
 {
   nix = nix;
 
   imports = [
     ./nixpkgs
-    (import ./environment {
-      inherit username;
-    })
+    (importUsername ./environment)
     ./system
     ./services
-    (import ./users { inherit username; })
-    (import ./carapace { inherit pkgs; })
-    (import ./curl { inherit pkgs; })
-    (import ./fd { inherit pkgs; })
-    (import ./gh { inherit pkgs; })
-    (import ./jq { inherit pkgs; })
-    (import ./lazygit { inherit pkgs; })
-    (import ./less { inherit pkgs; })
-    (import ./nvim { inherit pkgs; })
-    (import ./nixd { inherit pkgs; })
-    (import ./nushell { inherit pkgs; })
-    (import ./ripgrep { inherit pkgs; })
-    (import ./yazi { inherit pkgs; })
-    (import ./zig { inherit pkgs; })
+    (importUsername ./users)
+    (importPkgs ./carapace)
+    (importPkgs ./curl)
+    (importPkgs ./fd)
+    (importPkgs ./gh)
+    (importPkgs ./jq)
+    (importPkgs ./lazygit)
+    (importPkgs ./less)
+    (importPkgs ./nvim)
+    (importPkgs ./nixd)
+    (importPkgs ./nushell)
+    (importPkgs ./ripgrep)
+    (importPkgs ./yazi)
+    (importPkgs ./zig)
     ./zsh
     ./homebrew
   ];
-
 }
