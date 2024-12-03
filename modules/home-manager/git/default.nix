@@ -1,0 +1,6 @@
+{ ... }:
+{
+  probrams.git = {
+    enable = true;
+  };
+}
