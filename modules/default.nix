@@ -27,7 +27,6 @@ in
               {
                 imports = [
                   (home-manager {
-                    inherit system;
                     inherit username;
                   })
                 ];
