@@ -1,4 +1,4 @@
-{ username, ... }:
+{ pkgs, username, ... }:
 {
   imports = [
     ./home
@@ -8,7 +8,7 @@
     ./eza
     ./fzf
     ./git
-    ./java
+    (import ./java { inherit pkgs; })
     ./nushell
     ./ohmyposh
     ./password-store

@@ -13,8 +13,8 @@ in
     inputs.darwin.lib.darwinSystem {
       modules = [
         (import ./darwin {
-          inherit username;
           inherit pkgs;
+          inherit username;
         })
 
         inputs.home-manager.darwinModules.home-manager
@@ -26,7 +26,10 @@ in
               { ... }:
               {
                 imports = [
-                  (home-manager { inherit username; })
+                  (home-manager {
+                    inherit pkgs;
+                    inherit username;
+                  })
                 ];
               };
           };
