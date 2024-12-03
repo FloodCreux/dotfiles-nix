@@ -1,24 +1,5 @@
-{ pkgs, username, ... }:
+{ username, ... }:
 {
-  environment.systemPackages = with pkgs; [
-    carapace
-    curl
-    fd
-    gh
-    jq
-    lazygit
-    less
-    neovim
-    nixd
-    nushell
-    ripgrep
-    skhd
-    templ
-    yazi
-    zigpkgs.master
-    zoxide
-  ];
-
   environment.shellAliases = {
     tf = "terraform";
     code = "open -a 'Visual Studio Code'";
@@ -34,8 +15,6 @@
     flushdns = "sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder";
     tmux-sessionizer = "sh ~/.local/scripts/tmux-sessionizer";
   };
-
-  environment.shells = [ pkgs.nushell ];
 
   environment.variables = {
     XDG_CONFIG_HOME = "$HOME/.config";

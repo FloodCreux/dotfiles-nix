@@ -9,14 +9,26 @@ in
   imports = [
     ./nixpkgs
     (import ./environment {
-      inherit pkgs;
       inherit username;
     })
     ./system
     ./services
     (import ./users { inherit username; })
-    ./homebrew
+    (import ./carapace { inherit pkgs; })
+    (import ./curl { inherit pkgs; })
+    (import ./fd { inherit pkgs; })
+    (import ./gh { inherit pkgs; })
+    (import ./jq { inherit pkgs; })
+    (import ./lazygit { inherit pkgs; })
+    (import ./less { inherit pkgs; })
+    (import ./nvim { inherit pkgs; })
+    (import ./nixd { inherit pkgs; })
+    (import ./nushell { inherit pkgs; })
+    (import ./ripgrep { inherit pkgs; })
+    (import ./yazi { inherit pkgs; })
+    (import ./zig { inherit pkgs; })
     ./zsh
+    ./homebrew
   ];
 
 }
