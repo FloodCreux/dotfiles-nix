@@ -10,6 +10,6 @@
       enable = true;
     };
 
-    initExtra = builtins.readFile ./zshrc;
+    initExtra = builtins.readFile ./.zshrc;
   };
 }

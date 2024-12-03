@@ -1,6 +1,6 @@
 { ... }:
 {
-  probrams.git = {
+  programs.git = {
     enable = true;
   };
 }
