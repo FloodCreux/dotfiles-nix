@@ -910,6 +910,11 @@ def nixup [name = "default"] {
     pushd ~/personal/nix; nix flake update; nixswitch $name; popd
 }
 
+def zell [path = "~/personal"] {
+    let name = $"($path)" | path basename
+    zellij attach -b -c $name options --default-cwd $path
+}
+
 source ~/.config/nushell/env.nu
 source ~/.zoxide.nu
 source ~/.cache/carapace/init.nu

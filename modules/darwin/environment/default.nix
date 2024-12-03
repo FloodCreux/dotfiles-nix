@@ -1,4 +1,4 @@
-{ username, ... }:
+{ pkgs, username, ... }:
 {
   environment.shellAliases = {
     tf = "terraform";
@@ -19,5 +19,6 @@
   environment.variables = {
     XDG_CONFIG_HOME = "$HOME/.config";
     NIX_HOME = "/etc/profiles/per-user/${username}/";
+    SHELL = "${pkgs.nushell}/bin/nu";
   };
 }
