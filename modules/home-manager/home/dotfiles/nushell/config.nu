@@ -913,8 +913,9 @@ def nixup [name = "default"] {
 source ~/.config/nushell/env.nu
 source ~/.zoxide.nu
 source ~/.cache/carapace/init.nu
-source ~/.config/ohmyposh/init.nu
+# source ~/.config/ohmyposh/init.nu
+source ~/.oh-my-posh.nu
 
 # use ~/.config/ohmyposh/init.nu
-use ~/.cache/starship/init.nu
+# use ~/.cache/starship/init.nu
 

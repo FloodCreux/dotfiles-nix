@@ -24,8 +24,6 @@ config.window_padding = {
 
 config.text_background_opacity = 0.75
 
--- config.colors = wezterm.color.get_builtin_schemes()['Catppuccin Macchiato']
--- config.color_scheme = "Catppuccin Macchiato"
 config.color_scheme = "Gruber Darker"
 
 config.window_decorations = "RESIZE"

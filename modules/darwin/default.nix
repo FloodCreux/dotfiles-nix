@@ -34,7 +34,6 @@ in
     neovim
     nixd
     nushell
-    oh-my-posh
     ripgrep
     skhd
     templ
@@ -63,6 +62,7 @@ in
 
   environment.variables = {
     XDG_CONFIG_HOME = "$HOME/.config";
+    NIX_HOME = "/etc/profiles/per-user/${username}/";
   };
 
   system.keyboard.enableKeyMapping = true;
@@ -111,6 +111,7 @@ in
       "libuv"
       "pipx"
       "sbt"
+      "oh-my-posh"
     ];
   };
 }
