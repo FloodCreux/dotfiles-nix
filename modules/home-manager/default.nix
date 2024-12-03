@@ -8,7 +8,7 @@ in
 {
   imports = [
     ./home
-    ./bat
+    (importPkgs ./bat)
     ./carapace
     ./direnv
     ./eza
@@ -19,7 +19,7 @@ in
     ./ohmyposh
     ./password-store
     ./starship
-    ./tmux
+    (importPkgs ./tmux)
     (importUsername ./wezterm)
     ./zellij
     ./zsh
