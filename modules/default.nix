@@ -1,6 +1,6 @@
 { inputs }:
 let
-  home-manager = import ./home-manager { inherit inputs; };
+  home-manager = import ./home-manager;
   metals = import ./metals { inherit inputs; };
 in
 {
