@@ -1,16 +1,12 @@
 {
   description = "Development packages for Mike Flood";
   inputs = {
-    # Where we get most of our sofware
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Manages configs links things into home directory
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     # home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Controls system level software and settings including fonts
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -24,53 +20,125 @@
   };
 
   outputs =
-    inputs@{ flake-parts, self, ... }:
+    inputs@{
+      nixpkgs,
+      home-manager,
+      darwin,
+      ...
+    }:
     let
-      username = "mike";
-      nixpkgs = inputs.nixpkgs;
       nvim-overlay = inputs.neovim-nightly-overlay.overlays.default;
       zigpkgs = inputs.zig.packages;
     in
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "aarch64-darwin" ];
-      perSystem = { self, system, ... }: { };
-
-      flake = {
-        darwinConfigurations = {
-          default = self.lib.mkDarwin {
-            inherit username;
-            system = "aarch64-darwin";
+    {
+      darwinConfigurations = {
+        default =
+          let
             pkgs = import nixpkgs {
               system = "aarch64-darwin";
+
               config = {
                 allowUnfree = true;
                 allowUnsupportedSystem = true;
+                permittedInsecurePackages = [
+                  "dotnet-core-combined"
+                  "dotnet-sdk-6.0.428"
+                  "dotnet-sdk-wrapped-6.0.428"
+                  "dotnet-runtime-6.0.36"
+                ];
               };
+
               overlays = [
                 nvim-overlay
                 (final: prev: { zigpkgs = zigpkgs.${prev.system}; })
               ];
             };
+
+            username = "mike";
+          in
+          darwin.lib.darwinSystem {
+            system = "aarch64-darwin";
+
+            pkgs = pkgs;
+
+            modules = [
+              (import ./modules/darwin {
+                inherit pkgs;
+                inherit username;
+              })
+
+              home-manager.darwinModules.home-manager
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.${username} = {
+                    imports = [
+                      (import ./modules/home-manager {
+                        inherit pkgs;
+                        inherit username;
+                      })
+                    ];
+                  };
+                };
+              }
+            ];
           };
 
-          work = self.lib.mkDarwin {
+        work =
+          let
+            pkgs = import nixpkgs {
+              system = "aarch64-darwin";
+
+              config = {
+                allowUnfree = true;
+                allowUnsupportedSystem = true;
+                permittedInsecurePackages = [
+                  "dotnet-core-combined"
+                  "dotnet-sdk-6.0.428"
+                  "dotnet-sdk-wrapped-6.0.428"
+                  "dotnet-runtime-6.0.36"
+                ];
+              };
+
+              overlays = [
+                nvim-overlay
+                (final: prev: { zigpkgs = zigpkgs.${prev.system}; })
+              ];
+            };
+
             username = "chmc-h022fl97xj";
+          in
+          darwin.lib.darwinSystem {
             system = "aarch64-darwin";
-            pkgs = import nixpkgs {
-              system = "aarch64-darwin";
-              config = {
-                allowUnfree = true;
-                allowUnsupportedSystem = true;
-              };
-              overlays = [
-                nvim-overlay
-                (final: prev: { zigpkgs = zigpkgs.${prev.system}; })
-              ];
-            };
-          };
-        };
 
-        lib = import ./modules { inherit inputs; };
+            pkgs = pkgs;
+
+            modules = [
+              (import ./modules/darwin {
+                inherit pkgs;
+                inherit username;
+              })
+
+              home-manager.darwinModules.home-manager
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.${username} = {
+                    imports = [
+                      (import ./modules/home-manager {
+                        inherit pkgs;
+                        inherit username;
+                      })
+                    ];
+                  };
+                };
+              }
+            ];
+          };
       };
+
+      lib = import ./modules { inherit inputs; };
     };
 }

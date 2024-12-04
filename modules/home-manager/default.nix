@@ -2,12 +2,18 @@
 let
   # Helper to import modules with pkgs or username
   importWith = path: args: import path args;
+  # importUsername = path: importWith path { inherit username; };
   importPkgs = path: importWith path { inherit pkgs; };
-  importUsername = path: importWith path { inherit username; };
+  importAll =
+    path:
+    importWith path {
+      inherit pkgs;
+      inherit username;
+    };
 in
 {
   imports = [
-    ./home
+    (importAll ./home)
     (importPkgs ./bat)
     ./carapace
     ./direnv
@@ -20,7 +26,7 @@ in
     ./password-store
     ./starship
     (importPkgs ./tmux)
-    (importUsername ./wezterm)
+    ./wezterm
     ./zellij
     ./zsh
   ];

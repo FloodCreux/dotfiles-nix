@@ -20,7 +20,7 @@ in
 
   imports = [
     ./nixpkgs
-    (importAll ./environment)
+    (importPkgs ./environment)
     ./system
     ./services
     (importAll ./users)

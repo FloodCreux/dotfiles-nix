@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 let
   catppuccin-lazygit = pkgs.fetchFromGitHub {
     owner = "catppuccin";
@@ -14,61 +14,61 @@ in
   home.enableNixpkgsReleaseCheck = false;
 
   # specify home manager configs
-  home.packages = [
-    pkgs.gimp
+  home.packages = with pkgs; [
+    gimp
 
     # Git
-    pkgs.lazygit
-    pkgs.gitkraken
+    lazygit
+    gitkraken
 
     # C
-    pkgs.gcc
-    pkgs.ghc
-    pkgs.cmake
-    pkgs.raylib
+    gcc
+    ghc
+    cmake
+    raylib
 
     # Scala
-    pkgs.metals
-    pkgs.coursier
-    pkgs.maven
-    pkgs.scala_2_12
-    pkgs.scalafmt
+    metals
+    coursier
+    maven
+    scala_2_12
+    scalafmt
 
-    pkgs.jdk8
-    # pkgs.jdk17
+    jdk8
+    # jdk17
 
-    pkgs.hadoop
+    hadoop
 
     # OCaml
-    pkgs.ocaml
+    ocaml
 
     # Nix
-    pkgs.nixfmt-rfc-style
+    nixfmt-rfc-style
 
     # Haskell
-    pkgs.elixir
+    elixir
 
     # .NET
-    # pkgs.jetbrains.rider
-    pkgs.dotnet-sdk
-    pkgs.omnisharp-roslyn
-    pkgs.roslyn
+    # jetbrains.rider
+    dotnet-sdk
+    omnisharp-roslyn
+    roslyn
 
     # Zig
-    pkgs.zls
+    zls
 
     # Sql
-    pkgs.sqlite
+    sqlite
 
     # Containers
-    pkgs.docker
-    pkgs.podman
+    docker
+    podman
 
-    pkgs.nodePackages.vscode-json-languageserver
-    pkgs.nodePackages.prettier
+    nodePackages.vscode-json-languageserver
+    nodePackages.prettier
 
     # Notes
-    pkgs.obsidian
+    obsidian
   ];
 
   home.sessionVariables = {
