@@ -134,7 +134,5 @@
             ];
           };
       };
-
-      lib = import ./modules { inherit inputs; };
     };
 }
