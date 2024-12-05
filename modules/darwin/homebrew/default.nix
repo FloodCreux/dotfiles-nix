@@ -8,8 +8,10 @@
     casks = [
       "devtoys"
       "dotnet-sdk"
+      # is available in nix... lower version
       "raycast"
       "fontforge"
+      # is available in nix... v0.15, this is 0.16
       "nikitabobko/tap/aerospace"
     ];
     taps = [
@@ -18,8 +20,6 @@
     ];
     brews = [
       "azd"
-      "tree"
-      "go"
       # "scalacenter/bloop/bloop"
       "openjdk@17"
       "libuv"

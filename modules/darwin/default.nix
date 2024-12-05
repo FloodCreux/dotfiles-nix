@@ -28,6 +28,7 @@ in
     (importPkgs ./curl)
     (importPkgs ./fd)
     (importPkgs ./gh)
+    (importPkgs ./go)
     (importPkgs ./jq)
     (importPkgs ./lazygit)
     (importPkgs ./less)
@@ -40,6 +41,7 @@ in
     (importPkgs ./ripgrep)
     (importPkgs ./rust)
     (importPkgs ./scala)
+    (importPkgs ./tree)
     (importPkgs ./yazi)
     (importPkgs ./zig)
     ./zsh
