@@ -2,6 +2,7 @@ local wezterm = require("wezterm")
 
 local config = {}
 
+config.front_end = "WebGpu"
 config.font = wezterm.font("JetBrains Mono", { weight = "Bold" })
 config.font_size = 13
 
@@ -24,7 +25,7 @@ config.window_padding = {
 
 config.text_background_opacity = 0.75
 
-config.color_scheme = "Gruber Darker"
+--config.color_scheme = "Gruber Darker"
 
 config.window_decorations = "RESIZE"
 
