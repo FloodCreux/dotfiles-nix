@@ -14,18 +14,15 @@
     ];
     taps = [
       "azure/azd"
-      "scalacenter/bloop"
+      # "scalacenter/bloop"
     ];
     brews = [
       "azd"
       "tree"
-      "azure-cli"
       "go"
-      "scalacenter/bloop/bloop"
+      # "scalacenter/bloop/bloop"
       "openjdk@17"
       "libuv"
-      "pipx"
-      "sbt"
       "oh-my-posh"
     ];
   };

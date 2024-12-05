@@ -35,8 +35,10 @@ in
     (importPkgs ./nixd)
     (importPkgs ./nushell)
     (importPkgs ./ocaml)
+    (importPkgs ./python)
     (importPkgs ./ripgrep)
     (importPkgs ./rust)
+    (importPkgs ./scala)
     (importPkgs ./yazi)
     (importPkgs ./zig)
     ./zsh
