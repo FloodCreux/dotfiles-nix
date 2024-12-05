@@ -17,6 +17,10 @@
     };
 
     zig.url = "github:mitchellh/zig-overlay";
+    fenix = {
+      url = "github:nix-community/fenix/monthly";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -24,11 +28,27 @@
       nixpkgs,
       home-manager,
       darwin,
+      fenix,
       ...
     }:
     let
       nvim-overlay = inputs.neovim-nightly-overlay.overlays.default;
       zigpkgs = inputs.zig.packages;
+      overlays = [
+        nvim-overlay
+        (final: prev: { zigpkgs = zigpkgs.${prev.system}; })
+        fenix.overlays.default
+      ];
+      pkgs-config = {
+        allowUnfree = true;
+        allowUnsupportedSystem = true;
+        permittedInsecurePackages = [
+          "dotnet-core-combined"
+          "dotnet-sdk-6.0.428"
+          "dotnet-sdk-wrapped-6.0.428"
+          "dotnet-runtime-6.0.36"
+        ];
+      };
     in
     {
       darwinConfigurations = {
@@ -37,21 +57,8 @@
             pkgs = import nixpkgs {
               system = "aarch64-darwin";
 
-              config = {
-                allowUnfree = true;
-                allowUnsupportedSystem = true;
-                permittedInsecurePackages = [
-                  "dotnet-core-combined"
-                  "dotnet-sdk-6.0.428"
-                  "dotnet-sdk-wrapped-6.0.428"
-                  "dotnet-runtime-6.0.36"
-                ];
-              };
-
-              overlays = [
-                nvim-overlay
-                (final: prev: { zigpkgs = zigpkgs.${prev.system}; })
-              ];
+              config = pkgs-config;
+              overlays = overlays;
             };
 
             username = "mike";
@@ -90,21 +97,8 @@
             pkgs = import nixpkgs {
               system = "aarch64-darwin";
 
-              config = {
-                allowUnfree = true;
-                allowUnsupportedSystem = true;
-                permittedInsecurePackages = [
-                  "dotnet-core-combined"
-                  "dotnet-sdk-6.0.428"
-                  "dotnet-sdk-wrapped-6.0.428"
-                  "dotnet-runtime-6.0.36"
-                ];
-              };
-
-              overlays = [
-                nvim-overlay
-                (final: prev: { zigpkgs = zigpkgs.${prev.system}; })
-              ];
+              config = pkgs-config;
+              overlays = overlays;
             };
 
             username = "chmc-h022fl97xj";

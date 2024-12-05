@@ -22,7 +22,6 @@
       "tree"
       # "yabai"
       "azure-cli"
-      "rustup"
       "go"
       "scalacenter/bloop/bloop"
       "openjdk@17"

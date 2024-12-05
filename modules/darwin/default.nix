@@ -35,6 +35,7 @@ in
     (importPkgs ./nixd)
     (importPkgs ./nushell)
     (importPkgs ./ripgrep)
+    (importPkgs ./rust)
     (importPkgs ./yazi)
     (importPkgs ./zig)
     ./zsh
