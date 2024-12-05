@@ -17,6 +17,8 @@
     };
 
     zig.url = "github:mitchellh/zig-overlay";
+
+    # rust overlay
     fenix = {
       url = "github:nix-community/fenix/monthly";
       inputs.nixpkgs.follows = "nixpkgs";

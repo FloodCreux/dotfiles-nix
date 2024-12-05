@@ -39,9 +39,6 @@ in
 
     hadoop
 
-    # OCaml
-    ocaml
-
     # Nix
     nixfmt-rfc-style
 

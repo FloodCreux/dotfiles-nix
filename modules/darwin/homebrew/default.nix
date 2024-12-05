@@ -18,9 +18,7 @@
     ];
     brews = [
       "azd"
-      "opam"
       "tree"
-      # "yabai"
       "azure-cli"
       "go"
       "scalacenter/bloop/bloop"

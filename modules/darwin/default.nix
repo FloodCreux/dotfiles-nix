@@ -34,6 +34,7 @@ in
     (importPkgs ./nvim)
     (importPkgs ./nixd)
     (importPkgs ./nushell)
+    (importPkgs ./ocaml)
     (importPkgs ./ripgrep)
     (importPkgs ./rust)
     (importPkgs ./yazi)
