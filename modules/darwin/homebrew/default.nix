@@ -23,7 +23,6 @@
       # "scalacenter/bloop/bloop"
       "openjdk@17"
       "libuv"
-      "oh-my-posh"
     ];
   };
 }

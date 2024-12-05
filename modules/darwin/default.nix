@@ -35,6 +35,7 @@ in
     (importPkgs ./nixd)
     (importPkgs ./nushell)
     (importPkgs ./ocaml)
+    (importPkgs ./ohmyposh)
     (importPkgs ./python)
     (importPkgs ./ripgrep)
     (importPkgs ./rust)
