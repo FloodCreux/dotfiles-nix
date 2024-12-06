@@ -23,6 +23,12 @@
       url = "github:nix-community/fenix/monthly";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    neovim-flake = {
+      url = "/Users/chmc-h022fl97xj/personal/nvim-ide";
+      # url = "github:FloodCreux/neovim-ide";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -96,17 +102,18 @@
 
         work =
           let
+            system = "aarch64-darwin";
             pkgs = import nixpkgs {
-              system = "aarch64-darwin";
+              inherit system;
 
               config = pkgs-config;
-              overlays = overlays;
+              overlays = overlays ++ [ inputs.neovim-flake.overlays.${system}.default ];
             };
 
             username = "chmc-h022fl97xj";
           in
           darwin.lib.darwinSystem {
-            system = "aarch64-darwin";
+            inherit system;
 
             pkgs = pkgs;
 
@@ -123,6 +130,7 @@
                   useUserPackages = true;
                   users.${username} = {
                     imports = [
+                      inputs.neovim-flake.homeManagerModules.${system}.default
                       (import ./modules/home-manager {
                         inherit pkgs;
                         inherit username;
