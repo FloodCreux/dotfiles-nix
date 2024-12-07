@@ -13,10 +13,20 @@
           vim-repeat
         ];
         mapLeaderSpace = true;
+        filetree = {
+          enable = true;
+          yazi.enable = true;
+        };
         format = {
           conform = {
             enable = true;
           };
+        };
+        git = {
+          enable = true;
+
+          gitsigns.enable = true;
+          lazygit.enable = true;
         };
         keys = {
           enable = true;

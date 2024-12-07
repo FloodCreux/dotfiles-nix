@@ -10,12 +10,6 @@
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
-    nixvim = {
-      url = "github:FloodCreux/nixvim";
-    };
-
     zig.url = "github:mitchellh/zig-overlay";
 
     # rust overlay
@@ -40,10 +34,8 @@
       ...
     }:
     let
-      nvim-overlay = inputs.neovim-nightly-overlay.overlays.default;
       zigpkgs = inputs.zig.packages;
       overlays = [
-        nvim-overlay
         (final: prev: { zigpkgs = zigpkgs.${prev.system}; })
         fenix.overlays.default
       ];
