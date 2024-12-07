@@ -19,7 +19,7 @@
     };
 
     neovim-flake = {
-      url = "/Users/chmc-h022fl97xj/personal/nvim-ide";
+      url = "/Users/mike/personal/neovim-ide";
       # url = "github:FloodCreux/neovim-ide";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -35,7 +35,7 @@
     }:
     let
       zigpkgs = inputs.zig.packages;
-      overlays = [
+      sharedOverlays = [
         (final: prev: { zigpkgs = zigpkgs.${prev.system}; })
         fenix.overlays.default
       ];
@@ -54,11 +54,13 @@
       darwinConfigurations = {
         default =
           let
+            system = "aarch64-darwin";
+            overlays = sharedOverlays ++ [ inputs.neovim-flake.overlays.${system}.default ];
             pkgs = import nixpkgs {
-              system = "aarch64-darwin";
+              inherit system;
+              inherit overlays;
 
               config = pkgs-config;
-              overlays = overlays;
             };
 
             username = "mike";
@@ -81,6 +83,7 @@
                   useUserPackages = true;
                   users.${username} = {
                     imports = [
+                      inputs.neovim-flake.homeManagerModules.${system}.default
                       (import ./modules/home-manager {
                         inherit pkgs;
                         inherit username;
@@ -99,7 +102,7 @@
               inherit system;
 
               config = pkgs-config;
-              overlays = overlays ++ [ inputs.neovim-flake.overlays.${system}.default ];
+              overlays = sharedOverlays ++ [ inputs.neovim-flake.overlays.${system}.default ];
             };
 
             username = "chmc-h022fl97xj";
