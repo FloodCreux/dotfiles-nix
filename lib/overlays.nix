@@ -9,17 +9,19 @@ with inputs;
 let
   metalsOverlay = f: p: { };
 
-  libVersionOverlay = import "${inputs.nixpkgs}/lib/flake-version-info.nix" inputs.nixpkgs;
+  lib = import ../lib { inherit pkgs inputs plugins; };
 
-  libOverlay = f: p: rec {
-    libx = import ./. { inherit (p) lib; };
-    lib =
-      (p.lib.extend (
-        _: _: {
-          inherit (libx) exe removeNewline secretManager;
-        }
-      )).extend
-        libVersionOverlay;
+  libOverlay = f: p: {
+    lib = p.lib.extend (
+      _: _: {
+        inherit (lib)
+          mkVimBool
+          withAttrSet
+          withPlugins
+          writeIf
+          ;
+      }
+    );
   };
 
   buildersOverlay = f: p: {

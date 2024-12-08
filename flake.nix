@@ -30,15 +30,9 @@
       nixpkgs,
       home-manager,
       darwin,
-      fenix,
       ...
     }:
     let
-      zigpkgs = inputs.zig.packages;
-      sharedOverlays = [
-        (final: prev: { zigpkgs = zigpkgs.${prev.system}; })
-        fenix.overlays.default
-      ];
       pkgs-config = {
         allowUnfree = true;
         allowUnsupportedSystem = true;
@@ -49,24 +43,27 @@
           "dotnet-runtime-6.0.36"
         ];
       };
+
     in
     {
       darwinConfigurations = {
         default =
           let
             system = "aarch64-darwin";
-            overlays = sharedOverlays ++ [ inputs.neovim-flake.overlays.${system}.default ];
+            overlays = import ./lib/overlays.nix { inherit inputs system username; } ++ [
+              inputs.neovim-flake.overlays.${system}.default
+            ];
             pkgs = import nixpkgs {
-              inherit system;
-              inherit overlays;
+              inherit overlays system;
 
               config = pkgs-config;
             };
 
             username = "mike";
+
           in
           darwin.lib.darwinSystem {
-            system = "aarch64-darwin";
+            inherit system;
 
             pkgs = pkgs;
 
@@ -83,8 +80,9 @@
                   useUserPackages = true;
                   users.${username} = {
                     imports = [
-                      inputs.neovim-flake.homeManagerModules.${system}.default
+                      inputs.neovim-flake.homeManagerModules.${system}.nvim
                       (import ./modules/home-manager {
+                        inherit inputs;
                         inherit pkgs;
                         inherit username;
                       })
@@ -102,7 +100,9 @@
               inherit system;
 
               config = pkgs-config;
-              overlays = sharedOverlays ++ [ inputs.neovim-flake.overlays.${system}.default ];
+              overlays = import ./lib/overlays.nix { inherit inputs system username; } ++ [
+                inputs.neovim-flake.overlays.${system}.default
+              ];
             };
 
             username = "chmc-h022fl97xj";
@@ -125,7 +125,7 @@
                   useUserPackages = true;
                   users.${username} = {
                     imports = [
-                      inputs.neovim-flake.homeManagerModules.${system}.default
+                      inputs.neovim-flake.homeManagerModules.${system}.nvim
                       (import ./modules/home-manager {
                         inherit pkgs;
                         inherit username;

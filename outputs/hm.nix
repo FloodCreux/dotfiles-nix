@@ -3,13 +3,14 @@
   inputs,
   system,
   pkgs,
-  username,
   ...
 }:
 
 with inputs;
 let
   sharedImports = [
+    # ../home/wm/mac.nix
+
     neovim-flake.homeManagerModules.${system}.default
     { home.packages = extraPkgs; }
     { nix.registry.nixpkgs.flake = inputs.nixpkgs; }
@@ -17,18 +18,9 @@ let
 
   mkMacHome =
     { }:
-    let
-      macHome = import ../home/wm/mac.nix { inherit pkgs username; };
-      imports = sharedImports ++ [ macHome ];
-    in
-    (home-manager.darwinModules.home-manager {
-      home-manager = {
-        useGlobalPkgs = true;
-        useUserPackages = true;
-        users.${username} = {
-          imports = imports;
-        };
-      };
+    (home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      modules = sharedImports;
     });
 in
 {
