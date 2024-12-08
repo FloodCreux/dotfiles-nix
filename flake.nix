@@ -10,6 +10,8 @@
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+
     zig.url = "github:mitchellh/zig-overlay";
 
     # rust overlay

@@ -48,6 +48,8 @@ let
     ]);
   };
 
+  nvim-nighlty-overlay = inputs.neovim-nightly-overlay.overlays.default;
+
   rustOverlay = inputs.fenix.overlays.default;
 
   zigOverlay = f: p: {
@@ -57,6 +59,7 @@ in
 [
   libOverlay
   metalsOverlay
+  nvim-nighlty-overlay
   neovim-flake.overlays.${system}.default
   buildersOverlay
   treesitterGrammarsOverlay

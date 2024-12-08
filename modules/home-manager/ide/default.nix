@@ -5,6 +5,7 @@
     enable = true;
     settings = {
       vim = {
+        neovim.package = pkgs.neovim;
         viAlias = false;
         vimAlias = true;
         preventJunkFiles = true;
