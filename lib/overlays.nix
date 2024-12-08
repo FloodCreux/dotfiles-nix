@@ -25,19 +25,42 @@ let
   };
 
   buildersOverlay = f: p: {
-    mkHomeConfigurations =
+    mkDarwin =
       {
-        pkgs ? f,
-        extraPkgs ? [ ],
+        darwin,
+        system,
+        pkgs,
+        username,
       }:
-      import ../outputs/hm.nix {
-        inherit
-          extraPkgs
-          inputs
-          pkgs
-          system
-          username
-          ;
+      darwin.lib.darwinSystem {
+        inherit system;
+
+        pkgs = pkgs;
+
+        modules = [
+          (import ../modules/darwin {
+            inherit pkgs;
+            inherit username;
+          })
+
+          home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.${username} = {
+                imports = [
+                  inputs.neovim-flake.homeManagerModules.${system}.nvim
+                  (import ../modules/home-manager {
+                    inherit inputs;
+                    inherit pkgs;
+                    inherit username;
+                  })
+                ];
+              };
+            };
+          }
+        ];
       };
   };
 

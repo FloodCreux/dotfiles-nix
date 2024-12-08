@@ -63,35 +63,13 @@
             username = "mike";
 
           in
-          darwin.lib.darwinSystem {
-            inherit system;
-
-            pkgs = pkgs;
-
-            modules = [
-              (import ./modules/darwin {
-                inherit pkgs;
-                inherit username;
-              })
-
-              home-manager.darwinModules.home-manager
-              {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  users.${username} = {
-                    imports = [
-                      inputs.neovim-flake.homeManagerModules.${system}.nvim
-                      (import ./modules/home-manager {
-                        inherit inputs;
-                        inherit pkgs;
-                        inherit username;
-                      })
-                    ];
-                  };
-                };
-              }
-            ];
+          pkgs.mkDarwin {
+            inherit
+              darwin
+              system
+              pkgs
+              username
+              ;
           };
 
         work =
@@ -108,34 +86,13 @@
 
             username = "chmc-h022fl97xj";
           in
-          darwin.lib.darwinSystem {
-            inherit system;
-
-            pkgs = pkgs;
-
-            modules = [
-              (import ./modules/darwin {
-                inherit pkgs;
-                inherit username;
-              })
-
-              home-manager.darwinModules.home-manager
-              {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  users.${username} = {
-                    imports = [
-                      inputs.neovim-flake.homeManagerModules.${system}.nvim
-                      (import ./modules/home-manager {
-                        inherit pkgs;
-                        inherit username;
-                      })
-                    ];
-                  };
-                };
-              }
-            ];
+          pkgs.mkDarwin {
+            inherit
+              darwin
+              system
+              pkgs
+              username
+              ;
           };
       };
     };
