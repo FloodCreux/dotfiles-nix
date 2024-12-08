@@ -51,16 +51,17 @@
         default =
           let
             system = "aarch64-darwin";
+            username = "mike";
+
             overlays = import ./lib/overlays.nix { inherit inputs system username; } ++ [
               inputs.neovim-flake.overlays.${system}.default
             ];
+
             pkgs = import nixpkgs {
               inherit overlays system;
 
               config = pkgs-config;
             };
-
-            username = "mike";
 
           in
           pkgs.mkDarwin {
@@ -75,16 +76,17 @@
         work =
           let
             system = "aarch64-darwin";
+            username = "chmc-h022fl97xj";
+
+            overlays = import ./lib/overlays.nix { inherit inputs system username; } ++ [
+              inputs.neovim-flake.overlays.${system}.default
+            ];
+
             pkgs = import nixpkgs {
-              inherit system;
+              inherit system overlays;
 
               config = pkgs-config;
-              overlays = import ./lib/overlays.nix { inherit inputs system username; } ++ [
-                inputs.neovim-flake.overlays.${system}.default
-              ];
             };
-
-            username = "chmc-h022fl97xj";
           in
           pkgs.mkDarwin {
             inherit
