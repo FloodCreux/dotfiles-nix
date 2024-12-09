@@ -1,4 +1,8 @@
-{ pkgs, username, ... }:
+{
+  pkgs,
+  username,
+  ...
+}:
 let
   # Helper to import modules with pkgs or username
   importWith = path: args: import path args;
@@ -20,6 +24,7 @@ in
     ./eza
     ./fzf
     ./git
+    (importPkgs ./ide)
     (importPkgs ./java)
     ./nushell
     ./ohmyposh

@@ -66,6 +66,8 @@ in
 
     # Notes
     obsidian
+
+    chafa
   ];
 
   home.sessionVariables = {
@@ -77,7 +79,8 @@ in
   home.file.".inputrc".source = ./dotfiles/inputrc;
 
   home.file.".config/alacritty/alacritty.yml".source = ./dotfiles/alacritty/alacritty.yml;
-  home.file.".config/alacritty/catppuccin-macchiato.yml".source = ./dotfiles/alacritty/catppuccin-macchiato.yml;
+  home.file.".config/alacritty/catppuccin-macchiato.yml".source =
+    ./dotfiles/alacritty/catppuccin-macchiato.yml;
 
   home.file.".zsh/starship.zsh".source = ./dotfiles/zsh/starship.zsh;
   home.file.".zsh/aliases.zsh".source = ./dotfiles/zsh/aliases.zsh;

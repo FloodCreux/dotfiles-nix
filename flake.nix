@@ -12,15 +12,16 @@
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
-    nixvim = {
-      url = "github:FloodCreux/nixvim";
-    };
-
     zig.url = "github:mitchellh/zig-overlay";
 
     # rust overlay
     fenix = {
       url = "github:nix-community/fenix/monthly";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    neovim-flake = {
+      url = "github:FloodCreux/neovim-ide";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -30,17 +31,9 @@
       nixpkgs,
       home-manager,
       darwin,
-      fenix,
       ...
     }:
     let
-      nvim-overlay = inputs.neovim-nightly-overlay.overlays.default;
-      zigpkgs = inputs.zig.packages;
-      overlays = [
-        nvim-overlay
-        (final: prev: { zigpkgs = zigpkgs.${prev.system}; })
-        fenix.overlays.default
-      ];
       pkgs-config = {
         allowUnfree = true;
         allowUnsupportedSystem = true;
@@ -49,89 +42,60 @@
           "dotnet-sdk-6.0.428"
           "dotnet-sdk-wrapped-6.0.428"
           "dotnet-runtime-6.0.36"
+          "dotnet-runtime-wrapped-6.0.36"
         ];
       };
+
     in
     {
       darwinConfigurations = {
         default =
           let
+            system = "aarch64-darwin";
+            username = "mike";
+
+            overlays = import ./lib/overlays.nix { inherit inputs system username; } ++ [
+              inputs.neovim-flake.overlays.${system}.default
+            ];
+
             pkgs = import nixpkgs {
-              system = "aarch64-darwin";
+              inherit overlays system;
 
               config = pkgs-config;
-              overlays = overlays;
             };
 
-            username = "mike";
           in
-          darwin.lib.darwinSystem {
-            system = "aarch64-darwin";
-
-            pkgs = pkgs;
-
-            modules = [
-              (import ./modules/darwin {
-                inherit pkgs;
-                inherit username;
-              })
-
-              home-manager.darwinModules.home-manager
-              {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  users.${username} = {
-                    imports = [
-                      (import ./modules/home-manager {
-                        inherit pkgs;
-                        inherit username;
-                      })
-                    ];
-                  };
-                };
-              }
-            ];
+          pkgs.mkDarwin {
+            inherit
+              darwin
+              system
+              pkgs
+              username
+              ;
           };
 
         work =
           let
+            system = "aarch64-darwin";
+            username = "chmc-h022fl97xj";
+
+            overlays = import ./lib/overlays.nix { inherit inputs system username; } ++ [
+              inputs.neovim-flake.overlays.${system}.default
+            ];
+
             pkgs = import nixpkgs {
-              system = "aarch64-darwin";
+              inherit system overlays;
 
               config = pkgs-config;
-              overlays = overlays;
             };
-
-            username = "chmc-h022fl97xj";
           in
-          darwin.lib.darwinSystem {
-            system = "aarch64-darwin";
-
-            pkgs = pkgs;
-
-            modules = [
-              (import ./modules/darwin {
-                inherit pkgs;
-                inherit username;
-              })
-
-              home-manager.darwinModules.home-manager
-              {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  users.${username} = {
-                    imports = [
-                      (import ./modules/home-manager {
-                        inherit pkgs;
-                        inherit username;
-                      })
-                    ];
-                  };
-                };
-              }
-            ];
+          pkgs.mkDarwin {
+            inherit
+              darwin
+              system
+              pkgs
+              username
+              ;
           };
       };
     };
