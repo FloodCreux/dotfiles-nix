@@ -5,11 +5,17 @@
     enable = true;
     settings = {
       vim = {
-        neovim.package = pkgs.neovim;
+        neovim.package = pkgs.neovim-nightly;
         viAlias = false;
         vimAlias = true;
         preventJunkFiles = true;
         cmdHeight = 2;
+        autocomplete = {
+          enable = true;
+        };
+        autopairs = {
+          enable = true;
+        };
         customPlugins = with pkgs.vimPlugins; [
           multiple-cursors
           vim-repeat
@@ -30,6 +36,9 @@
           gitsigns.enable = true;
           lazygit.enable = true;
         };
+        harpoon = {
+          enable = true;
+        };
         keys = {
           enable = true;
           whichKey.enable = true;
@@ -38,6 +47,10 @@
           enable = true;
           folds = true;
           formatOnSave = false;
+
+          nix = {
+            enable = true;
+          };
 
           scala = {
             enable = true;
@@ -58,6 +71,10 @@
 
           trouble.enable = true;
         };
+        markdown = {
+          enable = true;
+          render.enable = true;
+        };
         mini = {
           enable = true;
           ai.enable = true;
@@ -66,6 +83,9 @@
           hipatterns.enable = true;
           statusLine.enable = true;
           surround.enable = true;
+        };
+        notifications = {
+          enable = true;
         };
         telescope = {
           enable = true;
