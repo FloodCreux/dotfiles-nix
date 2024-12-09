@@ -16,6 +16,10 @@
         autopairs = {
           enable = true;
         };
+        colorColumn = {
+          enable = true;
+          column = 120;
+        };
         customPlugins = with pkgs.vimPlugins; [
           multiple-cursors
           vim-repeat
