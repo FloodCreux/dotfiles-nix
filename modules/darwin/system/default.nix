@@ -12,7 +12,7 @@
 
     NSGlobalDomain = {
       AppleShowAllExtensions = true;
-      InitialKeyRepeat = 16;
+      InitialKeyRepeat = 15;
       KeyRepeat = 1;
     };
   };

@@ -34,7 +34,8 @@
           enable = true;
 
           gitsigns.enable = true;
-          lazygit.enable = true;
+          # Handled by snacks.nvim
+          lazygit.enable = false;
         };
         harpoon = {
           enable = true;
@@ -47,11 +48,14 @@
           enable = true;
           folds = true;
           formatOnSave = false;
-
+          clang = true;
+          go = true;
           nix = {
             enable = true;
           };
-
+          rust = {
+            enable = true;
+          };
           scala = {
             enable = true;
             metals = {
@@ -78,6 +82,7 @@
         mini = {
           enable = true;
           ai.enable = true;
+          completion.enable = true;
           icons.enable = true;
           indentScope.enable = true;
           hipatterns.enable = true;
@@ -87,6 +92,9 @@
         notifications = {
           enable = true;
         };
+        snippets = {
+          vsnip.enable = true;
+        };
         telescope = {
           enable = true;
           tabs.enable = true;
@@ -94,7 +102,8 @@
         };
         theme = {
           enable = true;
-          name = "gruber-darker";
+          name = "onedark";
+          style = "deep";
           transparency = true;
         };
         treesitter = {
