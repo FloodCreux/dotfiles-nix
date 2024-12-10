@@ -13,61 +13,20 @@ in
 
   home.enableNixpkgsReleaseCheck = false;
 
-  # specify home manager configs
-  home.packages = with pkgs; [
-    gimp
-
-    # Git
-    lazygit
-    gitkraken
-
-    # C
-    gcc
-    ghc
-    cmake
-    raylib
-
-    # Scala
-    metals
-    coursier
-    maven
-    scala_2_12
-    scalafmt
-
-    jdk8
-    # jdk17
-
-    hadoop
-
-    # Nix
-    nixfmt-rfc-style
-
-    # Haskell
-    elixir
-
-    # .NET
-    # jetbrains.rider
-    dotnet-sdk
-    omnisharp-roslyn
-    roslyn
-
-    # Zig
-    zls
-
-    # Sql
-    sqlite
-
-    # Containers
-    docker
-    podman
-
-    nodePackages.vscode-json-languageserver
-    nodePackages.prettier
-
-    # Notes
-    obsidian
-
-    chafa
+  imports = [
+    ./clang
+    ./containers
+    ./csharp
+    ./git
+    ./haskell
+    ./java
+    ./misc
+    ./nix
+    ./node
+    ./notes
+    ./scala
+    ./sql
+    ./zig
   ];
 
   home.sessionVariables = {

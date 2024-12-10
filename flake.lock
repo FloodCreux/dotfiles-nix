@@ -738,11 +738,11 @@
         "yazi": "yazi"
       },
       "locked": {
-        "lastModified": 1733777913,
-        "narHash": "sha256-OBmr1wDOV9ekRS48fV+pjjrwIfx0aU2Hm6RnpQiHXMs=",
+        "lastModified": 1733782502,
+        "narHash": "sha256-DRylJRakHqX/BkGnXutuadPGUnI0qTfcJUQvAHNJ6zg=",
         "owner": "FloodCreux",
         "repo": "neovim-ide",
-        "rev": "cfc205dc47c36d1ac8b89b995e4725030448c54c",
+        "rev": "f569c58318c13ddfe236185717b2137e4f8aba67",
         "type": "github"
       },
       "original": {
