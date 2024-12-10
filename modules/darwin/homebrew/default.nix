@@ -7,7 +7,6 @@
     masApps = { };
     casks = [
       "devtoys"
-      "dotnet-sdk"
       # is available in nix... lower version
       "raycast"
       "fontforge"

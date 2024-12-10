@@ -53,6 +53,10 @@
           folds = true;
           formatOnSave = false;
           clang = true;
+          csharp = {
+            enable = true;
+            type = "csharp_ls";
+          };
           go = true;
           nix = {
             enable = true;
