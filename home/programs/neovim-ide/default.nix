@@ -32,7 +32,8 @@
         mapLeaderSpace = true;
         filetree = {
           enable = true;
-          yazi.enable = true;
+          # yazi.enable = true;
+          oil.enable = true;
         };
         format = {
           conform = {

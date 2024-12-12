@@ -21,8 +21,7 @@
     };
 
     neovim-flake = {
-      url = "/Users/chmc-h022fl97xj/personal/nvim-ide";
-      # url = "github:FloodCreux/neovim-ide";
+      url = "github:FloodCreux/neovim-ide";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

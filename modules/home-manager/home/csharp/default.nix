@@ -6,5 +6,6 @@
     roslyn
     csharp-ls
     netcoredbg
+    csharpier
   ];
 }

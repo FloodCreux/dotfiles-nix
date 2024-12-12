@@ -20,12 +20,14 @@ in
     ./git
     ./haskell
     ./java
+    ./lua
     ./misc
     ./nix
     ./node
     ./notes
     ./scala
     ./sql
+    ./terraform
     ./zig
   ];
 

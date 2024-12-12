@@ -825,11 +825,11 @@
         "yazi": "yazi"
       },
       "locked": {
-        "lastModified": 1733972185,
-        "narHash": "sha256-vgx0n6ei0nYYFmNUr32zQIReTMQuAjE1etR4P2TmAaI=",
+        "lastModified": 1734028360,
+        "narHash": "sha256-g14z4FGaHnb1WB18FBlQu/qFeFVQrm0YMUlxfxC+rFk=",
         "owner": "FloodCreux",
         "repo": "neovim-ide",
-        "rev": "fda9d6b898cd7827438302c23f5bb69ce5caf6d8",
+        "rev": "0b9aece84f4922e8ab292655b3867e1f801360a1",
         "type": "github"
       },
       "original": {
@@ -1627,11 +1627,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1733877138,
-        "narHash": "sha256-Y1dLasHOrvcic2SlrAuqDa3SaIoiNe1eOi/H3QyaUTw=",
+        "lastModified": 1734005556,
+        "narHash": "sha256-11iSnf84kQeqYKgq+8c3N38TYjl19cmnXiYF4Dl8duw=",
         "owner": "mitchellh",
         "repo": "zig-overlay",
-        "rev": "ed2e9c6fc49604e90a5793c3015373190748d69a",
+        "rev": "5db786755a01a846a6967cf67086bc3e30a13f1c",
         "type": "github"
       },
       "original": {
