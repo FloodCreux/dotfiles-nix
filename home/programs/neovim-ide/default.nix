@@ -24,6 +24,11 @@
           multiple-cursors
           vim-repeat
         ];
+        dap = {
+          enable = true;
+          csharp = true;
+          scala = true;
+        };
         mapLeaderSpace = true;
         filetree = {
           enable = true;
@@ -53,6 +58,7 @@
           folds = true;
           formatOnSave = false;
           clang = true;
+          codeActions.enable = true;
           csharp = {
             enable = true;
             type = "csharp_ls";
@@ -67,7 +73,7 @@
           scala = {
             enable = true;
             metals = {
-              package = pkgs.metals;
+              package = pkgs.callPackage ./metals.nix { };
               # best effort compilation + vs code default settings
               # see https://github.com/scalameta/metals-vscode/blob/1e10e1a71cf81569ea65329ec2aa0aa1cb6ad682/packages/metals-vscode/package.json#L232
               serverProperties = [

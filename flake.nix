@@ -21,7 +21,8 @@
     };
 
     neovim-flake = {
-      url = "github:FloodCreux/neovim-ide";
+      url = "/Users/chmc-h022fl97xj/personal/nvim-ide";
+      # url = "github:FloodCreux/neovim-ide";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -54,9 +55,7 @@
             system = "aarch64-darwin";
             username = "mike";
 
-            overlays = import ./lib/overlays.nix { inherit inputs system username; } ++ [
-              inputs.neovim-flake.overlays.${system}.default
-            ];
+            overlays = import ./lib/overlays.nix { inherit inputs system username; };
 
             pkgs = import nixpkgs {
               inherit overlays system;
@@ -79,9 +78,7 @@
             system = "aarch64-darwin";
             username = "chmc-h022fl97xj";
 
-            overlays = import ./lib/overlays.nix { inherit inputs system username; } ++ [
-              inputs.neovim-flake.overlays.${system}.default
-            ];
+            overlays = import ./lib/overlays.nix { inherit inputs system username; };
 
             pkgs = import nixpkgs {
               inherit system overlays;

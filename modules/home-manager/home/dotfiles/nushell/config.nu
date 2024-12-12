@@ -907,7 +907,7 @@ def nixswitch [name = "default"] {
 }
 
 def nixup [name = "default"] {
-    pushd ~/personal/nix; nix flake update; nixswitch $name; popd
+    cd ~/personal/nix; nix flake update; nixswitch $name;
 }
 
 def zell [path = "~/personal"] {

@@ -5,5 +5,6 @@
     omnisharp-roslyn
     roslyn
     csharp-ls
+    netcoredbg
   ];
 }

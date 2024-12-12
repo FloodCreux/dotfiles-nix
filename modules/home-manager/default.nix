@@ -24,7 +24,7 @@ in
     ./eza
     ./fzf
     ./git
-    (importPkgs ./ide)
+    (importPkgs ../../home/programs/neovim-ide)
     (importPkgs ./java)
     ./nushell
     ./ohmyposh
