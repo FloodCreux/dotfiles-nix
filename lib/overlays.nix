@@ -80,9 +80,9 @@ let
       p.tree-sitter-toml
       p.tree-sitter-zig
       p.tree-sitter-vim
-      p.tree-sitter-vimdoc
+      # p.tree-sitter-vimdoc
       p.tree-sitter-hcl
-      p.tree-sitter-terraform
+      # p.tree-sitter-terraform
       p.tree-sitter-yaml
       p.tree-sitter-make
       p.tree-sitter-html
@@ -90,7 +90,7 @@ let
       p.tree-sitter-ocaml
       p.tree-sitter-c-sharp
       p.tree-sitter-lua
-      p.tree-sitter-luadoc
+      # p.tree-sitter-luadoc
       p.tree-sitter-nu
     ]);
   };
