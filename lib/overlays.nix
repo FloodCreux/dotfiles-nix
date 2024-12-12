@@ -113,4 +113,5 @@ in
   treesitterGrammarsOverlay
   rustOverlay
   zigOverlay
+  yazi.overlays.default
 ]
