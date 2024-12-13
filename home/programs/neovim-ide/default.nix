@@ -124,7 +124,7 @@
         treesitter = {
           enable = true;
           autotagHtml = true;
-          context.enable = true;
+          context.enable = false;
         };
         visuals = {
           enable = true;
