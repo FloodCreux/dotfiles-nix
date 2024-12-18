@@ -93,6 +93,8 @@ let
       p.tree-sitter-lua
       # p.tree-sitter-luadoc
       p.tree-sitter-nu
+      p.tree-sitter-hocon
+      p.tree-sitter-haskell
     ]);
   };
 
