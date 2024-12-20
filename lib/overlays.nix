@@ -95,6 +95,7 @@ let
       p.tree-sitter-nu
       p.tree-sitter-hocon
       p.tree-sitter-haskell
+      p.tree-sitter-elixir
     ]);
   };
 

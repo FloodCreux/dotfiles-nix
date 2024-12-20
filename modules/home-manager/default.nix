@@ -24,9 +24,9 @@ in
     ./eza
     ./fzf
     ./git
-    ./haskell
     (importPkgs ../../home/programs/neovim-ide)
     (importPkgs ./java)
+    ./neofetch
     ./nushell
     ./ohmyposh
     ./password-store
