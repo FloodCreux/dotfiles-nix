@@ -13,6 +13,7 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     zig.url = "github:mitchellh/zig-overlay";
+    ghostty.url = "github:ghostty-org/ghostty";
 
     # rust overlay
     fenix = {
@@ -67,7 +68,6 @@
 
               config = pkgs-config;
             };
-
           in
           pkgs.mkDarwin {
             inherit

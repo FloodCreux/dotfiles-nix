@@ -106,6 +106,11 @@ let
   zigOverlay = f: p: {
     zigpkgs = zig.packages.${p.system};
   };
+
+  # ghosttyOverlay = f: p: {
+  #   ghostty = inputs.ghostty.packages.${system}.default;
+  # };
+
 in
 [
   libOverlay
@@ -115,6 +120,7 @@ in
   buildersOverlay
   treesitterGrammarsOverlay
   rustOverlay
+  # ghosttyOverlay
   zigOverlay
   yazi.overlays.default
 ]

@@ -28,6 +28,7 @@ in
     (importPkgs ./curl)
     (importPkgs ./fd)
     (importPkgs ./gh)
+    # (importPkgs ./ghostty)
     (importPkgs ./go)
     (importPkgs ./jq)
     (importPkgs ./lazygit)
