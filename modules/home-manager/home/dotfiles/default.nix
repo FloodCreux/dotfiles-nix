@@ -14,6 +14,8 @@ in
   home.file.".config/alacritty/catppuccin-macchiato.yml".source =
     ./alacritty/catppuccin-macchiato.yml;
 
+  home.file.".config/ghostty/config".source = ./ghostty/config;
+
   home.file.".zsh/starship.zsh".source = ./zsh/starship.zsh;
   home.file.".zsh/aliases.zsh".source = ./zsh/aliases.zsh;
   home.file.".zsh/integrations.zsh".source = ./zsh/integrations.zsh;
@@ -21,12 +23,12 @@ in
   home.file.".config/ohmyposh/zen.toml".source = ./ohmyposh/zen.toml;
 
   home.file.".local/scripts/tmux-sessionizer" = {
-    source = ./scripts/tmux/tmux-sessionizer.sh;
+    source = ../scripts/tmux/tmux-sessionizer.sh;
     executable = true;
   };
 
   home.file.".local/scripts/tmux-cht.sh" = {
-    source = ./scripts/tmux/tmux-cht.sh;
+    source = ../scripts/tmux/tmux-cht.sh;
     executable = true;
   };
 
@@ -67,6 +69,8 @@ in
     executable = true;
   };
 
+  home.file.".config/yazi/yazi.toml".source = ./yazi/yazi.toml;
+
   home.file.".config/yabai/yabairc" = {
     source = ./yabai/yabairc;
     executable = true;
@@ -88,7 +92,7 @@ in
   };
 
   home.file.".local/bin/zet" = {
-    source = ./scripts/second-brain/zet;
+    source = ../scripts/second-brain/zet;
     executable = true;
   };
 

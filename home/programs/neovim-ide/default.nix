@@ -118,8 +118,8 @@
         };
         theme = {
           enable = true;
-          name = "onedark";
-          style = "deep";
+          name = "gruber-darker";
+          # style = "deep";
           transparency = true;
         };
         treesitter = {
