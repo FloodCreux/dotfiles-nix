@@ -2,7 +2,7 @@
 {
 
   programs.neovim-ide = {
-    enable = true;
+    enable = false;
     settings = {
       vim = {
         neovim.package = pkgs.neovim-nightly;
@@ -25,7 +25,7 @@
           vim-repeat
         ];
         dap = {
-          enable = true;
+          enable = false;
           csharp = true;
           scala = true;
         };
@@ -70,7 +70,7 @@
             enable = true;
           };
           rust = {
-            enable = true;
+            enable = false;
           };
           scala = {
             enable = true;

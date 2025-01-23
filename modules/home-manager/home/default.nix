@@ -9,7 +9,7 @@
     ./clang
     ./containers
     ./csharp
-    ./dotfiles
+    # ./dotfiles
     ./git
     ./haskell
     ./java
