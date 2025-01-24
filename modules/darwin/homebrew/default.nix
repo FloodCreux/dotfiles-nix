@@ -26,6 +26,7 @@
       "openjdk@17"
       "libuv"
       "sketchybar"
+      "tmux"
     ];
   };
 }
