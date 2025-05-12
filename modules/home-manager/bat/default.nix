@@ -14,7 +14,9 @@ in
       theme = "catppuccin";
     };
     themes = {
-      catppuccin = builtins.readFile (catppuccin-bat + "/Catppuccin-macchiato.tmTheme");
+      catppuccin = {
+        src = "${catppuccin-bat}/Catppuccin-macchiato.tmTheme";
+      };
     };
   };
 }

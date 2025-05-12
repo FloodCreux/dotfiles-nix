@@ -22,7 +22,6 @@ in
     ./nixpkgs
     (importPkgs ./environment)
     ./system
-    ./services
     (importAll ./users)
     (importPkgs ./carapace)
     (importPkgs ./curl)

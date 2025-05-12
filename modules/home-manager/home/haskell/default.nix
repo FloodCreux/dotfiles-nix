@@ -4,6 +4,6 @@
     elixir
     elixir-ls
     cabal-install
-    stack
+    # stack
   ];
 }

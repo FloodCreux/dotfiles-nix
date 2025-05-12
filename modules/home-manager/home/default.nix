@@ -1,7 +1,7 @@
 { pkgs, username, ... }:
 {
   # Don't change this unless you know what you're doing
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
 
   home.enableNixpkgsReleaseCheck = false;
 
@@ -9,7 +9,6 @@
     ./clang
     ./containers
     ./csharp
-    # ./dotfiles
     ./git
     ./haskell
     ./java

@@ -17,12 +17,12 @@
     ];
     taps = [
       "azure/azd"
-      # "scalacenter/bloop"
+      "scalacenter/bloop"
       "FelixKratz/formulae"
     ];
     brews = [
       "azd"
-      # "scalacenter/bloop/bloop"
+      "scalacenter/bloop/bloop"
       "openjdk@17"
       "libuv"
       "sketchybar"

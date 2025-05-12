@@ -46,16 +46,16 @@ in
     source = ./aerospace/aerospace.toml;
     executable = true;
   };
-
-  home.file.".config/nushell/config.nu" = {
-    source = ./nushell/config.nu;
-    executable = true;
-  };
-
-  home.file.".config/nushell/env.nu" = {
-    source = ./nushell/env.nu;
-    executable = true;
-  };
+  #
+  # home.file.".config/nushell/config.nu" = {
+  #   source = ./nushell/config.nu;
+  #   executable = true;
+  # };
+  #
+  # home.file.".config/nushell/env.nu" = {
+  #   source = ./nushell/env.nu;
+  #   executable = true;
+  # };
 
   home.file.".config/tmux/tmux.reset.conf" = {
     source = ./tmux/tmux.reset.conf;
