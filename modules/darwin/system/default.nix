@@ -1,5 +1,6 @@
-{ ... }:
+{ username, ... }:
 {
+  system.primaryUser = username;
   system.stateVersion = 4;
   system.keyboard.enableKeyMapping = true;
   system.defaults = {

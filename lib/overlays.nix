@@ -1,4 +1,5 @@
 {
+  lib,
   inputs,
   system,
   username,
@@ -7,13 +8,6 @@
 with inputs;
 
 let
-  metalsOverlay = f: p: {
-    metals = p.callPackage ../home/programs/neovim-ide/metals.nix { };
-    metals-updater = p.callPackage ../home/programs/neovim-ide/update-metals.nix { };
-  };
-
-  lib = import ../lib { inherit pkgs inputs plugins; };
-
   libOverlay = f: p: {
     lib = p.lib.extend (
       _: _: {
@@ -28,6 +22,8 @@ let
   };
 
   buildersOverlay = f: p: {
+    inherit (lib) metalsBuilder;
+
     mkDarwin =
       {
         darwin,
@@ -107,20 +103,15 @@ let
     zigpkgs = zig.packages.${p.system};
   };
 
-  # ghosttyOverlay = f: p: {
-  #   ghostty = inputs.ghostty.packages.${system}.default;
-  # };
-
 in
 [
   libOverlay
-  metalsOverlay
+  lib.metalsOverlay
   nvim-nighlty-overlay
   neovim-flake.overlays.${system}.default
   buildersOverlay
   treesitterGrammarsOverlay
   rustOverlay
-  # ghosttyOverlay
   zigOverlay
   yazi.overlays.default
 ]

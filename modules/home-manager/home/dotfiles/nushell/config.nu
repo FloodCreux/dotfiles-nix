@@ -903,7 +903,7 @@ alias vimdiff = nvim -d
 
 def nixswitch [name = "default"] {
     let command = $"($env.HOME)/personal/nix/.#($name)"
-    darwin-rebuild switch --flake $command
+    sudo darwin-rebuild switch --flake $command
 }
 
 def nixup [name = "default"] {

@@ -83,7 +83,16 @@
             system = "aarch64-darwin";
             username = "chmc-h022fl97xj";
 
-            overlays = import ./lib/overlays.nix { inherit inputs system username; };
+            lib = import ./lib { inherit pkgs inputs; };
+
+            overlays = import ./lib/overlays.nix {
+              inherit
+                lib
+                inputs
+                system
+                username
+                ;
+            };
 
             pkgs = import nixpkgs {
               inherit system overlays;

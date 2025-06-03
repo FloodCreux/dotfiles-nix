@@ -1,4 +1,9 @@
-{ ... }:
+{ pkgs, ... }:
+
+let
+  metalsBuilder = import ./metalsBuilder.nix { inherit pkgs; };
+  metalsOverlay = import ./metalsOverlay.nix { };
+in
 {
   mkVimBool = val: if val then 1 else 0;
 
@@ -7,4 +12,6 @@
   withPlugins = cond: plugins: if cond then plugins else [ ];
 
   withAttrSet = cond: attrSet: if cond then attrSet else { };
+
+  inherit metalsBuilder metalsOverlay;
 }

@@ -6,7 +6,7 @@ let
   # Helper to import modules with pkgs or username
   importWith = path: args: import path args;
   importPkgs = path: importWith path { inherit pkgs; };
-  # importUsername = path: importWith path { inherit username; };
+  importUsername = path: importWith path { inherit username; };
   importAll =
     path:
     importWith path {
@@ -21,7 +21,7 @@ in
   imports = [
     ./nixpkgs
     (importPkgs ./environment)
-    ./system
+    (importUsername ./system)
     (importAll ./users)
     (importPkgs ./carapace)
     (importPkgs ./curl)
