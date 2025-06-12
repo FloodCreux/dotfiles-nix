@@ -2,6 +2,6 @@
 {
   home.packages = with pkgs.nodePackages; [
     vscode-json-languageserver
-    prettier
+    # prettier
   ];
 }

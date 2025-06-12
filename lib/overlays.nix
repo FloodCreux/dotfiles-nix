@@ -45,8 +45,6 @@ let
           home-manager.darwinModules.home-manager
           {
             home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
               users.${username} = {
                 imports = [
                   inputs.neovim-flake.homeManagerModules.${system}.nvim

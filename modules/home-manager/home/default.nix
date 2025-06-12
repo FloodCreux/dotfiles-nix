@@ -1,5 +1,18 @@
 { pkgs, username, ... }:
+
 {
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnsupportedSystem = true;
+    permittedInsecurePackages = [
+      "dotnet-core-combined"
+      "dotnet-sdk-6.0.428"
+      "dotnet-sdk-wrapped-6.0.428"
+      "dotnet-runtime-6.0.36"
+      "dotnet-runtime-wrapped-6.0.36"
+    ];
+  };
+
   # Don't change this unless you know what you're doing
   home.stateVersion = "24.11";
 
