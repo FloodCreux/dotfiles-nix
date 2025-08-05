@@ -2,6 +2,6 @@
 {
   programs.java = {
     enable = true;
-    package = pkgs.jdk8;
+    package = pkgs.jdk17;
   };
 }

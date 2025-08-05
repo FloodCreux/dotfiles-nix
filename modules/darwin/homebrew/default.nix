@@ -27,6 +27,7 @@
       "libuv"
       "sketchybar"
       "tmux"
+      "borders"
     ];
   };
 }

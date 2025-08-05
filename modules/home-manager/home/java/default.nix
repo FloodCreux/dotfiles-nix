@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    jdk8
-    # jdk17
+    # jdk8
+    jdk17
   ];
 }

@@ -1,4 +1,7 @@
 { pkgs, ... }:
 {
-  environment.systemPackages = with pkgs; [ nixd ];
+  environment.systemPackages = with pkgs; [
+    nixd
+    nil
+  ];
 }
