@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
     metals
     coursier
     maven
-    scala_2_12
+    (lib.hiPrio scala_2_13)
     scalafmt
   ];
 }

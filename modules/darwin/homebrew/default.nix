@@ -7,10 +7,8 @@
     masApps = { };
     casks = [
       "devtoys"
-      # is available in nix... lower version
       "raycast"
       "fontforge"
-      # is available in nix... v0.15, this is 0.16
       "nikitabobko/tap/aerospace"
       "ghostty"
       "font-hack-nerd-font"
@@ -28,6 +26,7 @@
       "sketchybar"
       "tmux"
       "borders"
+      "imagemagick"
     ];
   };
 }

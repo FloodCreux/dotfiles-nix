@@ -1,6 +1,7 @@
 {
   pkgs,
   username,
+  lib,
   ...
 }:
 let
@@ -13,6 +14,7 @@ let
     importWith path {
       inherit pkgs;
       inherit username;
+      inherit lib;
     };
 in
 {

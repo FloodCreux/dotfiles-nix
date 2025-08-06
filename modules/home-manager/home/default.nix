@@ -1,4 +1,9 @@
-{ pkgs, username, ... }:
+{
+  pkgs,
+  lib,
+  username,
+  ...
+}:
 
 {
   nixpkgs.config = {

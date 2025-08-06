@@ -52,6 +52,7 @@ let
                     inherit inputs;
                     inherit pkgs;
                     inherit username;
+                    inherit lib;
                   })
                 ];
               };
