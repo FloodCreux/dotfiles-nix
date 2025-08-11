@@ -7,26 +7,32 @@
     masApps = { };
     casks = [
       "devtoys"
-      "raycast"
-      "fontforge"
-      "nikitabobko/tap/aerospace"
-      "ghostty"
       "font-hack-nerd-font"
+      "fontforge"
+      "ghostty"
+      "nikitabobko/tap/aerospace"
+      "raycast"
     ];
     taps = [
       "azure/azd"
-      "scalacenter/bloop"
       "FelixKratz/formulae"
+      "scalacenter/bloop"
     ];
     brews = [
       "azd"
-      "scalacenter/bloop/bloop"
-      "openjdk@17"
-      "libuv"
-      "sketchybar"
-      "tmux"
       "borders"
+      "dotenv"
+      "ghostscript"
       "imagemagick"
+      "libuv"
+      "mermaid-cli"
+      "openjdk@17"
+      "scalacenter/bloop/bloop"
+      "sketchybar"
+      "tectonic"
+      "tmux"
+      "tree-sitter"
+      "zsh-autosuggestions"
     ];
   };
 }

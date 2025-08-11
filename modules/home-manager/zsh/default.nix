@@ -1,15 +1,8 @@
-{ ... }:
+{ pkgs, ... }:
 {
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion = {
-      enable = true;
-    };
-    syntaxHighlighting = {
-      enable = true;
-    };
+  home.packages = [
+    pkgs.zsh
+  ];
 
-    initContent = builtins.readFile ./.zshrc;
-  };
+  home.file."~/.zshenv".source = ./zshenv;
 }
