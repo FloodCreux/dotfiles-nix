@@ -4,5 +4,5 @@
     pkgs.zsh
   ];
 
-  home.file."~/.zshenv".source = ./zshenv;
+  home.file.".zshenv".source = ./zshenv;
 }

@@ -21,7 +21,8 @@
     brews = [
       "azd"
       "borders"
-      "dotenv"
+      "direnv"
+      "eza"
       "ghostscript"
       "imagemagick"
       "libuv"
