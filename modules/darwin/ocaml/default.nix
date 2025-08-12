@@ -5,5 +5,6 @@
     opam
     dune_3
     ocamlPackages.ocamlformat
+    ocamlPackages.lsp
   ];
 }

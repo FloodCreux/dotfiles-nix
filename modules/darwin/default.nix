@@ -35,7 +35,7 @@ in
     (importPkgs ./nvim)
     (importPkgs ./nixd)
     (importPkgs ./nushell)
-    (importPkgs ./ocaml)
+    # (importPkgs ./ocaml)
     (importPkgs ./ohmyposh)
     (importPkgs ./python)
     (importPkgs ./ripgrep)

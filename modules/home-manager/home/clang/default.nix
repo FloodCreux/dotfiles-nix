@@ -1,9 +1,9 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    gcc
-    ghc
+    # gcc
+    # ghc
     cmake
-    raylib
+    # raylib
   ];
 }

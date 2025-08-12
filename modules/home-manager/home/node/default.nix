@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = with pkgs.nodePackages; [
     vscode-json-languageserver
-    # prettier
+    (lib.lowPrio prettier)
   ];
 }
