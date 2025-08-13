@@ -1,4 +1,7 @@
 { pkgs, ... }:
 {
-  environment.systemPackages = with pkgs; [ zigpkgs.master ];
+  environment.systemPackages = with pkgs; [
+    # zigpkgs.master
+    zig
+  ];
 }

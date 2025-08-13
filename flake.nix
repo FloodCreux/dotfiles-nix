@@ -15,7 +15,7 @@
     };
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    zig.url = "github:mitchellh/zig-overlay";
+    # zig.url = "github:mitchellh/zig-overlay";
     ghostty.url = "github:ghostty-org/ghostty";
 
     fenix = {

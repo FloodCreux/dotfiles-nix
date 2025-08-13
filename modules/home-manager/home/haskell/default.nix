@@ -5,6 +5,7 @@
     elixir-ls
     ghc
     cabal-install
+    zlib
     # stack
   ];
 }
