@@ -15,7 +15,7 @@
     };
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    # zig.url = "github:mitchellh/zig-overlay";
+    zig.url = "github:mitchellh/zig-overlay";
     ghostty.url = "github:ghostty-org/ghostty";
 
     fenix = {
@@ -29,10 +29,10 @@
     };
 
     # TODO: Remove once nixpkgs yazi version > 0.4.0
-    yazi = {
-      url = "github:sxyazi/yazi";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # yazi = {
+    #   url = "github:sxyazi/yazi";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs =

@@ -75,7 +75,7 @@ let
       p.tree-sitter-toml
       p.tree-sitter-zig
       p.tree-sitter-vim
-      # p.tree-sitter-vimdoc
+      p.tree-sitter-vimdoc
       p.tree-sitter-hcl
       # p.tree-sitter-terraform
       p.tree-sitter-yaml
@@ -91,6 +91,7 @@ let
       p.tree-sitter-hocon
       p.tree-sitter-haskell
       p.tree-sitter-elixir
+      p.tree-sitter-python
     ]);
   };
 
@@ -98,9 +99,9 @@ let
 
   rustOverlay = inputs.fenix.overlays.default;
 
-  # zigOverlay = f: p: {
-  #   zigpkgs = zig.packages.${p.system};
-  # };
+  zigOverlay = f: p: {
+    zigpkgs = zig.packages.${p.system};
+  };
 
 in
 [
@@ -111,6 +112,6 @@ in
   buildersOverlay
   treesitterGrammarsOverlay
   rustOverlay
-  # zigOverlay
-  yazi.overlays.default
+  zigOverlay
+  # yazi.overlays.default
 ]
