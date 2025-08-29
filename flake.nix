@@ -22,17 +22,6 @@
       url = "github:nix-community/fenix/monthly";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    neovim-flake = {
-      url = "github:FloodCreux/neovim-ide";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # TODO: Remove once nixpkgs yazi version > 0.4.0
-    # yazi = {
-    #   url = "github:sxyazi/yazi";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
 
   outputs =

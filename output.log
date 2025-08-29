@@ -1,0 +1,493 @@
+building the system configuration...
+error:
+       … while calling the 'derivationStrict' builtin
+         at <nix/derivation-internal.nix>:37:12:
+           36|
+           37|   strict = derivationStrict drvAttrs;
+             |            ^
+           38|
+
+       … while evaluating derivation 'darwin-system-25.11.8df64f8'
+         whose name attribute is located at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/stdenv/generic/make-derivation.nix:538:13
+
+       … while evaluating attribute 'activationScript' of derivation 'darwin-system-25.11.8df64f8'
+         at /nix/store/01973pmfpivikwnkhlggyv463bq3nmf9-source/modules/system/default.nix:89:7:
+           88|
+           89|       activationScript = cfg.activationScripts.script.text;
+             |       ^
+           90|
+
+       … from call site
+         at /nix/store/01973pmfpivikwnkhlggyv463bq3nmf9-source/modules/system/default.nix:89:26:
+           88|
+           89|       activationScript = cfg.activationScripts.script.text;
+             |                          ^
+           90|
+
+       … while calling anonymous lambda
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/attrsets.nix:1192:17:
+         1191|         mapAttrs (
+         1192|           name: value:
+             |                 ^
+         1193|           if isAttrs value && cond value then recurse (path ++ [ name ]) value else f (path ++ [ name ]) value
+
+       … from call site
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/attrsets.nix:1193:85:
+         1192|           name: value:
+         1193|           if isAttrs value && cond value then recurse (path ++ [ name ]) value else f (path ++ [ name ]) value
+             |                                                                                     ^
+         1194|         );
+
+       … while calling anonymous lambda
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:275:71:
+          274|           # For definitions that have an associated option
+          275|           declaredConfig = mapAttrsRecursiveCond (v: !isOption v) (_: v: v.value) options;
+             |                                                                       ^
+          276|
+
+       … while evaluating the attribute 'value'
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1118:7:
+         1117|     // {
+         1118|       value = addErrorContext "while evaluating the option `${showOption loc}':" value;
+             |       ^
+         1119|       inherit (res.defsFinal') highestPrio;
+
+       … while evaluating the option `system.activationScripts.script.text':
+
+       … while evaluating the attribute 'mergedValue'
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1166:5:
+         1165|     # Type-check the remaining definitions, and merge them. Or throw if no definitions.
+         1166|     mergedValue =
+             |     ^
+         1167|       if isDefined then
+
+       … while evaluating a branch condition
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1167:7:
+         1166|     mergedValue =
+         1167|       if isDefined then
+             |       ^
+         1168|         if type.merge ? v2 then
+
+       … while evaluating the attribute 'values'
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1160:9:
+         1159|       {
+         1160|         values = defs''';
+             |         ^
+         1161|         inherit (defs'') highestPrio;
+
+       … while evaluating a branch condition
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1154:11:
+         1153|           # Avoid sorting if we don't have to.
+         1154|           if any (def: def.value._type or "" == "order") defs''.values then
+             |           ^
+         1155|             sortProperties defs''.values
+
+       … while calling the 'any' builtin
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1154:14:
+         1153|           # Avoid sorting if we don't have to.
+         1154|           if any (def: def.value._type or "" == "order") defs''.values then
+             |              ^
+         1155|             sortProperties defs''.values
+
+       … while evaluating the attribute 'values'
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1331:7:
+         1330|     {
+         1331|       values = concatMap (def: if getPrio def == highestPrio then [ (strip def) ] else [ ]) defs;
+             |       ^
+         1332|       inherit highestPrio;
+
+       … while calling the 'concatMap' builtin
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1331:16:
+         1330|     {
+         1331|       values = concatMap (def: if getPrio def == highestPrio then [ (strip def) ] else [ ]) defs;
+             |                ^
+         1332|       inherit highestPrio;
+
+       … while calling the 'concatMap' builtin
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1134:17:
+         1133|         # Process mkMerge and mkIf properties.
+         1134|         defs' = concatMap (
+             |                 ^
+         1135|           m:
+
+       … while calling anonymous lambda
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1135:11:
+         1134|         defs' = concatMap (
+         1135|           m:
+             |           ^
+         1136|           map (
+
+       … while calling the 'map' builtin
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1136:11:
+         1135|           m:
+         1136|           map (
+             |           ^
+         1137|             value:
+
+       … while evaluating definitions from `/nix/store/01973pmfpivikwnkhlggyv463bq3nmf9-source/modules/system/activation-scripts.nix':
+
+       … from call site
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1145:80:
+         1144|               }
+         1145|           ) (addErrorContext "while evaluating definitions from `${m.file}':" (dischargeProperties m.value))
+             |                                                                                ^
+         1146|         ) defs;
+
+       … while calling 'dischargeProperties'
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1282:5:
+         1281|   dischargeProperties =
+         1282|     def:
+             |     ^
+         1283|     if def._type or "" == "merge" then
+
+       … while evaluating a branch condition
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1283:5:
+         1282|     def:
+         1283|     if def._type or "" == "merge" then
+             |     ^
+         1284|       concatMap dischargeProperties def.contents
+
+       … while evaluating the attribute 'value'
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:805:21:
+          804|             inherit (module) file;
+          805|             inherit value;
+             |                     ^
+          806|           }) module.config
+
+       … from call site
+         at /nix/store/01973pmfpivikwnkhlggyv463bq3nmf9-source/modules/system/activation-scripts.nix:121:9:
+          120|       ${cfg.activationScripts.users.text}
+          121|       ${cfg.activationScripts.applications.text}
+             |         ^
+          122|       ${cfg.activationScripts.pam.text}
+
+       … while calling anonymous lambda
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/attrsets.nix:1192:17:
+         1191|         mapAttrs (
+         1192|           name: value:
+             |                 ^
+         1193|           if isAttrs value && cond value then recurse (path ++ [ name ]) value else f (path ++ [ name ]) value
+
+       … from call site
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/attrsets.nix:1193:85:
+         1192|           name: value:
+         1193|           if isAttrs value && cond value then recurse (path ++ [ name ]) value else f (path ++ [ name ]) value
+             |                                                                                     ^
+         1194|         );
+
+       … while calling anonymous lambda
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:275:71:
+          274|           # For definitions that have an associated option
+          275|           declaredConfig = mapAttrsRecursiveCond (v: !isOption v) (_: v: v.value) options;
+             |                                                                       ^
+          276|
+
+       … while evaluating the attribute 'value'
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1118:7:
+         1117|     // {
+         1118|       value = addErrorContext "while evaluating the option `${showOption loc}':" value;
+             |       ^
+         1119|       inherit (res.defsFinal') highestPrio;
+
+       … while evaluating the option `system.activationScripts.applications.text':
+
+       (10 duplicate frames omitted)
+
+       … while evaluating definitions from `/nix/store/01973pmfpivikwnkhlggyv463bq3nmf9-source/modules/system/applications.nix':
+
+       … from call site
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1145:80:
+         1144|               }
+         1145|           ) (addErrorContext "while evaluating definitions from `${m.file}':" (dischargeProperties m.value))
+             |                                                                                ^
+         1146|         ) defs;
+
+       … while calling 'dischargeProperties'
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1282:5:
+         1281|   dischargeProperties =
+         1282|     def:
+             |     ^
+         1283|     if def._type or "" == "merge" then
+
+       … while evaluating a branch condition
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:1283:5:
+         1282|     def:
+         1283|     if def._type or "" == "merge" then
+             |     ^
+         1284|       concatMap dischargeProperties def.contents
+
+       … while evaluating the attribute 'value'
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/modules.nix:805:21:
+          804|             inherit (module) file;
+          805|             inherit value;
+             |                     ^
+          806|           }) module.config
+
+       … while calling the 'getAttr' builtin
+         at <nix/derivation-internal.nix>:50:17:
+           49|     value = commonAttrs // {
+           50|       outPath = builtins.getAttr outputName strict;
+             |                 ^
+           51|       drvPath = strict.drvPath;
+
+       … while calling the 'derivationStrict' builtin
+         at <nix/derivation-internal.nix>:37:12:
+           36|
+           37|   strict = derivationStrict drvAttrs;
+             |            ^
+           38|
+
+       … while evaluating derivation 'system-applications'
+         whose name attribute is located at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/stdenv/generic/make-derivation.nix:538:13
+
+       … while evaluating attribute 'passAsFile' of derivation 'system-applications'
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/build-support/trivial-builders/default.nix:81:9:
+           80|         inherit buildCommand name;
+           81|         passAsFile = [ "buildCommand" ] ++ (derivationArgs.passAsFile or [ ]);
+             |         ^
+           82|       }
+
+       … while evaluating the attribute 'passAsFile'
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/build-support/buildenv/default.nix:113:9:
+          112|         # XXX: The size is somewhat arbitrary
+          113|         passAsFile = if builtins.stringLength pkgs >= 128 * 1024 then [ "pkgs" ] else [ ];
+             |         ^
+          114|       }
+
+       … while evaluating a branch condition
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/build-support/buildenv/default.nix:113:22:
+          112|         # XXX: The size is somewhat arbitrary
+          113|         passAsFile = if builtins.stringLength pkgs >= 128 * 1024 then [ "pkgs" ] else [ ];
+             |                      ^
+          114|       }
+
+       … in the argument of the not operator
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/build-support/buildenv/default.nix:113:52:
+          112|         # XXX: The size is somewhat arbitrary
+          113|         passAsFile = if builtins.stringLength pkgs >= 128 * 1024 then [ "pkgs" ] else [ ];
+             |                                                    ^
+          114|       }
+
+       … while calling the 'lessThan' builtin
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/build-support/buildenv/default.nix:113:52:
+          112|         # XXX: The size is somewhat arbitrary
+          113|         passAsFile = if builtins.stringLength pkgs >= 128 * 1024 then [ "pkgs" ] else [ ];
+             |                                                    ^
+          114|       }
+
+       … while calling the 'stringLength' builtin
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/build-support/buildenv/default.nix:113:25:
+          112|         # XXX: The size is somewhat arbitrary
+          113|         passAsFile = if builtins.stringLength pkgs >= 128 * 1024 then [ "pkgs" ] else [ ];
+             |                         ^
+          114|       }
+
+       … while calling the 'toJSON' builtin
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/build-support/buildenv/default.nix:108:16:
+          107|           ;
+          108|         pkgs = builtins.toJSON chosenOutputs;
+             |                ^
+          109|         extraPathsFrom = lib.optional includeClosures (writeClosure pathsForClosure);
+
+       … while evaluating list element at index 10
+
+       … while evaluating attribute 'paths'
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/build-support/buildenv/default.nix:68:7:
+           67|     chosenOutputs = map (drv: {
+           68|       paths =
+             |       ^
+           69|         # First add the usual output(s): respect if user has chosen explicitly,
+
+       … while evaluating list element at index 0
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/build-support/buildenv/default.nix:68:7:
+           67|     chosenOutputs = map (drv: {
+           68|       paths =
+             |       ^
+           69|         # First add the usual output(s): respect if user has chosen explicitly,
+
+       … while calling the 'getAttr' builtin
+         at <nix/derivation-internal.nix>:50:17:
+           49|     value = commonAttrs // {
+           50|       outPath = builtins.getAttr outputName strict;
+             |                 ^
+           51|       drvPath = strict.drvPath;
+
+       … while calling the 'derivationStrict' builtin
+         at <nix/derivation-internal.nix>:37:12:
+           36|
+           37|   strict = derivationStrict drvAttrs;
+             |            ^
+           38|
+
+       … while evaluating derivation 'rust-analyzer-nightly-68e7ec9'
+         whose name attribute is located at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/stdenv/generic/make-derivation.nix:538:13
+
+       … while evaluating attribute '__impureHostDeps' of derivation 'rust-analyzer-nightly-68e7ec9'
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/stdenv/generic/make-derivation.nix:688:15:
+          687|               );
+          688|               __impureHostDeps =
+             |               ^
+          689|                 computedImpureHostDeps
+
+       … while calling the 'foldl'' builtin
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/stdenv/generic/make-derivation.nix:658:40:
+          657|
+          658|               computedImpureHostDeps = unique (
+             |                                        ^
+          659|                 concatMap (input: input.__propagatedImpureHostDeps or [ ]) (
+
+       … while calling the 'concatMap' builtin
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/stdenv/generic/make-derivation.nix:659:17:
+          658|               computedImpureHostDeps = unique (
+          659|                 concatMap (input: input.__propagatedImpureHostDeps or [ ]) (
+             |                 ^
+          660|                   extraNativeBuildInputs ++ extraBuildInputs ++ allDependencies
+
+       … while calling anonymous lambda
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/stdenv/generic/make-derivation.nix:659:28:
+          658|               computedImpureHostDeps = unique (
+          659|                 concatMap (input: input.__propagatedImpureHostDeps or [ ]) (
+             |                            ^
+          660|                   extraNativeBuildInputs ++ extraBuildInputs ++ allDependencies
+
+       … from call site
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/stdenv/generic/make-derivation.nix:659:35:
+          658|               computedImpureHostDeps = unique (
+          659|                 concatMap (input: input.__propagatedImpureHostDeps or [ ]) (
+             |                                   ^
+          660|                   extraNativeBuildInputs ++ extraBuildInputs ++ allDependencies
+
+       … while calling anonymous lambda
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/stdenv/generic/make-derivation.nix:500:19:
+          499|             (map (drv: getDev drv.__spliced.hostHost or drv) (checkDependencyList "depsHostHost" depsHostHost))
+          500|             (map (drv: getDev drv.__spliced.hostTarget or drv) (checkDependencyList "buildInputs" buildInputs'))
+             |                   ^
+          501|           ]
+
+       … from call site
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/stdenv/generic/make-derivation.nix:500:24:
+          499|             (map (drv: getDev drv.__spliced.hostHost or drv) (checkDependencyList "depsHostHost" depsHostHost))
+          500|             (map (drv: getDev drv.__spliced.hostTarget or drv) (checkDependencyList "buildInputs" buildInputs'))
+             |                        ^
+          501|           ]
+
+       … while calling 'getOutput'
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/attrsets.nix:1755:13:
+         1754|   getOutput =
+         1755|     output: pkg:
+             |             ^
+         1756|     if !pkg ? outputSpecified || !pkg.outputSpecified then pkg.${output} or pkg.out or pkg else pkg;
+
+       … while evaluating a branch condition
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/attrsets.nix:1756:5:
+         1755|     output: pkg:
+         1756|     if !pkg ? outputSpecified || !pkg.outputSpecified then pkg.${output} or pkg.out or pkg else pkg;
+             |     ^
+         1757|
+
+       … in the left operand of the OR (||) operator
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/attrsets.nix:1756:31:
+         1755|     output: pkg:
+         1756|     if !pkg ? outputSpecified || !pkg.outputSpecified then pkg.${output} or pkg.out or pkg else pkg;
+             |                               ^
+         1757|
+
+       … in the argument of the not operator
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/attrsets.nix:1756:9:
+         1755|     output: pkg:
+         1756|     if !pkg ? outputSpecified || !pkg.outputSpecified then pkg.${output} or pkg.out or pkg else pkg;
+             |         ^
+         1757|
+
+       … from call site
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/stdenv/generic/make-derivation.nix:500:31:
+          499|             (map (drv: getDev drv.__spliced.hostHost or drv) (checkDependencyList "depsHostHost" depsHostHost))
+          500|             (map (drv: getDev drv.__spliced.hostTarget or drv) (checkDependencyList "buildInputs" buildInputs'))
+             |                               ^
+          501|           ]
+
+       … while calling anonymous lambda
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/lists.nix:345:29:
+          344|   */
+          345|   imap1 = f: list: genList (n: f (n + 1) (elemAt list n)) (length list);
+             |                             ^
+          346|
+
+       … from call site
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/lists.nix:345:32:
+          344|   */
+          345|   imap1 = f: list: genList (n: f (n + 1) (elemAt list n)) (length list);
+             |                                ^
+          346|
+
+       … while calling anonymous lambda
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/stdenv/generic/make-derivation.nix:448:18:
+          447|         imap1 (
+          448|           index: dep:
+             |                  ^
+          449|           if dep == null || isDerivation dep || builtins.isString dep || builtins.isPath dep then
+
+       … while evaluating a branch condition
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/stdenv/generic/make-derivation.nix:449:11:
+          448|           index: dep:
+          449|           if dep == null || isDerivation dep || builtins.isString dep || builtins.isPath dep then
+             |           ^
+          450|             dep
+
+       … in the left operand of the OR (||) operator
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/stdenv/generic/make-derivation.nix:449:71:
+          448|           index: dep:
+          449|           if dep == null || isDerivation dep || builtins.isString dep || builtins.isPath dep then
+             |                                                                       ^
+          450|             dep
+
+       … in the left operand of the OR (||) operator
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/stdenv/generic/make-derivation.nix:449:46:
+          448|           index: dep:
+          449|           if dep == null || isDerivation dep || builtins.isString dep || builtins.isPath dep then
+             |                                              ^
+          450|             dep
+
+       … in the left operand of the OR (||) operator
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/stdenv/generic/make-derivation.nix:449:26:
+          448|           index: dep:
+          449|           if dep == null || isDerivation dep || builtins.isString dep || builtins.isPath dep then
+             |                          ^
+          450|             dep
+
+       … while calling the 'elemAt' builtin
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/lib/lists.nix:345:43:
+          344|   */
+          345|   imap1 = f: list: genList (n: f (n + 1) (elemAt list n)) (length list);
+             |                                           ^
+          346|
+
+       … while evaluating the attribute 'apple_sdk.frameworks.CoreServices'
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/top-level/darwin-aliases.nix:61:13:
+           60|   stubs = {
+           61|     inherit apple_sdk apple_sdk_11_0 apple_sdk_12_3;
+             |             ^
+           62|   }
+
+       … from call site
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/top-level/darwin-aliases.nix:54:20:
+           53|
+           54|   apple_sdk_11_0 = mkThrow "apple_sdk_11_0";
+             |                    ^
+           55|
+
+       … while calling 'mkThrow'
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/top-level/darwin-aliases.nix:51:5:
+           50|   mkThrow =
+           51|     name:
+             |     ^
+           52|     throw "darwin.${name} has been removed as it was a legacy compatibility stub; see <https://nixos.org/manual/nixpkgs/stable/#sec-darwin-legacy-frameworks> for migration instructions";
+
+       … while calling the 'throw' builtin
+         at /nix/store/4hm8lf740i8qvyg5pzdqfm0rpshwb7vn-source/pkgs/top-level/darwin-aliases.nix:52:5:
+           51|     name:
+           52|     throw "darwin.${name} has been removed as it was a legacy compatibility stub; see <https://nixos.org/manual/nixpkgs/stable/#sec-darwin-legacy-frameworks> for migration instructions";
+             |     ^
+           53|
+
+       error: darwin.apple_sdk_11_0 has been removed as it was a legacy compatibility stub; see <https://nixos.org/manual/nixpkgs/stable/#sec-darwin-legacy-frameworks> for migration instructions

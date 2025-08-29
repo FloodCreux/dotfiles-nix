@@ -8,6 +8,7 @@
       "rustc"
       "rustfmt"
     ])
-    rust-analyzer-nightly
+    # MOVED TO BREW FOR NOW
+    # rust-analyzer-nightly
   ];
 }

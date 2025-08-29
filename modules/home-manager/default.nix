@@ -26,7 +26,6 @@ in
     ./eza
     ./fzf
     ./git
-    (importPkgs ../../home/programs/neovim-ide)
     (importPkgs ./java)
     ./neofetch
     ./nushell
