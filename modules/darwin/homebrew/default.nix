@@ -8,7 +8,7 @@
     casks = [
       "devtoys"
       "font-hack-nerd-font"
-      "fontforge"
+      "fontforge-app"
       "ghostty"
       "nikitabobko/tap/aerospace"
       "raycast"
