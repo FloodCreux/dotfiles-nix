@@ -1,8 +1,11 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    gimp
+    # gimp
     hadoop
     chafa
+    utf8proc
+    lz4
+    arrow-cpp
   ];
 }

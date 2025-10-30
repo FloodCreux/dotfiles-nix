@@ -28,7 +28,7 @@
 
     variables = {
       XDG_CONFIG_HOME = "$HOME/.config";
-      SHELL = "${pkgs.nushell}/bin/nu";
+      SHELL = "${pkgs.zsh}/bin/zsh";
     };
   };
 }

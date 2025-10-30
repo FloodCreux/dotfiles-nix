@@ -26,7 +26,6 @@ in
     ./eza
     ./fzf
     ./git
-    (importPkgs ./java)
     ./neofetch
     ./nushell
     ./ohmyposh
