@@ -1,4 +1,9 @@
-.DS_STORE
+# macOS
 .DS_Store
+**/.DS_Store
+
+# Nix
 .direnv
 result
+result-*
+target/

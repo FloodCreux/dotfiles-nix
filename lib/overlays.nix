@@ -21,45 +21,64 @@ let
     );
   };
 
-  buildersOverlay = f: p: {
-    inherit (lib) metalsBuilder;
+  buildersOverlay =
+    f: p: {
+      inherit (lib) metalsBuilder;
 
-    mkDarwin =
-      {
-        darwin,
-        system,
-        pkgs,
-        username,
-      }:
-      darwin.lib.darwinSystem {
-        inherit system;
-
-        pkgs = pkgs;
-
-        modules = [
-          (import ../modules/darwin {
-            inherit pkgs;
-            inherit username;
-          })
-
-          home-manager.darwinModules.home-manager
-          {
-            home-manager = {
-              users.${username} = {
-                imports = [
-                  (import ../modules/home-manager {
-                    inherit inputs;
-                    inherit pkgs;
-                    inherit username;
-                    inherit lib;
-                  })
-                ];
+      mkDarwin =
+        {
+          darwin,
+          system,
+          pkgs,
+          username,
+          machineConfig ? null,
+        }:
+        let
+          # Load machine-specific config if provided
+          machineSettings =
+            if machineConfig != null then
+              import machineConfig { inherit pkgs username; }
+            else
+              {
+                machine = { };
+                extraSystemPackages = [ ];
+                extraHomePackages = [ ];
+                modules = { };
+                environment = { };
               };
-            };
-          }
-        ];
-      };
-  };
+        in
+        darwin.lib.darwinSystem {
+          inherit system;
+
+          pkgs = pkgs;
+
+          modules = [
+            (import ../modules/darwin {
+              inherit pkgs username;
+              extraSystemPackages = machineSettings.extraSystemPackages or [ ];
+            })
+
+            home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                users.${username} = {
+                  imports = [
+                    (import ../modules/home-manager {
+                      inherit
+                        inputs
+                        pkgs
+                        username
+                        lib
+                        ;
+                      extraHomePackages = machineSettings.extraHomePackages or [ ];
+                    })
+                  ];
+                };
+              };
+            }
+          ];
+        };
+    };
 
   treesitterGrammarsOverlay = f: p: {
     treesitterGrammars = _.withPlugins (p: [

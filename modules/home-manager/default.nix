@@ -2,6 +2,7 @@
   pkgs,
   username,
   lib,
+  extraHomePackages ? [ ],
   ...
 }:
 let
@@ -18,6 +19,9 @@ let
     };
 in
 {
+  # Merge machine-specific home packages with core configuration
+  home.packages = extraHomePackages;
+
   imports = [
     (importAll ./home)
     (importPkgs ./bat)

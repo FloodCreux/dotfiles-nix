@@ -1,4 +1,9 @@
-{ pkgs, username, ... }:
+{
+  pkgs,
+  username,
+  extraSystemPackages ? [ ],
+  ...
+}:
 
 let
   nix = import ../shared/nix.nix;
@@ -17,6 +22,9 @@ let
 in
 {
   nix = nix;
+
+  # Merge machine-specific packages with core configuration
+  environment.systemPackages = extraSystemPackages;
 
   imports = [
     ./nixpkgs

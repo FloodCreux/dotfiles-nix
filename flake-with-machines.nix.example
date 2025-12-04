@@ -1,3 +1,11 @@
+# This is an EXAMPLE of how flake.nix would be modified to support machine-specific configs
+# DO NOT rename this to flake.nix - it's just a reference implementation
+#
+# Key changes from current flake.nix:
+# 1. mkDarwinSystem accepts optional machineConfig parameter
+# 2. Machine configs can override packages and module settings
+# 3. Cleaner separation between core config and machine-specific overrides
+
 {
   description = "Development packages for Mike Flood";
 
@@ -29,15 +37,19 @@
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "aarch64-darwin" ];
-      perSystem = { system, pkgs, ... }: { };
+      perSystem = {
+        system,
+        pkgs,
+        ...
+      }: { };
 
       flake = {
-        # Helper function to generate configurations for any username
+        # ENHANCED: Helper function now accepts optional machine config
         lib.mkDarwinSystem =
           {
             username,
             system ? "aarch64-darwin",
-            machineConfig ? null,
+            machineConfig ? null, # NEW: Optional machine-specific config
           }:
           let
             darwin = inputs.darwin;
@@ -62,6 +74,21 @@
               inherit system overlays;
               config = pkgs-config;
             };
+
+            # NEW: Load machine-specific config if provided
+            machineSettings =
+              if machineConfig != null then
+                import machineConfig {
+                  inherit pkgs username;
+                }
+              else
+                {
+                  machine = { };
+                  extraSystemPackages = [ ];
+                  extraHomePackages = [ ];
+                  modules = { };
+                  environment = { };
+                };
           in
           pkgs.mkDarwin {
             inherit
@@ -69,41 +96,45 @@
               system
               pkgs
               username
-              machineConfig
+              ;
+            # NEW: Pass machine settings to the builder
+            inherit (machineSettings)
+              extraSystemPackages
+              extraHomePackages
+              machine
+              environment
               ;
           };
 
+        # ENHANCED: darwinConfigurations now supports machine-specific configs
         darwinConfigurations =
           let
             mkDarwinSystem = inputs.self.lib.mkDarwinSystem;
-
-            users = [
-              "mike"
-              "chmc-h022fl97xj"
-              # Add more usernames as needed
-            ];
-
-            # Generate a configuration for each username
-            mkConfigs = builtins.listToAttrs (
-              map (username: {
-                name = username;
-                value = mkDarwinSystem { inherit username; };
-              }) users
-            );
           in
-          mkConfigs
-          // {
-            # Keep aliases for convenience
-            default = mkDarwinSystem { username = "mike"; };
-            work = mkDarwinSystem {
-              username = "chmc-h022fl97xj";
-              machineConfig = ./machines/work.nix;
+          {
+            # Machine-specific configurations
+            "mikes-macbook" = mkDarwinSystem {
+              username = "mike";
+              machineConfig = ./machines/personal-macbook.nix;
             };
 
-            # Hostname-based configuration (darwin-rebuild auto-detects this)
-            "CHMC-H022FL97XJs-MacBook-Pro" = mkDarwinSystem {
+            "work-laptop" = mkDarwinSystem {
               username = "chmc-h022fl97xj";
-              machineConfig = ./machines/work.nix;
+              machineConfig = ./machines/work-macbook.nix;
+            };
+
+            # Generic username-based configs (backwards compatible)
+            mike = mkDarwinSystem { username = "mike"; };
+            chmc-h022fl97xj = mkDarwinSystem { username = "chmc-h022fl97xj"; };
+
+            # Convenience aliases
+            default = mkDarwinSystem {
+              username = "mike";
+              machineConfig = ./machines/personal-macbook.nix;
+            };
+            work = mkDarwinSystem {
+              username = "chmc-h022fl97xj";
+              machineConfig = ./machines/work-macbook.nix;
             };
           };
       };
