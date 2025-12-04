@@ -32,7 +32,12 @@
       perSystem = { system, pkgs, ... }: { };
 
       flake = {
-        darwinConfigurations =
+        # Helper function to generate configurations for any username
+        lib.mkDarwinSystem =
+          {
+            username,
+            system ? "aarch64-darwin",
+          }:
           let
             darwin = inputs.darwin;
 
@@ -48,31 +53,45 @@
               ];
             };
 
-            mkDarwinSystem =
-              {
-                username,
-                system ? "aarch64-darwin",
-              }:
-              let
-                lib = if username == "chmc-h022fl97xj" then import ./lib { inherit pkgs inputs; } else null;
-                overlays = import ./lib/overlays.nix (
-                  { inherit inputs system username; } // (if lib != null then { inherit lib; } else { })
-                );
-                pkgs = import inputs.nixpkgs {
-                  inherit system overlays;
-                  config = pkgs-config;
-                };
-              in
-              pkgs.mkDarwin {
-                inherit
-                  darwin
-                  system
-                  pkgs
-                  username
-                  ;
-              };
+            lib = import ./lib { inherit pkgs inputs; };
+            overlays = import ./lib/overlays.nix (
+              { inherit inputs system username; } // (if lib != null then { inherit lib; } else { })
+            );
+            pkgs = import inputs.nixpkgs {
+              inherit system overlays;
+              config = pkgs-config;
+            };
           in
-          {
+          pkgs.mkDarwin {
+            inherit
+              darwin
+              system
+              pkgs
+              username
+              ;
+          };
+
+        darwinConfigurations =
+          let
+            mkDarwinSystem = inputs.self.lib.mkDarwinSystem;
+
+            users = [
+              "mike"
+              "chmc-h022fl97xj"
+              # Add more usernames as needed
+            ];
+
+            # Generate a configuration for each username
+            mkConfigs = builtins.listToAttrs (
+              map (username: {
+                name = username;
+                value = mkDarwinSystem { inherit username; };
+              }) users
+            );
+          in
+          mkConfigs
+          // {
+            # Keep aliases for convenience
             default = mkDarwinSystem { username = "mike"; };
             work = mkDarwinSystem { username = "chmc-h022fl97xj"; };
           };
