@@ -1,0 +1,31 @@
+# Woodpecker CI configuration for Codeberg
+# https://docs.codeberg.org/ci/woodpecker/
+#
+# Woodpecker is Codeberg's recommended CI solution (more stable than Forgejo Actions)
+# To enable: Go to repository settings → Integrations → Woodpecker CI
+
+when:
+  - event: [push, pull_request]
+    branch: main
+
+steps:
+  format-check:
+    image: nixos/nix:latest
+    commands:
+      - nix-shell -p nixfmt --run "nixfmt --check **/*.nix"
+    when:
+      - event: [push, pull_request]
+
+  flake-check:
+    image: nixos/nix:latest
+    commands:
+      - nix --extra-experimental-features "nix-command flakes" flake check
+    when:
+      - event: [push, pull_request]
+
+  flake-show:
+    image: nixos/nix:latest
+    commands:
+      - nix --extra-experimental-features "nix-command flakes" flake show --all-systems
+    when:
+      - event: [push, pull_request]

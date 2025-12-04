@@ -1,0 +1,37 @@
+# Forgejo Actions workflow for Codeberg
+# https://docs.codeberg.org/ci/actions/
+
+name: "flake"
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  check:
+    name: Check formatting and syntax
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        # Use Forgejo's checkout action or GitHub's v4 (v6 has compatibility issues)
+        uses: https://code.forgejo.org/actions/checkout@v4
+        # Alternative: uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: https://github.com/DeterminateSystems/nix-installer-action@main
+
+      - name: Setup Nix cache
+        uses: https://github.com/DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Check Nix formatting
+        run: |
+          nix-shell -p nixfmt --run "nixfmt --check **/*.nix"
+
+      - name: Validate flake
+        run: nix flake check
+
+      - name: Show flake info
+        run: nix flake show --all-systems
