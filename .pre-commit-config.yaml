@@ -1,0 +1,42 @@
+# Pre-commit hooks for Nix configuration
+# Install: nix-shell -p pre-commit --run "pre-commit install"
+# Run manually: pre-commit run --all-files
+
+repos:
+  - repo: local
+    hooks:
+      # Format Nix files
+      - id: nixfmt
+        name: nixfmt
+        entry: nixfmt
+        language: system
+        files: \.nix$
+        pass_filenames: true
+
+      # Check Nix syntax
+      - id: nix-flake-check
+        name: nix flake check
+        entry: nix
+        args: ["flake", "check", "--no-build"]
+        language: system
+        files: \.nix$
+        pass_filenames: false
+
+      # Check for trailing whitespace
+      - id: trailing-whitespace
+        name: Trim trailing whitespace
+        entry: sed -i '' 's/[[:space:]]*$//'
+        language: system
+        types: [text]
+
+  # Standard pre-commit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-yaml
+      - id: check-json
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
