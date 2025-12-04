@@ -20,7 +20,7 @@ build:
 
 # Build and activate configuration
 switch:
-	darwin-rebuild switch --flake .
+	sudo darwin-rebuild switch --flake .
 
 # Update flake inputs
 update:

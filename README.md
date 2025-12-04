@@ -32,11 +32,13 @@ A declarative, reproducible configuration for macOS development machines using N
 ### First-Time Installation
 
 1. **Install Nix** (if not already installed):
+
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
 
 2. **Clone this repository**:
+
 ```bash
 git clone https://github.com/FloodCreux/nix.git ~/.config/nix
 cd ~/.config/nix
@@ -45,12 +47,14 @@ cd ~/.config/nix
 3. **Build and activate** (choose your profile):
 
 For personal machines:
+
 ```bash
 nix build .#darwinConfigurations.default.system
 ./result/sw/bin/darwin-rebuild switch --flake .#default
 ```
 
 For work machines:
+
 ```bash
 nix build .#darwinConfigurations.work.system
 ./result/sw/bin/darwin-rebuild switch --flake .#work
@@ -69,12 +73,14 @@ darwin-rebuild switch --flake ~/.config/nix#default  # or #work
 ### Updating Dependencies
 
 Update all flake inputs:
+
 ```bash
 nix flake update
 darwin-rebuild switch --flake ~/.config/nix#default
 ```
 
 Update specific inputs:
+
 ```bash
 nix flake lock --update-input nixpkgs
 nix flake lock --update-input home-manager
@@ -117,11 +123,13 @@ nix flake lock --update-input home-manager
 ## 🏗️ Configurations
 
 ### `default` - Personal Configuration
+
 - **Username**: `mike`
 - **Focus**: General development and personal projects
 - **Includes**: All language toolchains, personal dotfiles
 
 ### `work` - Work Configuration
+
 - **Username**: `chmc-h022fl97xj`
 - **Focus**: Professional development with additional enterprise tools
 - **Includes**: All `default` features plus custom library functions (Metals builder)
@@ -130,6 +138,7 @@ nix flake lock --update-input home-manager
 ## 🛠️ Managed Components
 
 ### Languages & Runtimes
+
 - **Scala**: sbt, bloop, coursier, Metals LSP (custom build)
 - **Rust**: Latest stable via fenix overlay, rust-analyzer
 - **Zig**: Latest from Mitchell Hashimoto's overlay
@@ -143,6 +152,7 @@ nix flake lock --update-input home-manager
 - **Lua**: Lua 5.x
 
 ### Development Tools
+
 - **Editor**: Neovim nightly with treesitter, LSP, custom plugins
 - **Version Control**: Git, lazygit, gh CLI
 - **Containers**: Docker/Podman configurations
@@ -150,6 +160,7 @@ nix flake lock --update-input home-manager
 - **Infrastructure**: Terraform, Azure CLI
 
 ### Shell & Terminal
+
 - **Shells**: Zsh (primary), Nushell (modern alternative)
 - **Prompt**: Oh My Posh with custom `zen.toml` theme, Starship (alternative)
 - **Multiplexers**: tmux, zellij
@@ -157,6 +168,7 @@ nix flake lock --update-input home-manager
 - **Terminal**: Ghostty (primary), Alacritty (configured)
 
 ### CLI Utilities
+
 - **Navigation**: zoxide (smart cd), yazi (file manager), eza (modern ls)
 - **Search**: ripgrep, fd, fzf
 - **File Tools**: bat (cat with syntax), tree, jq
@@ -164,11 +176,13 @@ nix flake lock --update-input home-manager
 - **Misc**: curl, less, direnv, password-store
 
 ### Window Management & UI
+
 - **Tiling**: Aerospace configuration, Yabai/SKHD dotfiles
 - **Status Bar**: SketchyBar, borders (via Homebrew)
 - **Launcher**: Raycast
 
 ### Fonts
+
 - **Primary**: JetBrains Mono Nerd Font (via Nix)
 - **Additional**: Hack Nerd Font (via Homebrew)
 
@@ -193,6 +207,7 @@ Dotfiles are managed in `modules/home-manager/home/dotfiles/` and automatically 
 ### Utility Scripts
 
 Custom scripts in `modules/home-manager/home/scripts/`:
+
 - **tmux-sessionizer**: Fuzzy find and switch tmux sessions
 - **tmux-cht.sh**: Quick cheatsheet lookup in tmux
 - **zet**: Go-based second brain/zettelkasten tool
@@ -202,6 +217,7 @@ Custom scripts in `modules/home-manager/home/scripts/`:
 ### Adding a New Package
 
 1. **System-wide** (available to all users):
+
 ```nix
 # In modules/darwin/environment/default.nix
 environment.systemPackages = with pkgs; [
@@ -210,6 +226,7 @@ environment.systemPackages = with pkgs; [
 ```
 
 2. **User-specific** (home-manager):
+
 ```nix
 # In modules/home-manager/home/<category>/default.nix
 home.packages = with pkgs; [
@@ -226,33 +243,29 @@ home.packages = with pkgs; [
 ### Modifying Dotfiles
 
 Dotfiles are managed as Nix sources. To modify:
+
 1. Edit files in `modules/home-manager/home/dotfiles/`
 2. Run `darwin-rebuild switch` to apply
 3. Files are automatically linked to appropriate locations
 
 ## 🐛 Troubleshooting
 
-### Insecure Package Warnings
-
-Some .NET 6.0 packages are marked insecure but required for legacy project compatibility. These are explicitly permitted in:
-- `flake.nix` (line 42-48)
-- `modules/home-manager/home/default.nix` (line 12-18)
-
-If you don't need .NET 6.0, you can remove these from `permittedInsecurePackages`.
-
 ### Build Failures
 
 Check the flake:
+
 ```bash
 nix flake check
 ```
 
 Check for syntax errors:
+
 ```bash
 nix flake show
 ```
 
 View detailed build logs:
+
 ```bash
 darwin-rebuild switch --flake .#default --show-trace
 ```
@@ -260,6 +273,7 @@ darwin-rebuild switch --flake .#default --show-trace
 ### Homebrew Issues
 
 If Homebrew packages aren't installing:
+
 ```bash
 # Manually trigger Homebrew bundle
 brew bundle --file=/opt/homebrew/Brewfile
@@ -268,6 +282,7 @@ brew bundle --file=/opt/homebrew/Brewfile
 ### Neovim LSP Issues
 
 If Metals or other LSPs aren't working:
+
 1. Check Neovim health: `:checkhealth`
 2. Update Metals: `home/programs/neovim-ide/update-metals.nix`
 3. Rebuild and restart Neovim
@@ -275,6 +290,7 @@ If Metals or other LSPs aren't working:
 ## 🔄 CI/CD
 
 This repository uses GitHub Actions to validate the flake configuration:
+
 - **Workflow**: `.github/workflows/flake.yml`
 - **Triggers**: Pull requests and pushes to `main`
 - **Checks**: `nix flake check` to ensure configuration builds
@@ -300,6 +316,7 @@ This repository uses GitHub Actions to validate the flake configuration:
 ## 🤝 Contributing
 
 This is a personal configuration, but feel free to:
+
 - Fork and adapt for your own use
 - Submit issues for bugs or questions
 - Suggest improvements via pull requests
@@ -314,5 +331,5 @@ Built with inspiration from the Nix community and various dotfiles repositories.
 
 ---
 
-**Maintained by**: Mike Flood  
+**Maintained by**: Mike Flood
 **Mirrors**: [GitHub](https://github.com/FloodCreux/nix) | [Codeberg](https://codeberg.org/flood-mike/nix)

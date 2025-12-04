@@ -45,17 +45,6 @@
             pkgs-config = {
               allowUnfree = true;
               allowUnsupportedSystem = true;
-
-              # .NET 6.0 reached end-of-life but is required for legacy projects
-              # TODO: Migrate to .NET 8.0 LTS (supported until Nov 2026)
-              # Review: Quarterly (check if still needed)
-              permittedInsecurePackages = [
-                "dotnet-core-combined"
-                "dotnet-sdk-6.0.428"
-                "dotnet-sdk-wrapped-6.0.428"
-                "dotnet-runtime-6.0.36"
-                "dotnet-runtime-wrapped-6.0.36"
-              ];
             };
 
             lib = import ./lib { inherit pkgs inputs; };
