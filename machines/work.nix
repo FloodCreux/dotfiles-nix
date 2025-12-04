@@ -12,6 +12,9 @@
     # Example: kubectl, terraform, awscli2, etc.
     kubectl
     awscli2
+    terraform
+    k9s
+    docker
   ];
 
   # Additional home packages for work machine
