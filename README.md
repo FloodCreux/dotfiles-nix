@@ -240,14 +240,6 @@ home.packages = with pkgs; [
 2. Add `default.nix` with your configuration
 3. Import it in the parent `default.nix`
 
-### Modifying Dotfiles
-
-Dotfiles are managed as Nix sources. To modify:
-
-1. Edit files in `modules/home-manager/home/dotfiles/`
-2. Run `darwin-rebuild switch` to apply
-3. Files are automatically linked to appropriate locations
-
 ## 🐛 Troubleshooting
 
 ### Build Failures
