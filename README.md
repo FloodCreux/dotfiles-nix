@@ -186,24 +186,6 @@ nix flake lock --update-input home-manager
 - **Primary**: JetBrains Mono Nerd Font (via Nix)
 - **Additional**: Hack Nerd Font (via Homebrew)
 
-## 📝 Dotfiles
-
-Dotfiles are managed in `modules/home-manager/home/dotfiles/` and automatically linked to `~/.config/`:
-
-- **aerospace**: Window manager config (`aerospace.toml`)
-- **alacritty**: Terminal emulator config with Catppuccin theme
-- **ghostty**: Primary terminal config
-- **gitkraken**: GitKraken themes (Catppuccin Macchiato)
-- **nushell**: Modern shell config and env
-- **ohmyposh**: Custom `zen.toml` and `zen.json` themes
-- **skhd**: Keyboard shortcuts for yabai
-- **starship**: Alternative prompt config
-- **tmux**: Tmux configuration with custom scripts
-- **yabai**: Tiling window manager config
-- **yazi**: File manager config
-- **zellij**: Modern multiplexer config
-- **zsh**: Aliases, integrations, and Starship setup
-
 ### Utility Scripts
 
 Custom scripts in `modules/home-manager/home/scripts/`:
