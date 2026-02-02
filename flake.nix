@@ -15,7 +15,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     zig.url = "github:mitchellh/zig-overlay";
     ghostty.url = "github:ghostty-org/ghostty";
 
@@ -29,7 +32,11 @@
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "aarch64-darwin" ];
-      perSystem = { system, pkgs, ... }: { };
+      perSystem =
+        { system, pkgs, ... }:
+        {
+          formatter = pkgs.nixfmt-tree;
+        };
 
       flake = {
         # Helper function to generate configurations for any username

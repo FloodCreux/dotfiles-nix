@@ -36,6 +36,7 @@ in
     (importPkgs ./fd)
     (importPkgs ./gh)
     (importPkgs ./go)
+    ./homebrew
     (importPkgs ./jq)
     (importPkgs ./lazygit)
     (importPkgs ./less)
@@ -51,6 +52,5 @@ in
     (importPkgs ./yazi)
     (importPkgs ./zig)
     ./zsh
-    ./homebrew
   ];
 }

@@ -2,6 +2,6 @@
 {
   users.users.${username} = {
     home = "/Users/${username}";
-    shell = "${pkgs.nushell}/bin/nu";
+    shell = "${pkgs.zsh}/bin/zsh";
   };
 }

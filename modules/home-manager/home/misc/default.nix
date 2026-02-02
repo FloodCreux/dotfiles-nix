@@ -6,6 +6,6 @@
     chafa
     utf8proc
     lz4
-    arrow-cpp
+    # arrow-cpp
   ];
 }
