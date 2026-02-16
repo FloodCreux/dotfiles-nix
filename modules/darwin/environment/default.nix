@@ -5,10 +5,6 @@
 }:
 {
   environment = {
-    shells = with pkgs; [
-      nushell
-    ];
-
     systemPackages = [
       pkgs.coreutils
     ];
@@ -18,7 +14,7 @@
 
     variables = {
       XDG_CONFIG_HOME = "$HOME/.config";
-      SHELL = "${pkgs.zsh}/bin/zsh";
+      # SHELL = "${pkgs.zsh}/bin/zsh";
     }
     // (
       if enableNetskope then

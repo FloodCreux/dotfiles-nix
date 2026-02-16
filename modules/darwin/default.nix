@@ -13,12 +13,6 @@ let
   importWith = path: args: import path args;
   importPkgs = path: importWith path { inherit pkgs; };
   importUsername = path: importWith path { inherit username; };
-  importAll =
-    path:
-    importWith path {
-      inherit pkgs;
-      inherit username;
-    };
 
 in
 {
@@ -31,8 +25,7 @@ in
     ./nixpkgs
     (importWith ./environment { inherit pkgs enableNetskope; })
     (importUsername ./system)
-    (importAll ./users)
-    (importPkgs ./carapace)
+    (importUsername ./users)
     (importPkgs ./curl)
     (importPkgs ./fd)
     (importPkgs ./gh)
@@ -42,14 +35,12 @@ in
     (importPkgs ./less)
     (importPkgs ./nvim)
     (importPkgs ./nixd)
-    (importPkgs ./nushell)
-    (importPkgs ./ohmyposh)
     (importPkgs ./python)
     (importPkgs ./ripgrep)
     (importPkgs ./rust)
     (importPkgs ./scala)
     (importPkgs ./tree)
     (importPkgs ./yazi)
-    ./zsh
+    # ./zsh
   ];
 }
