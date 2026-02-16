@@ -19,15 +19,12 @@
   imports = [
     ./clang
     ./containers
-    # ./csharp
-    ./git
     ./haskell
     ./java
     ./lua
     ./misc
     ./nix
     ./node
-    ./notes
     ./scala
     ./sql
     ./terraform
