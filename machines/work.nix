@@ -27,4 +27,7 @@
 
   # Machine-specific environment variables
   environment = { };
+
+  # Enable Netskope SSL inspection certificate handling
+  netskope.enable = true;
 }

@@ -55,6 +55,7 @@ let
           (import ../modules/darwin {
             inherit pkgs username;
             extraSystemPackages = machineSettings.extraSystemPackages or [ ];
+            enableNetskope = machineSettings.netskope.enable or false;
           })
 
           home-manager.darwinModules.home-manager

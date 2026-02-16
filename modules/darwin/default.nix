@@ -2,11 +2,12 @@
   pkgs,
   username,
   extraSystemPackages ? [ ],
+  enableNetskope ? false,
   ...
 }:
 
 let
-  nix = import ../shared/nix.nix;
+  nix = import ../shared/nix.nix { inherit enableNetskope; };
 
   # Helper to import modules with pkgs or username
   importWith = path: args: import path args;
@@ -28,7 +29,7 @@ in
 
   imports = [
     ./nixpkgs
-    (importPkgs ./environment)
+    (importWith ./environment { inherit pkgs enableNetskope; })
     (importUsername ./system)
     (importAll ./users)
     (importPkgs ./carapace)
