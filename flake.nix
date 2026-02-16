@@ -20,7 +20,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zig.url = "github:mitchellh/zig-overlay";
-    ghostty.url = "github:ghostty-org/ghostty";
 
     fenix = {
       url = "github:nix-community/fenix/monthly";
