@@ -19,7 +19,6 @@
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zig.url = "github:mitchellh/zig-overlay";
 
     fenix = {
       url = "github:nix-community/fenix/monthly";

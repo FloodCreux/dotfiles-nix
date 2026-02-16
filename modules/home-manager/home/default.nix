@@ -18,7 +18,6 @@
 
   imports = [
     ./clang
-    ./containers
     ./haskell
     ./java
     ./lua

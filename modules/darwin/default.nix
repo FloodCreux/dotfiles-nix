@@ -39,7 +39,6 @@ in
     (importPkgs ./go)
     ./homebrew
     (importPkgs ./jq)
-    (importPkgs ./lazygit)
     (importPkgs ./less)
     (importPkgs ./nvim)
     (importPkgs ./nixd)
@@ -51,7 +50,6 @@ in
     (importPkgs ./scala)
     (importPkgs ./tree)
     (importPkgs ./yazi)
-    (importPkgs ./zig)
     ./zsh
   ];
 }

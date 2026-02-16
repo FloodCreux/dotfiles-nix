@@ -117,10 +117,6 @@ let
 
   rustOverlay = inputs.fenix.overlays.default;
 
-  zigOverlay = f: p: {
-    zigpkgs = zig.packages.${p.system};
-  };
-
 in
 [
   libOverlay
@@ -129,6 +125,4 @@ in
   buildersOverlay
   treesitterGrammarsOverlay
   rustOverlay
-  zigOverlay
-  # yazi.overlays.default
 ]
