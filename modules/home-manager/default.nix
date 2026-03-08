@@ -25,18 +25,6 @@ in
   imports = [
     (importAll ./home)
     (importPkgs ./bat)
-    ./carapace
-    ./direnv
-    ./eza
-    ./fzf
     ./git
-    ./neofetch
-    ./nushell
-    ./ohmyposh
-    ./password-store
-    ./starship
-    (importPkgs ./tmux)
-    ./zellij
-    ./zsh
   ];
 }

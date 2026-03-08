@@ -94,6 +94,8 @@
           // {
             # Keep aliases for convenience
             default = mkDarwinSystem { username = "mike"; };
+            personal = mkDarwinSystem { username = "mike"; };
+
             work = mkDarwinSystem {
               username = "chmc-h022fl97xj";
               machineConfig = ./machines/work.nix;

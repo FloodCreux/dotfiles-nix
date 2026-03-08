@@ -27,8 +27,6 @@
     ./node
     ./scala
     ./sql
-    ./terraform
-    ./zig
   ];
 
   home.sessionVariables = {

@@ -1,7 +1,7 @@
 { username, ... }:
 {
   system.primaryUser = username;
-  system.stateVersion = 4;
+  system.stateVersion = 6;
   system.keyboard.enableKeyMapping = true;
   system.defaults = {
     finder = {
