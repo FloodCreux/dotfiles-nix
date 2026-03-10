@@ -1,13 +1,13 @@
 # Personal machine configuration
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 {
-  # Additional system packages for personal machine
+  # Machine-specific system packages
   environment.systemPackages = with pkgs; [
     # Add personal-specific packages here
     # Example: docker, ffmpeg, etc.
   ];
 
-  # Module overrides - disable modules not needed on this machine:
-  # modules.ocaml.enable = false;
-  # modules.go.enable = false;
+  # Module overrides — disable dev tool modules not needed on this machine:
+  # home-manager.users.${username}.modules.ocaml.enable = false;
+  # home-manager.users.${username}.modules.go.enable = false;
 }

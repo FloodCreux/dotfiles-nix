@@ -8,6 +8,6 @@
   options.modules.go.enable = lib.mkEnableOption "Go";
 
   config = lib.mkIf config.modules.go.enable {
-    environment.systemPackages = [ pkgs.go ];
+    home.packages = [ pkgs.go ];
   };
 }

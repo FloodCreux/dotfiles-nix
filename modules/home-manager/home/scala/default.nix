@@ -9,6 +9,7 @@
 
   config = lib.mkIf config.modules.scala.enable {
     home.packages = with pkgs; [
+      sbt
       metals
       coursier
       maven

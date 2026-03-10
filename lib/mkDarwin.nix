@@ -27,6 +27,7 @@ darwin.lib.darwinSystem {
     home-manager.darwinModules.home-manager
     {
       home-manager = {
+        useGlobalPkgs = true;
         backupFileExtension = "backup";
         users.${username} = {
           imports = [

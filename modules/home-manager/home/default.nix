@@ -1,25 +1,30 @@
 { ... }:
 {
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowUnsupportedSystem = true;
-  };
-
   home.stateVersion = "25.11";
 
   home.enableNixpkgsReleaseCheck = false;
 
   imports = [
+    # Always-on core tools
+    ./core
+
+    # Toggleable language/tool modules
     ./clang
     ./elixir
+    ./go
+    ./hadoop
     ./haskell
     ./java
     ./lua
-    ./misc
-    ./nix
+    ./nixd
     ./node
+    ./nvim
+    ./ocaml
+    ./python
+    ./rust
     ./scala
     ./sql
+    ./yazi
   ];
 
   home.sessionVariables = {
@@ -43,11 +48,19 @@
   modules = {
     clang.enable = true;
     elixir.enable = true;
+    go.enable = true;
+    hadoop.enable = true;
     haskell.enable = true;
     java.enable = true;
     lua.enable = true;
+    nixd.enable = true;
     node.enable = true;
+    nvim.enable = true;
+    ocaml.enable = true;
+    python.enable = true;
+    rust.enable = true;
     scala.enable = true;
     sql.enable = true;
+    yazi.enable = true;
   };
 }

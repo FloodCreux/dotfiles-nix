@@ -8,7 +8,7 @@
   options.modules.ocaml.enable = lib.mkEnableOption "OCaml";
 
   config = lib.mkIf config.modules.ocaml.enable {
-    environment.systemPackages = with pkgs; [
+    home.packages = with pkgs; [
       ocaml
       opam
       dune_3

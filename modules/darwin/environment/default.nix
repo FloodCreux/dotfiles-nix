@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 
@@ -14,8 +13,6 @@ in
   config = lib.mkMerge [
     {
       environment = {
-        systemPackages = [ pkgs.coreutils ];
-
         systemPath = [ "/opt/homebrew/bin" ];
         pathsToLink = [ "/Applications" ];
 
