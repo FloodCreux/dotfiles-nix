@@ -61,8 +61,10 @@ let
           home-manager.darwinModules.home-manager
           {
             home-manager = {
+              backupFileExtension = "backup";
               users.${username} = {
                 imports = [
+                  catppuccin.homeModules.catppuccin
                   (import ../modules/home-manager {
                     inherit
                       inputs
