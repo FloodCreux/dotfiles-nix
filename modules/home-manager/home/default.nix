@@ -1,7 +1,7 @@
 {
   pkgs,
-  lib,
   username,
+  lib,
   ...
 }:
 
@@ -17,6 +17,7 @@
 
   imports = [
     ./clang
+    ./elixir
     ./haskell
     ./java
     ./lua
@@ -29,7 +30,17 @@
 
   home.sessionVariables = {
     PAGER = "less";
-    CLICLOLOR = 1;
+    CLICOLOR = 1;
     EDITOR = "nvim";
+  };
+
+  catppuccin = {
+    enable = true;
+    flavor = "macchiato";
+    accent = "mauve";
+
+    bat = {
+      enable = true;
+    };
   };
 }

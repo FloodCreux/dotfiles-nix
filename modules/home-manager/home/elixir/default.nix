@@ -1,9 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    ghc
-    cabal-install
-    zlib
-    # stack
+    elixir
+    elixir-ls
   ];
 }
