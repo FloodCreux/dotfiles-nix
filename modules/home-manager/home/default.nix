@@ -1,10 +1,4 @@
-{
-  pkgs,
-  username,
-  lib,
-  ...
-}:
-
+{ ... }:
 {
   nixpkgs.config = {
     allowUnfree = true;
@@ -42,5 +36,18 @@
     bat = {
       enable = true;
     };
+  };
+
+  # Enable all toggleable modules by default.
+  # Machine configs can override these with `modules.<name>.enable = false;`
+  modules = {
+    clang.enable = true;
+    elixir.enable = true;
+    haskell.enable = true;
+    java.enable = true;
+    lua.enable = true;
+    node.enable = true;
+    scala.enable = true;
+    sql.enable = true;
   };
 }

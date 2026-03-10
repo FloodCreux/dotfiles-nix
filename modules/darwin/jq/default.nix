@@ -1,4 +1,4 @@
 { pkgs, ... }:
 {
-  environment.systemPackages = with pkgs; [ jq ];
+  environment.systemPackages = [ pkgs.jq ];
 }

@@ -1,89 +1,10 @@
-{
-  lib,
-  inputs,
-  system,
-  username,
-}:
-
-with inputs;
+{ inputs, system }:
 
 let
-  libOverlay = f: p: {
-    lib = p.lib.extend (
-      _: _: {
-        inherit (lib)
-          mkVimBool
-          withAttrSet
-          withPlugins
-          writeIf
-          ;
-      }
-    );
-  };
-
-  buildersOverlay = f: p: {
-    inherit (lib) metalsBuilder;
-
-    mkDarwin =
-      {
-        darwin,
-        system,
-        pkgs,
-        username,
-        machineConfig ? null,
-      }:
-      let
-        # Load machine-specific config if provided
-        machineSettings =
-          if machineConfig != null then
-            import machineConfig { inherit pkgs username; }
-          else
-            {
-              machine = { };
-              extraSystemPackages = [ ];
-              extraHomePackages = [ ];
-              modules = { };
-              environment = { };
-            };
-      in
-      darwin.lib.darwinSystem {
-        inherit system;
-
-        pkgs = pkgs;
-
-        modules = [
-          (import ../modules/darwin {
-            inherit pkgs username;
-            extraSystemPackages = machineSettings.extraSystemPackages or [ ];
-            enableNetskope = machineSettings.netskope.enable or false;
-          })
-
-          home-manager.darwinModules.home-manager
-          {
-            home-manager = {
-              backupFileExtension = "backup";
-              users.${username} = {
-                imports = [
-                  catppuccin.homeModules.catppuccin
-                  (import ../modules/home-manager {
-                    inherit
-                      inputs
-                      pkgs
-                      username
-                      lib
-                      ;
-                    extraHomePackages = machineSettings.extraHomePackages or [ ];
-                  })
-                ];
-              };
-            };
-          }
-        ];
-      };
-  };
+  metalsOverlay = import ./metalsOverlay.nix { };
 
   treesitterGrammarsOverlay = f: p: {
-    treesitterGrammars = p.withPlugins (p: [
+    treesitterGrammars = p.tree-sitter.withPlugins (p: [
       p.tree-sitter-scala
       p.tree-sitter-nix
       p.tree-sitter-c
@@ -120,10 +41,8 @@ let
 
 in
 [
-  libOverlay
-  lib.metalsOverlay
+  metalsOverlay
   nvim-nightly-overlay
-  buildersOverlay
   treesitterGrammarsOverlay
   rustOverlay
 ]

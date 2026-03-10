@@ -1,4 +1,4 @@
 { pkgs, ... }:
 {
-  environment.systemPackages = with pkgs; [ curl ];
+  environment.systemPackages = [ pkgs.curl ];
 }

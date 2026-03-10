@@ -1,62 +1,37 @@
 # Example machine-specific configuration
-# Copy this file and customize for your machine
+# Copy this file and customize for your machine.
+#
+# Machine configs are standard nix-darwin modules. They can set any
+# nix-darwin or home-manager option, and toggle feature modules on/off.
 
 { pkgs, username, ... }:
 {
-  # Machine identification
-  machine = {
-    hostname = "example-machine";
-    description = "Example machine configuration";
-    type = "personal"; # or "work"
-  };
-
   # Additional system packages for this machine only
-  extraSystemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     # Add machine-specific CLI tools here
     # Example: docker, kubernetes-cli, etc.
   ];
 
-  # Additional home packages for this machine only
-  extraHomePackages = with pkgs; [
-    # Add machine-specific GUI apps or user tools here
-    # Example: vscode, slack, etc.
-  ];
+  # Toggle darwin-level modules on/off:
+  # modules.rust.enable = false;
+  # modules.python.enable = false;
+  # modules.scala.enable = false;
+  # modules.ocaml.enable = false;
+  # modules.go.enable = false;
+  # modules.nvim.enable = false;
+  # modules.nixd.enable = false;
+  # modules.yazi.enable = false;
 
-  # Module overrides - enable/disable specific modules
-  modules = {
-    # Darwin (system-level) module overrides
-    darwin = {
-      # rust.enable = false;      # Disable Rust on this machine
-      # python.enable = true;     # Enable Python on this machine
-      # scala.enable = false;     # Disable Scala on this machine
-    };
+  # Enable Netskope SSL inspection (for work machines behind corporate proxies):
+  # modules.netskope.enable = true;
 
-    # Home-manager (user-level) module overrides
-    home = {
-      # wezterm.enable = false;   # Disable Wezterm terminal
-      # ghostty.enable = true;    # Enable Ghostty terminal
-    };
-  };
-
-  # Machine-specific environment variables
-  environment = {
-    # WORK_PROJECT_DIR = "/Users/${username}/work";
-    # PERSONAL_PROJECT_DIR = "/Users/${username}/personal";
-  };
-
-  # Machine-specific system settings
-  system = {
-    # Override keyboard settings, dock settings, etc.
-    # defaults = {
-    #   NSGlobalDomain = {
-    #     KeyRepeat = 1;
-    #   };
-    # };
-  };
-
-  # Machine-specific Git configuration
-  git = {
-    # userName = "Work Name";
-    # userEmail = "work@example.com";
-  };
+  # Toggle home-manager-level modules via home-manager config:
+  # home-manager.users.${username}.modules.java.enable = false;
+  # home-manager.users.${username}.modules.haskell.enable = false;
+  # home-manager.users.${username}.modules.elixir.enable = false;
+  # home-manager.users.${username}.modules.clang.enable = false;
+  # home-manager.users.${username}.modules.lua.enable = false;
+  # home-manager.users.${username}.modules.node.enable = false;
+  # home-manager.users.${username}.modules.scala.enable = false;
+  # home-manager.users.${username}.modules.sql.enable = false;
 }

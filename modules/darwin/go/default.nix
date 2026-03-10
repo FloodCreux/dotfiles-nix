@@ -1,4 +1,13 @@
-{ pkgs, ... }:
 {
-  environment.systemPackages = with pkgs; [ go ];
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  options.modules.go.enable = lib.mkEnableOption "Go";
+
+  config = lib.mkIf config.modules.go.enable {
+    environment.systemPackages = [ pkgs.go ];
+  };
 }

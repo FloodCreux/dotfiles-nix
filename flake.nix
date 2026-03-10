@@ -46,28 +46,22 @@
             machineConfig ? null,
           }:
           let
-            darwin = inputs.darwin;
-
-            pkgs-config = {
-              allowUnfree = true;
-              allowUnsupportedSystem = true;
-            };
-
-            lib = import ./lib { inherit pkgs inputs; };
-            overlays = import ./lib/overlays.nix (
-              { inherit inputs system username; } // (if lib != null then { inherit lib; } else { })
-            );
+            lib = import ./lib;
+            overlays = lib.overlays { inherit inputs system; };
             pkgs = import inputs.nixpkgs {
               inherit system overlays;
-              config = pkgs-config;
+              config = {
+                allowUnfree = true;
+                allowUnsupportedSystem = true;
+              };
             };
           in
-          pkgs.mkDarwin {
+          lib.mkDarwin {
             inherit
-              darwin
-              system
+              inputs
               pkgs
               username
+              system
               machineConfig
               ;
           };

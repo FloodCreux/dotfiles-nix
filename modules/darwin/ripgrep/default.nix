@@ -1,4 +1,4 @@
 { pkgs, ... }:
 {
-  environment.systemPackages = with pkgs; [ ripgrep ];
+  environment.systemPackages = [ pkgs.ripgrep ];
 }

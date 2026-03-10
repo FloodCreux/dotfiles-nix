@@ -1,14 +1,21 @@
-{ pkgs, ... }:
 {
-  environment.systemPackages = with pkgs; [
-    (fenix.complete.withComponents [
-      "cargo"
-      "clippy"
-      "rust-src"
-      "rustc"
-      "rustfmt"
-    ])
-    # MOVED TO BREW FOR NOW
-    # rust-analyzer-nightly
-  ];
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  options.modules.rust.enable = lib.mkEnableOption "Rust";
+
+  config = lib.mkIf config.modules.rust.enable {
+    environment.systemPackages = [
+      (pkgs.fenix.complete.withComponents [
+        "cargo"
+        "clippy"
+        "rust-src"
+        "rustc"
+        "rustfmt"
+      ])
+    ];
+  };
 }

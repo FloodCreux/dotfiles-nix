@@ -1,4 +1,4 @@
 { pkgs, ... }:
 {
-  environment.systemPackages = with pkgs; [ less ];
+  environment.systemPackages = [ pkgs.less ];
 }
