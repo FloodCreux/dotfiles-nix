@@ -97,16 +97,15 @@ let
       p.tree-sitter-vim
       p.tree-sitter-vimdoc
       p.tree-sitter-hcl
-      # p.tree-sitter-terraform
+      p.tree-sitter-terraform
       p.tree-sitter-yaml
       p.tree-sitter-make
       p.tree-sitter-html
       p.tree-sitter-bash
       p.tree-sitter-ocaml
-      # Broken, need to manually :TSInstall c_sharp
-      # p.tree-sitter-c-sharp
+      p.tree-sitter-c-sharp
       p.tree-sitter-lua
-      # p.tree-sitter-luadoc
+      p.tree-sitter-luadoc
       p.tree-sitter-nu
       p.tree-sitter-hocon
       p.tree-sitter-haskell
