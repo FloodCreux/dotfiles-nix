@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    catppuccin.url = "github:catppuccin/nix";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -19,7 +20,6 @@
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zig.url = "github:mitchellh/zig-overlay";
 
     fenix = {
       url = "github:nix-community/fenix/monthly";
@@ -46,28 +46,22 @@
             machineConfig ? null,
           }:
           let
-            darwin = inputs.darwin;
-
-            pkgs-config = {
-              allowUnfree = true;
-              allowUnsupportedSystem = true;
-            };
-
-            lib = import ./lib { inherit pkgs inputs; };
-            overlays = import ./lib/overlays.nix (
-              { inherit inputs system username; } // (if lib != null then { inherit lib; } else { })
-            );
+            lib = import ./lib;
+            overlays = lib.overlays { inherit inputs system; };
             pkgs = import inputs.nixpkgs {
               inherit system overlays;
-              config = pkgs-config;
+              config = {
+                allowUnfree = true;
+                allowUnsupportedSystem = true;
+              };
             };
           in
-          pkgs.mkDarwin {
+          lib.mkDarwin {
             inherit
-              darwin
-              system
+              inputs
               pkgs
               username
+              system
               machineConfig
               ;
           };
@@ -94,6 +88,8 @@
           // {
             # Keep aliases for convenience
             default = mkDarwinSystem { username = "mike"; };
+            personal = mkDarwinSystem { username = "mike"; };
+
             work = mkDarwinSystem {
               username = "chmc-h022fl97xj";
               machineConfig = ./machines/work.nix;

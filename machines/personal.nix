@@ -1,27 +1,13 @@
-# Personal machine configuration for user 'mike'
+# Personal machine configuration
 { pkgs, username, ... }:
 {
-  machine = {
-    hostname = "personal-macbook";
-    description = "Personal MacBook Pro";
-    type = "personal";
-  };
-
-  # Additional system packages for personal machine
-  extraSystemPackages = with pkgs; [
+  # Machine-specific system packages
+  environment.systemPackages = with pkgs; [
     # Add personal-specific packages here
     # Example: docker, ffmpeg, etc.
   ];
 
-  # Additional home packages for personal machine
-  extraHomePackages = with pkgs; [
-    # Add personal-specific user packages here
-    # Example: GUI apps, etc.
-  ];
-
-  # Module overrides (future use)
-  modules = { };
-
-  # Machine-specific environment variables
-  environment = { };
+  # Module overrides — disable dev tool modules not needed on this machine:
+  # home-manager.users.${username}.modules.ocaml.enable = false;
+  # home-manager.users.${username}.modules.go.enable = false;
 }

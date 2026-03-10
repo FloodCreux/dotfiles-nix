@@ -1,23 +1,32 @@
-{ pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    (pkgs.buildEnv {
-      name = "java-combined";
-      paths = with pkgs; [
-        jdk21
-        jdk8
-        jdk11
-        jdk17
-      ];
-      pathsToLink = [
-        "/bin"
-        "/lib"
-      ];
-      ignoreCollisions = true;
-    })
-  ];
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  options.modules.java.enable = lib.mkEnableOption "Java";
 
-  home.sessionVariables = {
-    JAVA_HOME = "${pkgs.jdk21}";
+  config = lib.mkIf config.modules.java.enable {
+    home.packages = [
+      (pkgs.buildEnv {
+        name = "java-combined";
+        paths = with pkgs; [
+          jdk21
+          jdk8
+          jdk11
+          jdk17
+        ];
+        pathsToLink = [
+          "/bin"
+          "/lib"
+        ];
+        ignoreCollisions = true;
+      })
+    ];
+
+    home.sessionVariables = {
+      JAVA_HOME = "${pkgs.jdk21}";
+    };
   };
 }

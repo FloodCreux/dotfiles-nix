@@ -1,33 +1,16 @@
-# Work machine configuration for user 'chmc-h022fl97xj'
+# Work machine configuration
 { pkgs, username, ... }:
 {
-  machine = {
-    hostname = "work-macbook";
-    description = "Work MacBook Pro";
-    type = "work";
-  };
-
-  # Additional system packages for work machine
-  extraSystemPackages = with pkgs; [
-    # Example: kubectl, terraform, awscli2, etc.
-    kubectl
+  # Machine-specific system packages (not general dev tools)
+  environment.systemPackages = with pkgs; [
     awscli2
-    terraform
     k9s
-    docker
   ];
 
-  # Additional home packages for work machine
-  extraHomePackages = with pkgs; [
-    # Add work-specific user packages here
-  ];
+  # Enable Netskope SSL inspection certificate handling (darwin-level)
+  modules.netskope.enable = true;
 
-  # Module overrides (future use)
-  modules = { };
-
-  # Machine-specific environment variables
-  environment = { };
-
-  # Enable Netskope SSL inspection certificate handling
-  netskope.enable = true;
+  # Module overrides — disable dev tool modules not needed on this machine:
+  # home-manager.users.${username}.modules.ocaml.enable = false;
+  # home-manager.users.${username}.modules.go.enable = false;
 }

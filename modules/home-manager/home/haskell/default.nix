@@ -1,11 +1,17 @@
-{ pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    elixir
-    elixir-ls
-    ghc
-    cabal-install
-    zlib
-    # stack
-  ];
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  options.modules.haskell.enable = lib.mkEnableOption "Haskell";
+
+  config = lib.mkIf config.modules.haskell.enable {
+    home.packages = with pkgs; [
+      ghc
+      cabal-install
+      zlib
+    ];
+  };
 }

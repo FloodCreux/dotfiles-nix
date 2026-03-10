@@ -1,87 +1,10 @@
-{
-  lib,
-  inputs,
-  system,
-  username,
-}:
-
-with inputs;
+{ inputs, system }:
 
 let
-  libOverlay = f: p: {
-    lib = p.lib.extend (
-      _: _: {
-        inherit (lib)
-          mkVimBool
-          withAttrSet
-          withPlugins
-          writeIf
-          ;
-      }
-    );
-  };
-
-  buildersOverlay = f: p: {
-    inherit (lib) metalsBuilder;
-
-    mkDarwin =
-      {
-        darwin,
-        system,
-        pkgs,
-        username,
-        machineConfig ? null,
-      }:
-      let
-        # Load machine-specific config if provided
-        machineSettings =
-          if machineConfig != null then
-            import machineConfig { inherit pkgs username; }
-          else
-            {
-              machine = { };
-              extraSystemPackages = [ ];
-              extraHomePackages = [ ];
-              modules = { };
-              environment = { };
-            };
-      in
-      darwin.lib.darwinSystem {
-        inherit system;
-
-        pkgs = pkgs;
-
-        modules = [
-          (import ../modules/darwin {
-            inherit pkgs username;
-            extraSystemPackages = machineSettings.extraSystemPackages or [ ];
-            enableNetskope = machineSettings.netskope.enable or false;
-          })
-
-          home-manager.darwinModules.home-manager
-          {
-            home-manager = {
-              users.${username} = {
-                imports = [
-                  (import ../modules/home-manager {
-                    inherit
-                      inputs
-                      pkgs
-                      username
-                      lib
-                      ;
-                    extraHomePackages = machineSettings.extraHomePackages or [ ];
-                  })
-                ];
-              };
-            };
-          }
-        ];
-      };
-  };
+  metalsOverlay = import ./metalsOverlay.nix { };
 
   treesitterGrammarsOverlay = f: p: {
-    treesitterGrammars = p.withPlugins (p: [
+    treesitterGrammars = p.tree-sitter.withPlugins (p: [
       p.tree-sitter-scala
       p.tree-sitter-nix
       p.tree-sitter-c
@@ -95,16 +18,15 @@ let
       p.tree-sitter-vim
       p.tree-sitter-vimdoc
       p.tree-sitter-hcl
-      # p.tree-sitter-terraform
+      p.tree-sitter-terraform
       p.tree-sitter-yaml
       p.tree-sitter-make
       p.tree-sitter-html
       p.tree-sitter-bash
       p.tree-sitter-ocaml
-      # Broken, need to manually :TSInstall c_sharp
-      # p.tree-sitter-c-sharp
+      p.tree-sitter-c-sharp
       p.tree-sitter-lua
-      # p.tree-sitter-luadoc
+      p.tree-sitter-luadoc
       p.tree-sitter-nu
       p.tree-sitter-hocon
       p.tree-sitter-haskell
@@ -113,22 +35,14 @@ let
     ]);
   };
 
-  nvim-nighlty-overlay = inputs.neovim-nightly-overlay.overlays.default;
+  nvim-nightly-overlay = inputs.neovim-nightly-overlay.overlays.default;
 
   rustOverlay = inputs.fenix.overlays.default;
 
-  zigOverlay = f: p: {
-    zigpkgs = zig.packages.${p.system};
-  };
-
 in
 [
-  libOverlay
-  lib.metalsOverlay
-  nvim-nighlty-overlay
-  buildersOverlay
+  metalsOverlay
+  nvim-nightly-overlay
   treesitterGrammarsOverlay
   rustOverlay
-  zigOverlay
-  # yazi.overlays.default
 ]
