@@ -114,7 +114,7 @@ let
     ]);
   };
 
-  nvim-nighlty-overlay = inputs.neovim-nightly-overlay.overlays.default;
+  nvim-nightly-overlay = inputs.neovim-nightly-overlay.overlays.default;
 
   rustOverlay = inputs.fenix.overlays.default;
 
@@ -122,7 +122,7 @@ in
 [
   libOverlay
   lib.metalsOverlay
-  nvim-nighlty-overlay
+  nvim-nightly-overlay
   buildersOverlay
   treesitterGrammarsOverlay
   rustOverlay

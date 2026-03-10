@@ -41,6 +41,5 @@ in
     (importPkgs ./scala)
     (importPkgs ./tree)
     (importPkgs ./yazi)
-    # ./zsh
   ];
 }
