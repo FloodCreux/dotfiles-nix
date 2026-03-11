@@ -8,22 +8,7 @@
   options.modules.java.enable = lib.mkEnableOption "Java";
 
   config = lib.mkIf config.modules.java.enable {
-    home.packages = [
-      (pkgs.buildEnv {
-        name = "java-combined";
-        paths = with pkgs; [
-          jdk21
-          jdk8
-          jdk11
-          jdk17
-        ];
-        pathsToLink = [
-          "/bin"
-          "/lib"
-        ];
-        ignoreCollisions = true;
-      })
-    ];
+    home.packages = [ pkgs.jdk21 ];
 
     home.sessionVariables = {
       JAVA_HOME = "${pkgs.jdk21}";
