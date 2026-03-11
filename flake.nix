@@ -75,7 +75,6 @@
             mkDarwinSystem = inputs.self.lib.mkDarwinSystem;
 
             users = [
-              "mike"
               "chmc-h022fl97xj"
               # Add more usernames as needed
             ];
@@ -91,8 +90,18 @@
           mkConfigs
           // {
             # Keep aliases for convenience
-            default = mkDarwinSystem { username = "mike"; };
-            personal = mkDarwinSystem { username = "mike"; };
+            mike = mkDarwinSystem {
+              username = "mike";
+              machineConfig = ./machines/personal.nix;
+            };
+            default = mkDarwinSystem {
+              username = "mike";
+              machineConfig = ./machines/personal.nix;
+            };
+            personal = mkDarwinSystem {
+              username = "mike";
+              machineConfig = ./machines/personal.nix;
+            };
 
             work = mkDarwinSystem {
               username = "chmc-h022fl97xj";
