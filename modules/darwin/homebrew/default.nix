@@ -1,3 +1,5 @@
+# Ensure Homebrew is installed and configured on the machine via nix-darwin.
+# Package management (casks, brews, taps) is handled externally.
 { ... }:
 {
   homebrew = {
