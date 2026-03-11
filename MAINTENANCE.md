@@ -118,30 +118,42 @@ Add to README.md under "Technologies Used" section.
 
 1. Copy the module template:
    ```bash
-   cp templates/module-template.nix modules/darwin/TOOLNAME/default.nix
+   cp templates/module-template.nix modules/home-manager/home/TOOLNAME/default.nix
    ```
 
-2. Edit the module with your packages
+2. Edit the module with your packages (uses `mkEnableOption`/`mkIf` pattern)
 
-3. Import in the appropriate default.nix:
+3. Import in `modules/home-manager/home/default.nix`:
    ```nix
-   # In modules/darwin/default.nix or modules/home-manager/default.nix
+   # In the imports list:
    ./TOOLNAME
    ```
 
-4. Test:
+4. Enable by default in the same file's `modules` block:
+   ```nix
+   modules.TOOLNAME.enable = true;
+   ```
+
+5. Test:
    ```bash
    make build
    ```
 
 ### Disabling a Module
 
-1. Comment out the import in default.nix:
+Modules use `mkEnableOption` and can be toggled per machine:
+
+1. To disable globally, set in `modules/home-manager/home/default.nix`:
    ```nix
-   # ./TOOLNAME  # Disabled: reason
+   modules.TOOLNAME.enable = false;
    ```
 
-2. Rebuild:
+2. To disable on a specific machine, set in the machine config (e.g., `machines/work.nix`):
+   ```nix
+   home-manager.users.${username}.modules.TOOLNAME.enable = false;
+   ```
+
+3. Rebuild:
    ```bash
    make switch
    ```
@@ -183,15 +195,11 @@ Add to README.md under "Technologies Used" section.
 
 ### Current Insecure Packages Permitted
 
-- `dotnet-sdk-6.0.428` and related .NET 6 packages
-
-### Why?
-
-.NET 6 reached end-of-life but some legacy projects still require it. This is documented in `flake.nix:47-53`.
+None. The `permittedInsecurePackages` list in `modules/darwin/nixpkgs/default.nix` is empty.
 
 ### Review Process
 
-**Quarterly** (every 3 months), review insecure packages:
+If insecure packages are added in the future, **quarterly** (every 3 months) review them:
 
 1. Check if still needed
 2. Look for migration path to newer versions
@@ -256,7 +264,7 @@ If home-manager complains about conflicts:
 
 ### Quarterly
 
-- [ ] Review insecure packages list
+- [ ] Review insecure packages list (if any)
 - [ ] Check for deprecated nixpkgs packages
 - [ ] Update this maintenance guide
 - [ ] Review and update README.md

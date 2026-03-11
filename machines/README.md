@@ -8,51 +8,33 @@ This directory contains machine-specific configuration overrides. Each machine c
 machines/
 ├── README.md                    # This file
 ├── example.nix                  # Example template
-├── personal-macbook.nix         # Personal MacBook Pro
-└── work-macbook.nix             # Work MacBook
+├── personal.nix                 # Personal machine config
+└── work.nix                     # Work machine config
 ```
 
 ## Usage
 
 ### 1. Create a machine configuration file
 
+Machine configs are standard nix-darwin modules. They can set any nix-darwin option
+and toggle home-manager modules via `home-manager.users.${username}`.
+
 ```nix
 # machines/my-machine.nix
-{ username, ... }:
+{ pkgs, username, ... }:
 {
-  # Machine metadata
-  machine = {
-    hostname = "my-machine";
-    description = "My personal MacBook Pro";
-  };
-
-  # Override system packages
-  extraSystemPackages = with pkgs; [
-    # Add machine-specific packages here
+  # Machine-specific system packages
+  environment.systemPackages = with pkgs; [
+    awscli2
+    k9s
   ];
 
-  # Override home-manager packages
-  extraHomePackages = with pkgs; [
-    # Add machine-specific home packages here
-  ];
+  # Darwin-level module options
+  # modules.netskope.enable = true;  # For corporate SSL proxies
 
-  # Enable/disable modules
-  modules = {
-    darwin = {
-      # Override darwin modules
-      rust.enable = true;
-      scala.enable = false;  # Disable on this machine
-    };
-    home = {
-      # Override home-manager modules
-      wezterm.enable = false;
-    };
-  };
-
-  # Machine-specific environment variables
-  environment = {
-    CUSTOM_VAR = "value";
-  };
+  # Toggle dev tool modules (all enabled by default)
+  # home-manager.users.${username}.modules.ocaml.enable = false;
+  # home-manager.users.${username}.modules.haskell.enable = false;
 }
 ```
 

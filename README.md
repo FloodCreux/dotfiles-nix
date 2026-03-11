@@ -4,20 +4,16 @@
 
 [![Flake Check](https://github.com/FloodCreux/nix/actions/workflows/flake.yml/badge.svg)](https://github.com/FloodCreux/nix/actions/workflows/flake.yml)
 
-A declarative, reproducible configuration for macOS development machines using Nix flakes, nix-darwin, and home-manager. Manages system settings, development tools, shell configurations, and dotfiles across multiple machines.
+A declarative, reproducible configuration for macOS development machines using Nix flakes, nix-darwin, and home-manager. Manages system settings and development tools across multiple machines.
 
 ## ✨ Features
 
 - 🍎 **macOS-focused**: Optimized for Apple Silicon (`aarch64-darwin`)
 - 🏢 **Multi-profile support**: Separate configurations for personal (`mike`) and work (`chmc-h022fl97xj`) machines
-- 🛠️ **Multi-language development**: Scala, Rust, Zig, Python, Go, OCaml, Haskell, C#, Java, Node.js, Lua, SQL
+- 🛠️ **Multi-language development**: Scala, Rust, Python, Go, OCaml, Haskell, Elixir, Java, C/C++, Node.js (LSP/formatters), Lua, SQL
 - 📝 **Modern editor setup**: Neovim nightly with LSP support and custom Metals configuration
-- 🐚 **Enhanced shells**: Zsh with Oh My Posh, Nushell with custom configs
-- 🖥️ **Terminal emulators**: Ghostty and Alacritty configurations
-- 🪟 **Window management**: Aerospace, Yabai/SKHD dotfiles
-- 🔧 **CLI power tools**: ripgrep, fd, fzf, eza, bat, yazi, zoxide, lazygit
-- 📦 **Containerization**: Docker/Podman support
-- 🔐 **Secrets management**: password-store integration
+- 🔧 **CLI power tools**: ripgrep, fd, jq, bat, tree, tree-sitter, and more
+- 🔌 **Toggleable modules**: Enable/disable any language or tool per machine
 - 🎨 **Consistent theming**: Catppuccin Macchiato across tools
 
 ## 📋 Prerequisites
@@ -92,32 +88,39 @@ nix flake lock --update-input home-manager
 .
 ├── flake.nix                 # Main flake configuration
 ├── flake.lock               # Locked dependency versions
+├── Makefile / justfile      # Build automation (check, build, switch, update, etc.)
 ├── lib/                     # Custom library functions
-│   ├── default.nix         # Helper functions
+│   ├── default.nix         # Exports mkDarwin and overlays
+│   ├── mkDarwin.nix        # Darwin system builder function
 │   ├── metalsBuilder.nix   # Custom Metals LSP builder
 │   ├── metalsOverlay.nix   # Metals overlay
-│   └── overlays.nix        # All overlays (Neovim, Rust, Zig, etc.)
+│   └── overlays.nix        # All overlays (Neovim, Rust, Metals, tree-sitter)
+├── machines/                # Machine-specific configuration overrides
+│   ├── example.nix         # Template for new machines
+│   ├── personal.nix        # Personal machine config
+│   └── work.nix            # Work machine config (awscli2, k9s, Netskope)
 ├── modules/
 │   ├── darwin/             # nix-darwin system configuration
 │   │   ├── default.nix    # Main darwin module imports
-│   │   ├── environment/   # System environment variables
-│   │   ├── fonts/         # System fonts (JetBrains Mono Nerd Font)
-│   │   ├── homebrew/      # Homebrew casks and formulae
-│   │   ├── system/        # macOS system defaults (Finder, Dock, etc.)
-│   │   ├── users/         # User account configuration
-│   │   └── */             # Individual tool modules (nvim, rust, scala, etc.)
+│   │   ├── environment/   # System environment variables, Netskope SSL handling
+│   │   ├── homebrew/      # Homebrew integration
+│   │   ├── nixpkgs/       # nixpkgs config (allowUnfree)
+│   │   ├── system/        # macOS system defaults (Finder, Dock, keyboard, etc.)
+│   │   └── users/         # User account configuration
 │   ├── home-manager/       # home-manager user configuration
-│   │   ├── default.nix    # Main home-manager imports
-│   │   ├── home/          # User-level packages and configs
-│   │   │   ├── default.nix         # Home configuration
-│   │   │   ├── dotfiles/           # Managed dotfiles
-│   │   │   └── */                  # Language/tool-specific configs
-│   │   └── */             # Shell configs (zsh, nushell, tmux, etc.)
+│   │   ├── default.nix    # Imports home, bat, git
+│   │   ├── bat/           # Bat configuration
+│   │   ├── git/           # Git + delta configuration
+│   │   └── home/          # User-level packages and configs
+│   │       ├── default.nix    # Imports all modules, Catppuccin theming
+│   │       ├── core/          # Core CLI tools (always installed)
+│   │       └── <lang>/        # Toggleable language/tool modules
 │   └── shared/             # Shared between darwin and home-manager
 │       └── nix.nix        # Nix daemon settings
-└── home/
-    └── programs/           # Standalone program configurations
-        └── neovim-ide/     # Neovim Metals LSP setup scripts
+├── scripts/
+│   └── netskope_cert.sh   # Netskope SSL cert bootstrap script
+└── templates/
+    └── module-template.nix # Template for creating new modules
 ```
 
 ## 🏗️ Configurations
@@ -132,67 +135,47 @@ nix flake lock --update-input home-manager
 
 - **Username**: `chmc-h022fl97xj`
 - **Focus**: Professional development with additional enterprise tools
-- **Includes**: All `default` features plus custom library functions (Metals builder)
-- **Extra**: Azure CLI, enterprise-specific tooling
+- **Includes**: All `default` features plus machine-specific packages
+- **Extra**: awscli2, k9s, Netskope SSL certificate handling
 
 ## 🛠️ Managed Components
 
 ### Languages & Runtimes
 
-- **Scala**: sbt, bloop, coursier, Metals LSP (custom build)
-- **Rust**: Latest stable via fenix overlay, rust-analyzer
-- **Zig**: Latest from Mitchell Hashimoto's overlay
-- **Python**: Python 3.x with pip
-- **Go**: Latest Go toolchain
-- **OCaml**: opam, OCaml toolchain
-- **Haskell**: GHC, Stack, Cabal
-- **C#**: .NET SDK (including legacy 6.0 for compatibility)
-- **Java**: OpenJDK 17
-- **Node.js**: Node, npm, yarn
-- **Lua**: Lua 5.x
+All language modules are toggleable per machine via `modules.<name>.enable`.
+
+- **Scala**: sbt, coursier, Metals LSP (custom overlay), maven, scalafmt
+- **Rust**: Complete toolchain via fenix overlay (cargo, clippy, rustc, rustfmt, rust-src)
+- **Python**: pipx (runtimes managed externally)
+- **Go**: Go toolchain
+- **OCaml**: ocaml, opam, dune, ocamlformat, LSP
+- **Haskell**: GHC, Cabal, zlib
+- **Elixir**: Elixir, elixir-ls
+- **Java**: OpenJDK 8, 11, 17, 21 (combined buildEnv, JAVA_HOME set to JDK 21)
+- **C/C++**: cmake
+- **Node.js**: JSON language server, prettier (runtime managed externally)
+- **Lua**: Lua, stylua
+- **SQL**: SQLite
 
 ### Development Tools
 
-- **Editor**: Neovim nightly with treesitter, LSP, custom plugins
-- **Version Control**: Git, lazygit, gh CLI
-- **Containers**: Docker/Podman configurations
-- **Databases**: SQL tools and clients
-- **Infrastructure**: Terraform, Azure CLI
+- **Editor**: Neovim nightly with tree-sitter grammars (24 languages)
+- **Version Control**: Git (with delta), gh CLI
+- **Databases**: SQLite
 
-### Shell & Terminal
+### Core CLI Utilities
 
-- **Shells**: Zsh (primary), Nushell (modern alternative)
-- **Prompt**: Oh My Posh with custom `zen.toml` theme, Starship (alternative)
-- **Multiplexers**: tmux, zellij
-- **Completions**: Carapace for enhanced shell completions
-- **Terminal**: Ghostty (primary), Alacritty (configured)
+Always-installed tools (in `modules/home-manager/home/core/`):
 
-### CLI Utilities
+- **Search**: ripgrep, fd
+- **File Tools**: bat (via home-manager program), tree, jq
+- **Misc**: curl, less, coreutils, tree-sitter, chafa, nixfmt
 
-- **Navigation**: zoxide (smart cd), yazi (file manager), eza (modern ls)
-- **Search**: ripgrep, fd, fzf
-- **File Tools**: bat (cat with syntax), tree, jq
-- **Git UI**: lazygit
-- **Misc**: curl, less, direnv, password-store
+### Additional Tools
 
-### Window Management & UI
-
-- **Tiling**: Aerospace configuration, Yabai/SKHD dotfiles
-- **Status Bar**: SketchyBar, borders (via Homebrew)
-- **Launcher**: Raycast
-
-### Fonts
-
-- **Primary**: JetBrains Mono Nerd Font (via Nix)
-- **Additional**: Hack Nerd Font (via Homebrew)
-
-### Utility Scripts
-
-Custom scripts in `modules/home-manager/home/scripts/`:
-
-- **tmux-sessionizer**: Fuzzy find and switch tmux sessions
-- **tmux-cht.sh**: Quick cheatsheet lookup in tmux
-- **zet**: Go-based second brain/zettelkasten tool
+- **File Manager**: yazi (toggleable module)
+- **Hadoop**: Hadoop tools (toggleable module)
+- **Nix LSP**: nixd, nil (toggleable module)
 
 ## 🔧 Customization
 
@@ -218,9 +201,10 @@ home.packages = with pkgs; [
 
 ### Adding a New Module
 
-1. Create a new directory: `modules/darwin/your-tool/` or `modules/home-manager/your-tool/`
-2. Add `default.nix` with your configuration
-3. Import it in the parent `default.nix`
+1. Copy the template: `cp templates/module-template.nix modules/home-manager/home/your-tool/default.nix`
+2. Edit the module with your packages and `mkEnableOption`/`mkIf` pattern
+3. Import it in `modules/home-manager/home/default.nix`
+4. Add `modules.your-tool.enable = true;` in the same file's `modules` block
 
 ## 🐛 Troubleshooting
 
@@ -258,7 +242,7 @@ brew bundle --file=/opt/homebrew/Brewfile
 If Metals or other LSPs aren't working:
 
 1. Check Neovim health: `:checkhealth`
-2. Update Metals: `home/programs/neovim-ide/update-metals.nix`
+2. Metals is managed via a custom overlay in `lib/metalsOverlay.nix` -- update the version there
 3. Rebuild and restart Neovim
 
 ## 🔄 CI/CD

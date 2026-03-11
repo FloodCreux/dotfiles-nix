@@ -8,9 +8,9 @@ The machine-specific configuration system has been successfully implemented. You
 
 ### 1. Core Changes
 
-#### `lib/overlays.nix`
-- Updated `mkDarwin` function to accept optional `machineConfig` parameter
-- Loads machine settings and passes `extraSystemPackages` and `extraHomePackages` to modules
+#### `lib/mkDarwin.nix`
+- The `mkDarwin` function accepts an optional `machineConfig` parameter
+- When provided, appends the machine config as an additional nix-darwin module
 
 #### `flake.nix`
 - Updated `lib.mkDarwinSystem` to accept optional `machineConfig` parameter
@@ -18,12 +18,11 @@ The machine-specific configuration system has been successfully implemented. You
 - Added hostname-based configuration for auto-detection
 
 #### `modules/darwin/default.nix`
-- Now accepts `extraSystemPackages` parameter
-- Merges machine-specific system packages with core configuration
+- Imports all darwin sub-modules (environment, homebrew, nixpkgs, system, users)
 
 #### `modules/home-manager/default.nix`
-- Now accepts `extraHomePackages` parameter
-- Merges machine-specific home packages with core configuration
+- Imports home, bat, and git modules
+- Language/tool modules under `home/` use `mkEnableOption` for per-machine toggling
 
 ### 2. Machine Configuration Files
 
@@ -59,11 +58,14 @@ To add machine-specific packages, edit the appropriate machine config:
 Edit `machines/work.nix`:
 
 ```nix
-extraSystemPackages = with pkgs; [
-  docker
-  kubectl
-  awscli2
-];
+{ pkgs, username, ... }:
+{
+  environment.systemPackages = with pkgs; [
+    docker
+    kubectl
+    awscli2
+  ];
+}
 ```
 
 Then rebuild:
@@ -72,14 +74,17 @@ Then rebuild:
 darwin-rebuild switch --flake .
 ```
 
-#### Example: Add GUI Apps to Personal Machine
+#### Example: Add Packages to Personal Machine
 
 Edit `machines/personal.nix`:
 
 ```nix
-extraHomePackages = with pkgs; [
-  # Add GUI or user-specific tools
-];
+{ pkgs, username, ... }:
+{
+  environment.systemPackages = with pkgs; [
+    # Add machine-specific tools
+  ];
+}
 ```
 
 ### Using Machine Configs in Flake
@@ -108,20 +113,27 @@ darwinConfigurations = {
 
 **Personal Machine** (`machines/personal.nix`):
 ```nix
-extraSystemPackages = with pkgs; [
-  docker          # Container development
-  ffmpeg          # Media projects
-  imagemagick     # Image manipulation
-];
+{ pkgs, username, ... }:
+{
+  environment.systemPackages = with pkgs; [
+    docker          # Container development
+    ffmpeg          # Media projects
+    imagemagick     # Image manipulation
+  ];
+}
 ```
 
 **Work Machine** (`machines/work.nix`):
 ```nix
-extraSystemPackages = with pkgs; [
-  kubectl         # Kubernetes
-  terraform       # Infrastructure
-  awscli2         # AWS tools
-];
+{ pkgs, username, ... }:
+{
+  environment.systemPackages = with pkgs; [
+    kubectl         # Kubernetes
+    awscli2         # AWS tools
+    k9s             # Kubernetes TUI
+  ];
+  modules.netskope.enable = true;
+}
 ```
 
 ### Use Case 2: Same User, Multiple Machines
@@ -140,26 +152,25 @@ darwinConfigurations = {
 };
 ```
 
-### Use Case 3: Minimal CI Machine
+### Use Case 3: Minimal Machine
 
-Create `machines/ci.nix`:
+Create `machines/minimal.nix`:
 
 ```nix
 { pkgs, username, ... }:
 {
-  machine = {
-    hostname = "ci-server";
-    type = "ci";
-  };
-
-  # Only essential build tools
-  extraSystemPackages = with pkgs; [
-    git
+  # Only essential system tools
+  environment.systemPackages = with pkgs; [
     docker
   ];
 
-  # No GUI apps
-  extraHomePackages = [ ];
+  # Disable dev modules not needed on this machine
+  home-manager.users.${username}.modules = {
+    scala.enable = false;
+    haskell.enable = false;
+    ocaml.enable = false;
+    elixir.enable = false;
+  };
 }
 ```
 
@@ -170,7 +181,8 @@ Your current setup:
 - ✅ Build successful with `make build`
 - ✅ Backwards compatible (works without machine configs)
 - ✅ Two machine configs created (personal.nix, work.nix)
-- ⚠️ Machine configs are **not yet active** (not referenced in flake.nix)
+- ✅ `work.nix` is **active** in `flake.nix` (used by `work` and hostname-based configurations)
+- ⚠️ `personal.nix` is **not yet active** (not referenced in flake.nix)
 
 To activate machine-specific configs:
 1. Edit `machines/personal.nix` or `machines/work.nix` to add packages
@@ -200,17 +212,16 @@ To activate machine-specific configs:
 nix/
 ├── flake.nix                          # Updated with machineConfig support
 ├── lib/
-│   └── overlays.nix                   # Updated mkDarwin function
+│   ├── mkDarwin.nix                   # Darwin builder (accepts machineConfig)
+│   └── overlays.nix                   # All overlays (Metals, Neovim, Rust, tree-sitter)
 ├── modules/
-│   ├── darwin/default.nix             # Accepts extraSystemPackages
-│   └── home-manager/default.nix       # Accepts extraHomePackages
+│   ├── darwin/default.nix             # Darwin module imports
+│   └── home-manager/default.nix       # Home-manager module imports
 ├── machines/
 │   ├── README.md                      # Documentation
-│   ├── example.nix                    # Template
+│   ├── example.nix                    # Template for new machines
 │   ├── personal.nix                   # Personal machine (ready to customize)
-│   ├── work.nix                       # Work machine (ready to customize)
-│   ├── personal-macbook.nix.example   # Advanced example
-│   └── work-macbook.nix.example       # Advanced example
+│   └── work.nix                       # Work machine (awscli2, k9s, Netskope)
 └── templates/
     └── module-template.nix            # Template for new tools
 ```
@@ -257,4 +268,3 @@ darwin-rebuild switch --rollback
 - Machine configs: See `machines/README.md`
 - Module templates: See `templates/module-template.nix`
 - Maintenance: See `MAINTENANCE.md`
-- Advanced examples: See `machines/*.example` files

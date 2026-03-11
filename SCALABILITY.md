@@ -14,17 +14,16 @@ The improved structure provides:
 
 ```
 nix/
-├── machines/                    # NEW: Machine-specific configs
+├── machines/                    # Machine-specific configs
 │   ├── README.md               # Documentation
-│   ├── example.nix             # Template
-│   ├── personal-macbook.nix    # Personal machine config
-│   └── work-macbook.nix        # Work machine config
+│   ├── example.nix             # Template for new machines
+│   ├── personal.nix            # Personal machine config
+│   └── work.nix                # Work machine config
 │
-├── templates/                   # NEW: Module templates
+├── templates/                   # Module templates
 │   └── module-template.nix     # Template for new modules
 │
-├── MAINTENANCE.md              # NEW: Maintenance procedures
-├── flake-with-machines.nix.example  # Example flake with machine support
+├── MAINTENANCE.md              # Maintenance procedures
 └── [existing files...]
 ```
 
@@ -49,14 +48,14 @@ users = ["mike", "chmc-h022fl97xj"];
 ```nix
 # flake.nix
 darwinConfigurations = {
-  personal-macbook = mkDarwinSystem {
+  personal = mkDarwinSystem {
     username = "mike";
-    machineConfig = ./machines/personal-macbook.nix;
+    machineConfig = ./machines/personal.nix;
   };
 
-  work-laptop = mkDarwinSystem {
-    username = "mike";  # Same user, different config!
-    machineConfig = ./machines/work-laptop.nix;
+  work = mkDarwinSystem {
+    username = "chmc-h022fl97xj";
+    machineConfig = ./machines/work.nix;
   };
 };
 ```
@@ -82,9 +81,8 @@ If you want machine-specific configs:
 
 2. **Create machine configs:**
    ```bash
-   # Copy examples and customize
-   cp machines/personal-macbook.nix.example machines/personal-macbook.nix
-   cp machines/work-macbook.nix.example machines/work-macbook.nix
+   # Copy the example template and customize
+   cp machines/example.nix machines/my-machine.nix
    ```
 
 3. **Update flake.nix:**
@@ -108,18 +106,20 @@ When adding a new tool:
 
 1. **Copy template:**
    ```bash
-   cp templates/module-template.nix modules/darwin/newtool/default.nix
+   cp templates/module-template.nix modules/home-manager/home/newtool/default.nix
    ```
 
 2. **Edit module:**
    - Add packages
-   - Add configuration
+   - Use `mkEnableOption`/`mkIf` pattern
    - Follow comments in template
 
-3. **Import module:**
+3. **Import and enable in `modules/home-manager/home/default.nix`:**
    ```nix
-   # In modules/darwin/default.nix
+   # In the imports list:
    ./newtool
+   # In the modules block:
+   modules.newtool.enable = true;
    ```
 
 4. **Test:**
@@ -141,60 +141,58 @@ See `MAINTENANCE.md` for:
 
 ```nix
 # Personal MacBook: All development tools
-personal-macbook = mkDarwinSystem {
+personal = mkDarwinSystem {
   username = "mike";
-  machineConfig = ./machines/personal-macbook.nix;
+  machineConfig = ./machines/personal.nix;
 };
-# Enables: Rust, Scala, Go, Python, Zig, OCaml, Docker, Godot
+# All modules enabled by default
 
-# Work MacBook: Only required tools
-work-macbook = mkDarwinSystem {
-  username = "mike";
-  machineConfig = ./machines/work-macbook.nix;
+# Work MacBook: Only required tools + enterprise packages
+work = mkDarwinSystem {
+  username = "chmc-h022fl97xj";
+  machineConfig = ./machines/work.nix;
 };
-# Enables: Scala, Python, Go, AWS CLI, Kubernetes
-# Disables: Rust, Zig, OCaml, personal tools
+# Adds: awscli2, k9s, Netskope SSL handling
+# Can disable unneeded modules per machine
 ```
 
-### Example 2: Work Profile with Different Git Configs
+### Example 2: Work Machine with Extra System Packages
 
 ```nix
-# machines/work-macbook.nix
-git = {
-  userName = "Mike Flood";
-  userEmail = "mike@company.com";  # Work email
-  signing.key = "WORK_GPG_KEY";
-};
-
-environment = {
-  WORK_PROJECTS = "/Users/mike/work";
-  AWS_PROFILE = "company";
-};
-```
-
-### Example 3: Minimal Server Config
-
-```nix
-# machines/minimal-server.nix
+# machines/work.nix
+{ pkgs, username, ... }:
 {
-  machine = {
-    hostname = "build-server";
-    type = "ci";
-  };
-
-  # Only CI/CD tools, no GUI apps
-  extraSystemPackages = with pkgs; [
-    git
-    docker
-    nodejs
+  environment.systemPackages = with pkgs; [
+    awscli2
+    k9s
   ];
 
-  modules = {
-    darwin = {
-      rust.enable = true;  # For builds
-      scala.enable = false;
-      python.enable = true;
-    };
+  # Enable corporate SSL proxy handling
+  modules.netskope.enable = true;
+
+  # Disable unneeded dev modules on this machine:
+  # home-manager.users.${username}.modules.ocaml.enable = false;
+}
+```
+
+### Example 3: Minimal Machine Config
+
+```nix
+# machines/minimal.nix
+{ pkgs, username, ... }:
+{
+  # Only essential system packages
+  environment.systemPackages = with pkgs; [
+    docker
+  ];
+
+  # Disable most dev modules to keep it lean
+  home-manager.users.${username}.modules = {
+    rust.enable = false;
+    scala.enable = false;
+    haskell.enable = false;
+    ocaml.enable = false;
+    elixir.enable = false;
   };
 }
 ```
@@ -264,4 +262,4 @@ You don't have to implement everything at once. Here's a gradual approach:
 - Module templates: See `templates/module-template.nix`
 - Machine configs: See `machines/README.md`
 - Maintenance: See `MAINTENANCE.md`
-- Example implementation: See `flake-with-machines.nix.example`
+- Current flake: See `flake.nix` for the active implementation
