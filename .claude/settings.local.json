@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc:*)",
+      "Bash(grep:*)",
+      "Bash(nixfmt:*)",
+      "Bash(rm:*)",
+      "Bash(make help:*)",
+      "Bash(nix flake metadata:*)",
+      "Bash(nix flake update:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
