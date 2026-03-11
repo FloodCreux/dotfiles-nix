@@ -10,7 +10,7 @@ This document describes how to maintain and update this Nix configuration.
 
 ```bash
 # Update all inputs
-make update
+just update
 
 # Or manually:
 nix flake update
@@ -19,10 +19,10 @@ nix flake update
 git diff flake.lock
 
 # Test the updated configuration
-make build
+just build
 
 # If successful, apply changes
-make switch
+just switch
 
 # Commit the updates
 git add flake.lock
@@ -55,7 +55,7 @@ If a security vulnerability is announced:
 ```bash
 # Emergency security update
 nix flake update
-make build && make switch
+just build && just switch
 ```
 
 ## Dependency Channels
@@ -104,8 +104,8 @@ new-input = {
 
 ```bash
 nix flake lock          # Generate lock file entry
-make check              # Validate configuration
-make build              # Test build
+just check              # Validate configuration
+just build              # Test build
 ```
 
 ### 3. Document the Input
@@ -136,7 +136,7 @@ Add to README.md under "Technologies Used" section.
 
 5. Test:
    ```bash
-   make build
+   just build
    ```
 
 ### Disabling a Module
@@ -155,7 +155,7 @@ Modules use `mkEnableOption` and can be toggled per machine:
 
 3. Rebuild:
    ```bash
-   make switch
+   just switch
    ```
 
 ### Removing a Module
@@ -213,8 +213,8 @@ If insecure packages are added in the future, **quarterly** (every 3 months) rev
 # Remove old generations (keep last 3)
 nix-collect-garbage --delete-older-than 30d
 
-# Or use Makefile
-make clean
+# Or use justfile
+just clean
 
 # Check disk usage
 du -sh /nix/store
@@ -253,12 +253,12 @@ If home-manager complains about conflicts:
 
 ### Weekly
 
-- [ ] Configuration still builds: `make build`
+- [ ] Configuration still builds: `just build`
 - [ ] No security advisories for dependencies
 
 ### Monthly
 
-- [ ] Update dependencies: `make update && make switch`
+- [ ] Update dependencies: `just update && just switch`
 - [ ] Review and clean old generations
 - [ ] Check disk usage: `du -sh /nix/store`
 

@@ -96,7 +96,7 @@ If you want machine-specific configs:
 
 5. **Test:**
    ```bash
-   make build
+   just build
    darwin-rebuild switch --flake .#machine-name
    ```
 
@@ -124,7 +124,7 @@ When adding a new tool:
 
 4. **Test:**
    ```bash
-   make build
+   just build
    ```
 
 ### Phase 3: Follow Maintenance Procedures

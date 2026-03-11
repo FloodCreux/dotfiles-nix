@@ -88,7 +88,7 @@ nix flake lock --update-input home-manager
 .
 ├── flake.nix                 # Main flake configuration
 ├── flake.lock               # Locked dependency versions
-├── Makefile / justfile      # Build automation (check, build, switch, update, etc.)
+├── justfile                  # Build automation (check, build, switch, update, etc.)
 ├── lib/                     # Custom library functions
 │   ├── default.nix         # Exports mkDarwin and overlays
 │   ├── mkDarwin.nix        # Darwin system builder function

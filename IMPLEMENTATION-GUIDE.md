@@ -178,7 +178,7 @@ Create `machines/minimal.nix`:
 
 Your current setup:
 - ✅ Machine config system is **implemented and working**
-- ✅ Build successful with `make build`
+- ✅ Build successful with `just build`
 - ✅ Backwards compatible (works without machine configs)
 - ✅ Two machine configs created (personal.nix, work.nix)
 - ✅ `work.nix` is **active** in `flake.nix` (used by `work` and hostname-based configurations)
@@ -193,17 +193,17 @@ To activate machine-specific configs:
 
 1. **Check syntax**:
    ```bash
-   make check
+   just check
    ```
 
 2. **Build without activating**:
    ```bash
-   make build
+   just build
    ```
 
 3. **Build and activate**:
    ```bash
-   make switch
+   just switch
    ```
 
 ## Files Overview
