@@ -11,7 +11,7 @@
     less
     ripgrep
     tree
-    tree-sitter
+    # tree-sitter
 
     # Nix tooling
     nixfmt

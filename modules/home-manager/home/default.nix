@@ -17,7 +17,6 @@
     ./java
     ./lua
     ./nixd
-    ./node
     ./nvim
     ./ocaml
     ./python
@@ -54,8 +53,7 @@
     java.enable = true;
     lua.enable = true;
     nixd.enable = true;
-    node.enable = true;
-    nvim.enable = true;
+    nvim.enable = false;
     ocaml.enable = true;
     python.enable = true;
     rust.enable = true;
