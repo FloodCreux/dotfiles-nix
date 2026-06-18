@@ -19,7 +19,6 @@
     ./nixd
     ./nvim
     ./ocaml
-    ./python
     ./rust
     ./scala
     ./sql
@@ -33,6 +32,7 @@
   };
 
   catppuccin = {
+    autoEnable = true;
     enable = true;
     flavor = "macchiato";
     accent = "mauve";
@@ -55,7 +55,6 @@
     nixd.enable = true;
     nvim.enable = false;
     ocaml.enable = true;
-    python.enable = true;
     rust.enable = true;
     scala.enable = true;
     sql.enable = true;
