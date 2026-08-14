@@ -1,12 +1,6 @@
 # Work machine configuration
-{ pkgs, username, ... }:
+{ ... }:
 {
-  # Machine-specific system packages (not general dev tools)
-  environment.systemPackages = with pkgs; [
-    awscli2
-    k9s
-  ];
-
   # Enable Netskope SSL inspection certificate handling (darwin-level)
   modules.netskope.enable = true;
 

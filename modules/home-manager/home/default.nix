@@ -10,14 +10,12 @@
 
     # Toggleable language/tool modules
     ./clang
-    ./elixir
     ./go
     ./hadoop
     ./haskell
     ./java
     ./lua
     ./nixd
-    ./nvim
     ./ocaml
     ./rust
     ./scala
@@ -46,14 +44,12 @@
   # Machine configs can override these with `modules.<name>.enable = false;`
   modules = {
     clang.enable = true;
-    elixir.enable = true;
     go.enable = true;
-    hadoop.enable = true;
+    hadoop.enable = false;
     haskell.enable = true;
     java.enable = true;
     lua.enable = true;
     nixd.enable = true;
-    nvim.enable = false;
     ocaml.enable = true;
     rust.enable = true;
     scala.enable = true;
