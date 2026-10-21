@@ -28,6 +28,7 @@ echo "User is: $USERNAME"
 
 NETSKOPE_CERT="/Library/Application Support/Netskope/STAgent/data/nscacert.pem"
 SYSTEM_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
+R1_CORP_CA_BUNDLE="/etc/ssl/certs/r1-corp-ca-bundle.pem"
 COMBINED_NIX="/etc/ssl/certs/ca-certificates-combined.crt"
 COMBINED_USER="/Users/$USERNAME/nscacert_combined.pem"
 
@@ -42,13 +43,17 @@ fi
 echo ""
 echo "=== Nix CA Bundle ==="
 
+if [ ! -f "$R1_CORP_CA_BUNDLE" ]; then
+	echo "WARNING: R1 Corp CA bundle not found at $R1_CORP_CA_BUNDLE"
+fi
+
 if [ ! -f "$NETSKOPE_CERT" ]; then
 	echo "WARNING: Netskope CA cert not found at $NETSKOPE_CERT"
 	echo "Netskope may not be installed. Skipping combined bundle creation."
 else
 	if [ -f "$SYSTEM_CA_BUNDLE" ]; then
 		# Create combined bundle in /etc/ssl/certs/ for Nix daemon
-		cat "$SYSTEM_CA_BUNDLE" "$NETSKOPE_CERT" > "$COMBINED_NIX"
+		cat "$SYSTEM_CA_BUNDLE" "$NETSKOPE_CERT" "$R1_CORP_CA_BUNDLE" > "$COMBINED_NIX"
 		echo "Combined Nix CA bundle created at $COMBINED_NIX"
 	else
 		echo "WARNING: System CA bundle not found at $SYSTEM_CA_BUNDLE"
@@ -56,7 +61,7 @@ else
 		security find-certificate -a -p \
 			/System/Library/Keychains/SystemRootCertificates.keychain \
 			/Library/Keychains/System.keychain > "$COMBINED_NIX"
-		cat "$NETSKOPE_CERT" >> "$COMBINED_NIX"
+		cat "$NETSKOPE_CERT" "$R1_CORP_CA_BUNDLE" >> "$COMBINED_NIX"
 		echo "Combined Nix CA bundle created (from keychain) at $COMBINED_NIX"
 	fi
 
