@@ -6,7 +6,7 @@
     ./environment
     ./system
     ./users
-    ./homebrew
+    # ./homebrew
     ./fonts
   ];
 }

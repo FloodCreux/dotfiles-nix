@@ -1,0 +1,93 @@
+min_version = "2026.10.0"
+
+[tools]
+"pipx:pre-commit" = "latest"
+
+# --- Build / activate ---------------------------------------------------
+[tasks.switch]
+description = "Build and activate a configuration"
+usage = '''
+arg "[config]" help="darwinConfiguration (defaults to hostname)" {
+	choices "work" "personal" "mike" "default" "chmc-h022fl97xj"
+}
+'''
+dir = "{{config_root}}"
+run = 'sudo darwin-rebuild switch --flake ".#${usage_config:-}"'
+
+[tasks.buld]
+description = "Build a configuration without activating it"
+usage = '''
+arg "[config]" help="darwinConfiguration (defaults to hostname)" {
+	choices "work" "personal" "mike" "default" "chmc-h022fl97xj"
+}
+'''
+dir = "{{config_root}}"
+run = 'darwin-rebuild build --flake ".#${usage_config:-}"'
+
+[tasks.diff]
+description = "Show package changes between the current system and a new build"
+depends = ["build"]
+dir = "{{config_root}}"
+run = "nix store diff-closures /run/current-system ./result"
+
+[tasks.rollback]
+description = "Roll back to the previous generation"
+run = "sudo darwin-rebuild --rollback"
+
+[tasks.generation]
+description = "List system generations"
+alias = "gens"
+run = "darwin-rebuild --list-generations"
+
+# --- Flake maintenance ---------------------------------------------------
+[tasks.update]
+description = "Update all flake inputs, or only the inputs you name"
+usage = 'arg "[inputs]" var=#true help="e.g. nixpkgs home-manager"'
+dir = "{{config_root}}"
+run = 'nix flake update ${usage_inputs:-}'
+
+[tasks.upgrade]
+description = "Update flake inputs and then switch"
+usage = '''
+arg "<config>" help="darwinConfiguration to switch to" {
+	choices "work" "personal" "mike" "default" "chmc-h022fl97xj"
+}
+'''
+dir = "{{config_root}}"
+run = [
+  "nix flake update",
+  'sudo darwin-rebuild switch --flake ".#${usage_config}"',
+]
+
+[tasks.show]
+description = "Show flake outputs"
+run = "nix flake show"
+
+[tasks.repl]
+description = "Open a nix repl with this flake loaded"
+dir = "{{config_root}}"
+run = "nix repl --expr 'builtins.getFlake (toString ./.)'"
+
+# --- Quality ---------------------------------------------------
+[tasks.fmt]
+description = "Format all Nix files"
+alias = "format"
+run = "nix fmt"
+
+[tasks."fmt:check"]
+description = "Check formatting with changing files"
+run = "nix fmt -- --ci"
+
+# --- Cleanup ---------------------------------------------------
+[tasks.clean]
+description = "Remove buiild artifacts"
+dir = "{{config_root}}"
+run = "run -rf result result-* target/"
+
+[tasks.gc]
+description = "Delete old generations and collect garbage"
+usage = 'flag "--older-than <age>" default="14d"'
+run = [
+  'sudo nix-collect-garbage --delete-older-than "${usage_older_than}"',
+  "nix store optimise",
+]

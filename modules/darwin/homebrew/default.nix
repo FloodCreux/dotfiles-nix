@@ -3,7 +3,7 @@
 { ... }:
 {
   homebrew = {
-    enable = true;
+    enable = false;
     onActivation.cleanup = "none";
     caskArgs.no_quarantine = true;
     global.brewfile = true;
