@@ -50,9 +50,12 @@ in
       system.activationScripts.postActivation.text = ''
         NETSKOPE_CERT="/Library/Application Support/Netskope/STAgent/data/nscacert.pem"
         COMBINED="/etc/ssl/certs/ca-certificates-combined.crt"
+        R1_CERT="/etc/ssl/certs/r1-corp-ca-bundle.pem"
         mkdir -p "$(dirname "$COMBINED")"
         if [ -f "$NETSKOPE_CERT" ]; then
-          cat /etc/ssl/certs/ca-certificates.crt "$NETSKOPE_CERT" > "$COMBINED"
+          cat /etc/ssl/certs/ca-certificates.crt > "$COMBINED"
+          [ -f "$NETSKOPE_CERT" ] && { echo; cat "$NETSKOPE_CERT"; } >> "$COMBINED"
+          [ -f "$R1_CERT" ] && { echo; cat "$R1_CERT"; } >> "$COMBINED"       
           chmod 644 "$COMBINED"
           echo "Combined CA bundle created with Netskope cert at $COMBINED"
         else
